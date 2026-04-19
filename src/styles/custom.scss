@@ -7,3 +7,22 @@
   line-height: $h2-line-height;
   font-weight: $h2-weight;
 }
+
+.nav-link {
+  font-family: $font-body;
+  font-size: $body-large-size;
+  line-height: $body-large-line-height;
+  font-weight: $font-weight-medium;
+  color: white;
+}
+
+.signin-nav-button {
+    background-color: $color-accent-sandstone;
+    padding: 10px 24px;
+    border-radius: 4px;
+    color: white;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    line-height: $body-medium-line-height;
+    font-weight: $font-weight-semibold;
+}

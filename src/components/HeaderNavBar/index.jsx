@@ -20,7 +20,9 @@ function HeaderNavBar() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive
+                ? "nav-link font-semibold underline"
+                : "nav-link hover:underline"
             }
           >
             Home
@@ -28,7 +30,9 @@ function HeaderNavBar() {
           <NavLink
             to="/explore"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive
+                ? "nav-link font-semibold underline"
+                : "nav-link hover:underline"
             }
           >
             Explore
@@ -36,13 +40,15 @@ function HeaderNavBar() {
           <NavLink
             to="/account"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive
+                ? "nav-link font-semibold underline"
+                : "nav-link hover:underline"
             }
           >
             My Account
           </NavLink>
         </div>
-        <div>
+        <div className="signin-nav-button">
           <NavLink
             to="/authenticate"
             className={({ isActive }) =>

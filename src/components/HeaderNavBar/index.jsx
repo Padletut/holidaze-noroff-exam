@@ -48,7 +48,7 @@ function HeaderNavBar() {
             My Account
           </NavLink>
         </div>
-        <div className="signin-nav-button">
+        <div className="signin-nav-button hidden md:block">
           <NavLink
             to="/authenticate"
             className={({ isActive }) =>
@@ -100,6 +100,15 @@ function HeaderNavBar() {
             onClick={toggleMenu}
           >
             My Account
+          </NavLink>
+          <NavLink
+            to="/authenticate"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+            onClick={toggleMenu}
+          >
+            Sign In
           </NavLink>
         </div>
       )}

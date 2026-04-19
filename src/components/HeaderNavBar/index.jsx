@@ -9,28 +9,94 @@ function HeaderNavBar() {
   }
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+    <nav className="w-full px-4 py-3">
+      <div className="max-w-6xl mx-auto flex items-center justify-between">
+        <Link to="/" className="font-bold tracking-tight logo-nav">
           Holidaze
         </Link>
-        <div className={`navbar-menu ${isOpen ? "open" : ""}`}>
-          <NavLink to="/" className="navbar-link" onClick={toggleMenu}>
+
+        {/* Desktop menu */}
+        <div className="hidden md:flex gap-6">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+          >
             Home
           </NavLink>
-          <NavLink to="/explore" className="navbar-link" onClick={toggleMenu}>
+          <NavLink
+            to="/explore"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+          >
             Explore
           </NavLink>
-          <NavLink to="/account" className="navbar-link" onClick={toggleMenu}>
+          <NavLink
+            to="/account"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+          >
             My Account
           </NavLink>
         </div>
-        <div className="navbar-toggle" onClick={toggleMenu}>
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
+        <div>
+          <NavLink
+            to="/authenticate"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+          >
+            Sign In
+          </NavLink>
         </div>
+
+        {/* Hamburger button */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <span className="block w-6 h-0.5 bg-current"></span>
+          <span className="block w-6 h-0.5 bg-current"></span>
+          <span className="block w-6 h-0.5 bg-current"></span>
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden flex flex-col gap-3 pt-3 px-2">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+            onClick={toggleMenu}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/explore"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+            onClick={toggleMenu}
+          >
+            Explore
+          </NavLink>
+          <NavLink
+            to="/account"
+            className={({ isActive }) =>
+              isActive ? "font-semibold underline" : "hover:underline"
+            }
+            onClick={toggleMenu}
+          >
+            My Account
+          </NavLink>
+        </div>
+      )}
     </nav>
   )
 }

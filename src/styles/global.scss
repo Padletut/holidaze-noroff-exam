@@ -1,5 +1,15 @@
 @use "variables" as *;
 
+h1, h2, h3, h4, h5 {
+  font-family: $font-heading;
+}
+
+h1 { font-size: $h1-size; line-height: $h1-line-height; font-weight: $h1-weight; }
+h2 { font-size: $h2-size; line-height: $h2-line-height; font-weight: $h2-weight; }
+h3 { font-size: $h3-size; line-height: $h3-line-height; font-weight: $h3-weight; }
+h4 { font-size: $h4-size; line-height: $h4-line-height; font-weight: $h4-weight; }
+h5 { font-size: $h5-size; line-height: $h5-line-height; font-weight: $h5-weight; }
+
 html,
 body,
 #root {

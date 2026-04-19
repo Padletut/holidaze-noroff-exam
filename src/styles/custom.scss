@@ -1,0 +1,9 @@
+@use "variables" as *;
+
+.logo-nav {
+  color: $color-accent-sandstone;
+  font-family: $font-heading;
+  font-size: $h2-size;
+  line-height: $h2-line-height;
+  font-weight: $h2-weight;
+}

@@ -18,8 +18,11 @@ function HeaderNavBar() {
           <NavLink to="/" className="navbar-link" onClick={toggleMenu}>
             Home
           </NavLink>
-          <NavLink to="/about" className="navbar-link" onClick={toggleMenu}>
-            About
+          <NavLink to="/explore" className="navbar-link" onClick={toggleMenu}>
+            Explore
+          </NavLink>
+          <NavLink to="/account" className="navbar-link" onClick={toggleMenu}>
+            My Account
           </NavLink>
         </div>
         <div className="navbar-toggle" onClick={toggleMenu}>

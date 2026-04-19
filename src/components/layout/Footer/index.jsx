@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer>
-      <Container>© 2026 Holidaze</Container>
+      <p>© 2026 Holidaze</p>
     </footer>
   )
 }

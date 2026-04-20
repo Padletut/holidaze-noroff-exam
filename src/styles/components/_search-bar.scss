@@ -1,0 +1,85 @@
+@use "../variables" as *;
+
+.search-bar {
+  background-color: $color-secondary;
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &__fields {
+    display: flex;
+    gap: 0.75rem;
+
+    .search-bar__input-wrapper {
+      flex: 1;
+    }
+  }
+
+  &__input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+
+    &--full {
+      width: 100%;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    color: #6b7280;
+    flex-shrink: 0;
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    line-height: $body-medium-line-height;
+    font-weight: $font-weight-regular;
+    color: $color-primary;
+    width: 100%;
+
+    &::placeholder {
+      color: #6b7280;
+    }
+
+    // hide number input spinners
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
+      appearance: none;
+    }
+    &[type="number"] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+  }
+
+  &__button {
+    background-color: $color-primary;
+    color: #ffffff;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    line-height: $body-medium-line-height;
+    font-weight: $font-weight-semibold;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-button-hover;
+    }
+  }
+}

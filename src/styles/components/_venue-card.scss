@@ -1,0 +1,104 @@
+@use "../variables" as *;
+
+.venue-card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-background;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  max-width: 375px;
+  margin-top: 5rem;
+  
+  &__image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__body {
+    padding: 20px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-size: $h3-size;
+    line-height: $h3-line-height;
+    font-weight: $h3-weight;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__location {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    line-height: $body-medium-line-height;
+    color: $color-font-dark-grey;
+    margin: 0;
+  }
+
+  &__price {
+    font-family: $font-body;
+    font-size: $body-large-size;
+    font-weight: $font-weight-bold;
+    color: $color-font-dark;
+    margin: 4px 0 0;
+  }
+
+  &__price-value {
+    color: $color-accent-sandstone;
+  }
+
+  &__guests {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    line-height: $body-medium-line-height;
+    color: $color-font-dark-grey;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__guests-icon {
+    font-size: 18px;
+  }
+
+  &__stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-top: 4px;
+
+    .star {
+      font-size: 20px;
+      color: #d1d5db;
+
+      &--filled {
+        color: $color-accent-sandstone;
+      }
+    }
+  }
+
+  &__rating-value {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+    margin-left: 6px;
+  }
+}

@@ -1,0 +1,58 @@
+@use "../variables" as *;
+
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+
+    h1 {
+      color: #ffffff;
+      margin: 0 0 0.75rem;
+      font-family: $font-heading;
+      font-size: $h2-size;
+      line-height: 43px;
+      font-weight: $h2-weight;
+      text-align: start;
+      span {
+        display: block;
+        
+      }
+    }
+
+    p {
+      color: #ffffff;
+      font-family: $font-heading;
+      font-size: $h4-size;
+      line-height: $h4-line-height;
+      font-weight: $h4-weight;
+      margin: 0;
+      max-width: 260px;
+      text-align: start;
+    }
+  }
+}

@@ -17,3 +17,8 @@
     color: $color-accent-sandstone;
   }
 }
+
+.nav-link--active:hover {
+  color: $color-accent-sandstone;
+  text-decoration: none;
+}

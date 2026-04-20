@@ -20,9 +20,7 @@ function HeaderNavBar() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive
-                ? "nav-link font-semibold underline"
-                : "nav-link hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
           >
             Home
@@ -30,9 +28,7 @@ function HeaderNavBar() {
           <NavLink
             to="/explore"
             className={({ isActive }) =>
-              isActive
-                ? "nav-link font-semibold underline"
-                : "nav-link hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
           >
             Explore
@@ -40,9 +36,7 @@ function HeaderNavBar() {
           <NavLink
             to="/account"
             className={({ isActive }) =>
-              isActive
-                ? "nav-link font-semibold underline"
-                : "nav-link hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
           >
             My Account
@@ -52,7 +46,7 @@ function HeaderNavBar() {
           <NavLink
             to="/authenticate"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
           >
             Sign In
@@ -77,7 +71,7 @@ function HeaderNavBar() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
             onClick={toggleMenu}
           >
@@ -86,7 +80,7 @@ function HeaderNavBar() {
           <NavLink
             to="/explore"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
             onClick={toggleMenu}
           >
@@ -95,7 +89,7 @@ function HeaderNavBar() {
           <NavLink
             to="/account"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
             onClick={toggleMenu}
           >
@@ -104,7 +98,7 @@ function HeaderNavBar() {
           <NavLink
             to="/authenticate"
             className={({ isActive }) =>
-              isActive ? "font-semibold underline" : "hover:underline"
+              isActive ? "nav-link nav-link--active" : "nav-link"
             }
             onClick={toggleMenu}
           >

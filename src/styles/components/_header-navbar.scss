@@ -1,0 +1,19 @@
+@use "../variables" as *;
+
+.nav-link {
+  font-family: $font-body;
+  font-size: $body-large-size;
+  line-height: $body-large-line-height;
+  font-weight: $font-weight-medium;
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-secondary;
+    text-decoration: none;
+  }
+
+  &--active {
+    color: $color-accent-sandstone;
+  }
+}

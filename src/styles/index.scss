@@ -1,6 +1,7 @@
 @use "variables" as *;
 @use "global.scss";
 @use "custom.scss";
+@use "components/header-navbar";
 @use "components/hero";
 @use "components/search-bar";
 @use "components/footer";

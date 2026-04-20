@@ -26,3 +26,21 @@
     line-height: $body-medium-line-height;
     font-weight: $font-weight-semibold;
 }
+
+.home-content {
+  padding: 1rem;
+}
+
+.home-content__heading {
+  color: $color-font-dark;
+  padding: 1rem;
+}
+
+.home-content__text {
+  color: $color-font-dark-grey;
+  font-family: $font-heading;
+  font-size: $h5-size;
+  line-height: $h5-line-height;
+  font-weight: $h5-weight;
+  max-width: 360px;
+}

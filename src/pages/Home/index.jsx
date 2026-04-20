@@ -11,7 +11,7 @@ function Home() {
 
   useEffect(() => {
     getVenues()
-      .then((result) => setVenues(result.data))
+      .then((result) => setVenues(result.data.slice(0, 6)))
       .catch((err) => setError(err.message))
   }, [])
 

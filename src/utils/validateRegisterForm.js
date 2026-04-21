@@ -1,0 +1,17 @@
+function validateRegisterForm(values) {
+  const errors = {}
+  if (!values.name) errors.name = "Please enter your name"
+  if (!values.email) errors.email = "Please enter your email"
+  else if (!values.email.endsWith("@stud.noroff.no"))
+    errors.email = "Email must end with @stud.noroff.no"
+  if (!values.password) errors.password = "Please enter a password"
+  else if (values.password.length < 8)
+    errors.password = "Please enter a password with at least 8 characters"
+  if (!values.confirmPassword)
+    errors.confirmPassword = "Please confirm your password"
+  else if (values.confirmPassword !== values.password)
+    errors.confirmPassword = "Passwords do not match"
+  return errors
+}
+
+export default validateRegisterForm

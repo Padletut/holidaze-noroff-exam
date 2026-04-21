@@ -1,6 +1,10 @@
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 function validateLoginForm(values) {
   const errors = {}
   if (!values.email) errors.email = "Please enter your email"
+  else if (!EMAIL_REGEX.test(values.email))
+    errors.email = "Please enter a valid email address"
   else if (!values.email.endsWith("@stud.noroff.no"))
     errors.email = "Email must end with @stud.noroff.no"
   if (!values.password) errors.password = "Please enter your password"

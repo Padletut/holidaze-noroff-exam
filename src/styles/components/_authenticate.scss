@@ -159,6 +159,15 @@
       box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
     }
   }
+
+  &--valid {
+    border-color: $color-secondary;
+
+    &:focus {
+      border-color: $color-secondary;
+      box-shadow: 0 0 0 2px rgba(19, 194, 150, 0.2);
+    }
+  }
 }
 
 .auth-form {
@@ -190,6 +199,16 @@
       color: #dc2626;
       line-height: 1;
     }
+  }
+
+  &__valid-icon {
+    position: absolute;
+    right: 0.75rem;
+    font-size: 1rem;
+    color: $color-secondary;
+    pointer-events: none;
+    flex-shrink: 0;
+    line-height: 1;
   }
 
   &__feedback {

@@ -1,7 +1,13 @@
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 function validateRegisterForm(values) {
   const errors = {}
   if (!values.name) errors.name = "Please enter your name"
+  else if (values.name.trim().length < 3)
+    errors.name = "Name must be at least 3 characters"
   if (!values.email) errors.email = "Please enter your email"
+  else if (!EMAIL_REGEX.test(values.email))
+    errors.email = "Please enter a valid email address"
   else if (!values.email.endsWith("@stud.noroff.no"))
     errors.email = "Email must end with @stud.noroff.no"
   if (!values.password) errors.password = "Please enter a password"

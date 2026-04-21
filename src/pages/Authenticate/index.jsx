@@ -11,6 +11,7 @@ function FieldGroup({
   value,
   onChange,
   error,
+  valid,
 }) {
   return (
     <div className="auth-form__group">
@@ -21,7 +22,7 @@ function FieldGroup({
         <input
           id={id}
           type={type}
-          className={`form-control${error ? " form-control--invalid" : ""}`}
+          className={`form-control${error ? " form-control--invalid" : ""}${valid ? " form-control--valid" : ""}`}
           placeholder={placeholder}
           autoComplete={autoComplete}
           value={value}
@@ -31,6 +32,11 @@ function FieldGroup({
         />
         {error && (
           <span className="auth-form__invalid-icon" aria-hidden="true" />
+        )}
+        {valid && (
+          <span className="auth-form__valid-icon" aria-hidden="true">
+            ✓
+          </span>
         )}
       </div>
       {error && (
@@ -44,21 +50,29 @@ function FieldGroup({
 
 function LoginForm({ onSwitch }) {
   const [values, setValues] = useState({ email: "", password: "" })
-  const [errors, setErrors] = useState({})
+  const [touched, setTouched] = useState({})
 
-  const set = (field) => (e) =>
+  const errors = validateLoginForm(values)
+
+  const set = (field) => (e) => {
     setValues((v) => ({ ...v, [field]: e.target.value }))
-
-  const validate = () => validateLoginForm(values)
+    setTouched((t) => ({ ...t, [field]: true }))
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const errs = validate()
-    setErrors(errs)
-    if (Object.keys(errs).length === 0) {
+    setTouched({ email: true, password: true })
+    if (Object.keys(errors).length === 0) {
       // TODO: call login API
     }
   }
+
+  const fieldProps = (field) => ({
+    value: values[field],
+    onChange: set(field),
+    error: touched[field] ? errors[field] : undefined,
+    valid: touched[field] && !errors[field],
+  })
 
   return (
     <div className="auth-card">
@@ -71,18 +85,14 @@ function LoginForm({ onSwitch }) {
             type="email"
             placeholder="Email (stud.noroff.no)"
             autoComplete="email"
-            value={values.email}
-            onChange={set("email")}
-            error={errors.email}
+            {...fieldProps("email")}
           />
           <FieldGroup
             id="login-password"
             type="password"
             placeholder="Password"
             autoComplete="current-password"
-            value={values.password}
-            onChange={set("password")}
-            error={errors.password}
+            {...fieldProps("password")}
           />
           <button type="submit" className="auth-form__btn">
             Login
@@ -107,21 +117,34 @@ function RegisterForm({ onSwitch }) {
     confirmPassword: "",
     venueManager: false,
   })
-  const [errors, setErrors] = useState({})
+  const [touched, setTouched] = useState({})
 
-  const set = (field) => (e) =>
+  const errors = validateRegisterForm(values)
+
+  const set = (field) => (e) => {
     setValues((v) => ({ ...v, [field]: e.target.value }))
-
-  const validate = () => validateRegisterForm(values)
+    setTouched((t) => ({ ...t, [field]: true }))
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const errs = validate()
-    setErrors(errs)
-    if (Object.keys(errs).length === 0) {
+    setTouched({
+      name: true,
+      email: true,
+      password: true,
+      confirmPassword: true,
+    })
+    if (Object.keys(errors).length === 0) {
       // TODO: call register API
     }
   }
+
+  const fieldProps = (field) => ({
+    value: values[field],
+    onChange: set(field),
+    error: touched[field] ? errors[field] : undefined,
+    valid: touched[field] && !errors[field],
+  })
 
   return (
     <div className="auth-card">
@@ -134,36 +157,28 @@ function RegisterForm({ onSwitch }) {
             type="text"
             placeholder="Your name"
             autoComplete="name"
-            value={values.name}
-            onChange={set("name")}
-            error={errors.name}
+            {...fieldProps("name")}
           />
           <FieldGroup
             id="register-email"
             type="email"
             placeholder="Email (stud.noroff.no)"
             autoComplete="email"
-            value={values.email}
-            onChange={set("email")}
-            error={errors.email}
+            {...fieldProps("email")}
           />
           <FieldGroup
             id="register-password"
             type="password"
             placeholder="Password"
             autoComplete="new-password"
-            value={values.password}
-            onChange={set("password")}
-            error={errors.password}
+            {...fieldProps("password")}
           />
           <FieldGroup
             id="register-confirm-password"
             type="password"
             placeholder="Confirm password"
             autoComplete="new-password"
-            value={values.confirmPassword}
-            onChange={set("confirmPassword")}
-            error={errors.confirmPassword}
+            {...fieldProps("confirmPassword")}
           />
           <div className="auth-form__checkbox-group">
             <input

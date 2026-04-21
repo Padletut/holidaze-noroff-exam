@@ -2,17 +2,20 @@ import "../../styles/index.scss"
 import Hero from "./Hero"
 import SearchBar from "../../components/SearchBar"
 import VenueCard from "../../components/VenueCard"
+import LoadingSpinner from "../../components/LoadingSpinner"
 import { getVenues } from "../../api/getVenues"
 import { useEffect, useState } from "react"
 
 function Home() {
   const [venues, setVenues] = useState([])
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getVenues()
       .then((result) => setVenues(result.data.slice(0, 6)))
       .catch((err) => setError(err.message))
+      .finally(() => setLoading(false))
   }, [])
 
   return (
@@ -29,11 +32,15 @@ function Home() {
           Browse through our selection of the most popular places to stay.
         </p>
         {error && <p className="text-center text-red-500">{error}</p>}
-        <div className="home-content__venues grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {venues.map((venue) => (
-            <VenueCard key={venue.id} venue={venue} />
-          ))}
-        </div>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="home-content__venues grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {venues.map((venue) => (
+              <VenueCard key={venue.id} venue={venue} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

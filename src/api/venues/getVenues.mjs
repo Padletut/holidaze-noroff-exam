@@ -1,4 +1,4 @@
-import { BASE_URL } from "./config.js"
+import { BASE_URL } from "../config.mjs"
 
 export async function getVenues() {
   try {

@@ -2,7 +2,7 @@ import "../../styles/index.scss"
 import Hero from "./Hero"
 import SearchBar from "../../components/SearchBar"
 import VenueCard from "../../components/VenueCard"
-import { getVenues } from "../../api/getVenues"
+import { getVenues } from "../../api/venues/getVenues"
 import { useEffect, useState } from "react"
 
 function Home() {

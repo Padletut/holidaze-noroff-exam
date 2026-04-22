@@ -1,0 +1,200 @@
+@use "../variables" as *;
+
+.drp {
+  position: relative;
+  width: 100%;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-primary;
+
+    &--open {
+      outline: 2px solid $color-secondary;
+      outline-offset: -2px;
+    }
+  }
+
+  &__trigger-icon {
+    display: flex;
+    align-items: center;
+    color: #6b7280;
+    flex-shrink: 0;
+  }
+
+  &__trigger-text {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &--placeholder {
+      color: #6b7280;
+    }
+  }
+
+  &__popover {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 200;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+    padding: 1rem;
+    width: 100%;
+    min-width: 280px;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  &__nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    color: $color-font-dark;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background: $color-background;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+  }
+
+  &__month-label {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+  }
+
+  &__day-names {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 0.25rem;
+  }
+
+  &__day-name {
+    text-align: center;
+    font-family: $font-body;
+    font-size: 11px;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark-grey;
+    padding: 0.25rem 0;
+    text-transform: uppercase;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  &__day {
+    aspect-ratio: 1;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    font-family: $font-body;
+    font-size: 13px;
+    color: $color-font-dark;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.12s ease, color 0.12s ease;
+    position: relative;
+
+    &--empty {
+      pointer-events: none;
+    }
+
+    &--past {
+      color: #d1d5db;
+      cursor: default;
+    }
+
+    &--today {
+      font-weight: $font-weight-bold;
+      color: $color-secondary;
+    }
+
+    &--available:not(&--start):not(&--end):hover {
+      background-color: rgba($color-secondary, 0.18);
+    }
+
+    &--in-range {
+      background-color: rgba($color-secondary, 0.15);
+      border-radius: 0;
+    }
+
+    &--start,
+    &--end {
+      background-color: $color-secondary;
+      color: #ffffff;
+      border-radius: 50%;
+      font-weight: $font-weight-semibold;
+    }
+
+    // Flatten inner edge of range on start day
+    &--start#{&}--in-range {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    // Flatten inner edge of range on end day
+    &--end#{&}--in-range {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  &__hint {
+    margin-top: 0.75rem;
+    min-height: 1.5rem;
+    text-align: center;
+    font-family: $font-body;
+    font-size: 13px;
+    color: $color-font-dark-grey;
+  }
+
+  &__clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: $font-body;
+    font-size: 13px;
+    color: $color-font-dark-grey;
+    text-decoration: underline;
+    padding: 0;
+
+    &:hover {
+      color: $color-font-dark;
+    }
+  }
+}

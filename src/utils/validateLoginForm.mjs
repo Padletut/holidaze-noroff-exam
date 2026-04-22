@@ -1,5 +1,12 @@
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+/**
+ * Validates the login form values.
+ *
+ * @param {{ email: string, password: string }} values - The form field values to validate.
+ * @returns {Object} An object containing any validation error messages, keyed by field name.
+ *   Returns an empty object if all fields are valid.
+ */
 function validateLoginForm(values) {
   const errors = {}
   if (!values.email) errors.email = "Please enter your email"

@@ -1,0 +1,419 @@
+@use "../variables" as *;
+
+// ─── Venue Detail Page ──────────────────────────────────────────────────────
+
+.venue-detail {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+
+  &__error {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: #dc2626;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  // Gallery
+  &__gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #e5e7eb;
+  }
+
+  &__gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.65);
+    }
+
+    &--prev { left: 12px; }
+    &--next { right: 12px; }
+  }
+
+  &__gallery-count {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-family: $font-body;
+    font-size: 13px;
+    border-radius: 20px;
+    padding: 2px 10px;
+  }
+
+  &__gallery-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  &__gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+
+    &--active {
+      background: #ffffff;
+      transform: scale(1.3);
+    }
+
+    &:hover:not(&--active) {
+      background: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  // Body
+  &__body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-size: $h2-size;
+    font-weight: $h2-weight;
+    color: $color-font-dark;
+    margin: 0.5rem 0 0;
+  }
+
+  &__location {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    margin: 0;
+  }
+
+  &__meta-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  &__price {
+    font-family: $font-body;
+    font-size: $body-large-size;
+    color: $color-accent-sandstone;
+
+    strong {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__rating {
+    font-size: 18px;
+    color: $color-accent-sandstone;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__rating-value {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+  }
+
+  &__guests {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+  }
+
+  &__section {
+    margin-top: 1.25rem;
+  }
+
+  &__section-title {
+    font-family: $font-heading;
+    font-size: $h4-size;
+    font-weight: $h4-weight;
+    color: $color-font-dark;
+    margin: 0 0 0.75rem;
+  }
+
+  &__description {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    line-height: $body-medium-line-height;
+    color: $color-font-dark-grey;
+    margin: 0;
+  }
+
+  &__amenities {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__amenity {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    background: #f3f4f6;
+    border-radius: 20px;
+    padding: 0.35rem 0.9rem;
+    color: $color-font-dark;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+// ─── Booking Calendar ────────────────────────────────────────────────────────
+
+.bc {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__calendar {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  &__nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: $color-font-dark;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+    line-height: 1;
+
+    &:hover:not(:disabled) {
+      background: $color-background;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+  }
+
+  &__month-label {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+  }
+
+  &__day-names {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 0.25rem;
+  }
+
+  &__day-name {
+    text-align: center;
+    font-family: $font-body;
+    font-size: 11px;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark-grey;
+    padding: 0.25rem 0;
+    text-transform: uppercase;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  &__day {
+    aspect-ratio: 1;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    font-family: $font-body;
+    font-size: 13px;
+    color: $color-font-dark;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.12s ease, color 0.12s ease;
+    position: relative;
+
+    &--empty {
+      pointer-events: none;
+    }
+
+    &--past {
+      color: #d1d5db;
+      cursor: default;
+    }
+
+    &--booked {
+      background: #f3f4f6;
+      color: #9ca3af;
+      text-decoration: line-through;
+      cursor: not-allowed;
+      border-radius: 0;
+    }
+
+    &--today {
+      font-weight: $font-weight-bold;
+      color: $color-secondary;
+    }
+
+    &--available:not(&--start):not(&--end):hover {
+      background-color: rgba($color-secondary, 0.18);
+    }
+
+    &--in-range {
+      background-color: rgba($color-secondary, 0.15);
+      border-radius: 0;
+    }
+
+    &--start,
+    &--end {
+      background-color: $color-secondary;
+      color: #ffffff;
+      border-radius: 50%;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__hint {
+    margin-top: 0.75rem;
+    min-height: 1.25rem;
+    font-family: $font-body;
+    font-size: 13px;
+    color: #dc2626;
+    text-align: center;
+  }
+
+  // Guest select
+  &__guests {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__guests-label {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-medium;
+    color: $color-font-dark;
+  }
+
+  &__guests-select {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    background: #ffffff;
+    width: 100%;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  // Summary
+  &__summary {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+
+    &--total {
+      font-weight: $font-weight-bold;
+      color: $color-font-dark;
+      padding-top: 0.5rem;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 0.25rem;
+    }
+  }
+
+  &__book-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    background: $color-primary;
+    color: #ffffff;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      background: $color-button-hover;
+    }
+  }
+}

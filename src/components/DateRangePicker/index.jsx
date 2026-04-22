@@ -4,35 +4,16 @@ import {
   formatDisplay,
   getDaysInMonth,
   getFirstWeekday,
+  MONTH_NAMES,
+  DAY_NAMES,
 } from "../../utils/dateUtils.mjs"
-
-const MONTH_NAMES = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-]
-const DAY_NAMES = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+import useCalendarNav from "../../hooks/useCalendarNav"
 
 function DateRangePicker({ checkIn, checkOut, onChange }) {
-  const today = new Date()
-  const todayStr = toDateStr(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate(),
-  )
+  const { viewYear, viewMonth, prevMonth, nextMonth, isAtMinMonth, todayStr } =
+    useCalendarNav()
 
   const [open, setOpen] = useState(false)
-  const [viewYear, setViewYear] = useState(today.getFullYear())
-  const [viewMonth, setViewMonth] = useState(today.getMonth())
   const [hoverDate, setHoverDate] = useState(null)
   const containerRef = useRef(null)
 
@@ -73,33 +54,6 @@ function DateRangePicker({ checkIn, checkOut, onChange }) {
       }
     }
   }
-
-  const prevMonth = () => {
-    const prevMonthYear = viewMonth === 0 ? viewYear - 1 : viewYear
-    const prevMonthIndex = viewMonth === 0 ? 11 : viewMonth - 1
-    const firstOfPrevMonth = toDateStr(prevMonthYear, prevMonthIndex, 1)
-    // Don't go before current month
-    const firstOfCurrentMonth = toDateStr(
-      today.getFullYear(),
-      today.getMonth(),
-      1,
-    )
-    if (firstOfPrevMonth < firstOfCurrentMonth) return
-    setViewYear(prevMonthYear)
-    setViewMonth(prevMonthIndex)
-  }
-
-  const nextMonth = () => {
-    if (viewMonth === 11) {
-      setViewYear((y) => y + 1)
-      setViewMonth(0)
-    } else {
-      setViewMonth((m) => m + 1)
-    }
-  }
-
-  const isAtMinMonth =
-    viewYear === today.getFullYear() && viewMonth === today.getMonth()
 
   const renderDays = () => {
     const daysInMonth = getDaysInMonth(viewYear, viewMonth)

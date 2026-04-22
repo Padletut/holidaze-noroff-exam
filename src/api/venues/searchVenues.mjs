@@ -19,7 +19,6 @@ export async function searchVenues(query) {
     }
 
     const data = await response.json()
-    console.log("Search results:", data)
     return data
   } catch (error) {
     console.error("Error searching venues:", error)

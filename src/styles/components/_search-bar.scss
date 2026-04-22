@@ -63,6 +63,13 @@
     }
   }
 
+  &__dates-separator {
+    color: #6b7280;
+    flex-shrink: 0;
+    font-size: $body-medium-size;
+    padding: 0 0.25rem;
+  }
+
   &__button {
     background-color: $color-primary;
     color: #ffffff;

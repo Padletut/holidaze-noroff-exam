@@ -5,11 +5,13 @@ import VenueCard from "../../components/VenueCard"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import { getVenues } from "../../api/venues/getVenues"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function Home() {
   const [venues, setVenues] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getVenues()
@@ -18,11 +20,20 @@ function Home() {
       .finally(() => setLoading(false))
   }, [])
 
+  const handleSearchSubmit = ({ query, guests, checkIn, checkOut }) => {
+    const params = new URLSearchParams()
+    if (query) params.set("q", query)
+    if (guests) params.set("guests", guests)
+    if (checkIn) params.set("checkIn", checkIn)
+    if (checkOut) params.set("checkOut", checkOut)
+    navigate(`/explore?${params.toString()}`)
+  }
+
   return (
     <div className="home relative">
       <Hero />
       <div className="-mt-16 px-4 relative z-10">
-        <SearchBar />
+        <SearchBar onSubmit={handleSearchSubmit} />
       </div>
       <div className="home-content max-w-6xl mx-auto py-8">
         <h2 className="home-content__heading text-center mb-8">

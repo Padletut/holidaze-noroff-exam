@@ -1,6 +1,34 @@
+import { useState } from "react"
 import "../../styles/index.scss"
+import DateRangePicker from "../DateRangePicker"
 
-function SearchBar() {
+function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
+  const [query, setQuery] = useState(initialValues.query ?? "")
+  const [guests, setGuests] = useState(initialValues.guests ?? "")
+  const [checkIn, setCheckIn] = useState(initialValues.checkIn ?? "")
+  const [checkOut, setCheckOut] = useState(initialValues.checkOut ?? "")
+
+  const handleQueryChange = (e) => {
+    const value = e.target.value
+    setQuery(value)
+    onSearch?.({ query: value, guests, checkIn, checkOut })
+  }
+
+  const handleGuestsChange = (e) => {
+    const value = e.target.value
+    setGuests(value)
+    onSearch?.({ query, guests: value, checkIn, checkOut })
+  }
+
+  const handleDatesChange = ({
+    checkIn: newCheckIn,
+    checkOut: newCheckOut,
+  }) => {
+    setCheckIn(newCheckIn)
+    setCheckOut(newCheckOut)
+    onSearch?.({ query, guests, checkIn: newCheckIn, checkOut: newCheckOut })
+  }
+
   return (
     <div className="search-bar">
       <div className="search-bar__fields">
@@ -24,7 +52,9 @@ function SearchBar() {
             className="search-bar__input"
             type="text"
             placeholder="Location"
-            aria-label="Location"
+            aria-label="Search by location or name"
+            value={query}
+            onChange={handleQueryChange}
           />
         </div>
 
@@ -50,37 +80,23 @@ function SearchBar() {
             min="1"
             placeholder="1 guest"
             aria-label="Number of guests"
+            value={guests}
+            onChange={handleGuestsChange}
           />
         </div>
       </div>
 
-      <div className="search-bar__input-wrapper search-bar__input-wrapper--full">
-        <span className="search-bar__icon" aria-hidden="true">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-          </svg>
-        </span>
-        <input
-          className="search-bar__input"
-          type="text"
-          placeholder="Check In - Out"
-          aria-label="Check in and check out dates"
-        />
-      </div>
+      <DateRangePicker
+        checkIn={checkIn}
+        checkOut={checkOut}
+        onChange={handleDatesChange}
+      />
 
-      <button className="search-bar__button" type="button">
+      <button
+        className="search-bar__button"
+        type="button"
+        onClick={() => onSubmit?.({ query, guests, checkIn, checkOut })}
+      >
         Search
       </button>
     </div>

@@ -1,0 +1,62 @@
+@use "../variables" as *;
+
+.explore {
+  padding: 2rem 1.25rem 4rem;
+  max-width: 480px;
+  margin: 0 auto;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h2-size;
+    font-weight: $h2-weight;
+    color: $color-font-dark;
+    margin: 0 0 0.25rem;
+  }
+
+  &__subtitle {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    line-height: $body-medium-line-height;
+    color: $color-font-dark-grey;
+    margin: 0;
+  }
+
+  &__search {
+    margin-bottom: 2rem;
+  }
+
+  &__venues {
+    margin-top: 0.5rem;
+  }
+
+  &__venues-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__group {
+    margin-bottom: 2.5rem;
+  }
+
+  &__group-title {
+    font-family: $font-heading;
+    font-size: $h3-size;
+    font-weight: $h3-weight;
+    color: $color-font-dark;
+    margin: 0 0 1rem;
+  }
+
+  &__error {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: #dc2626;
+    text-align: center;
+    margin-top: 2rem;
+  }
+}

@@ -11,7 +11,7 @@ import Alert from "../../components/Alert"
 
 function Account() {
   const [profile, setProfile] = useState(null)
-  const [bookingCount, setBookingCount] = useState(0)
+  const [bookings, setBookings] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -32,7 +32,7 @@ function Account() {
     ])
       .then(([profileData, bookingsData]) => {
         setProfile(profileData)
-        setBookingCount(bookingsData.length)
+        setBookings(bookingsData)
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
@@ -105,9 +105,48 @@ function Account() {
         {/* Bookings */}
         <section className="account-section">
           <h2 className="account-section__heading">Bookings</h2>
-          <div className="account-section__card">
-            <p className="account-section__empty">No upcoming bookings.</p>
-            {bookingCount > 0 && (
+          <div className="account-section__card account-section__card--bookings">
+            {(() => {
+              const today = new Date().toISOString().slice(0, 10)
+              const upcoming = bookings
+                .filter((b) => b.dateFrom.slice(0, 10) >= today)
+                .sort((a, b) => a.dateFrom.localeCompare(b.dateFrom))
+              const preview = upcoming[0]
+              if (!preview) {
+                return (
+                  <p className="account-section__empty">
+                    No upcoming bookings.
+                  </p>
+                )
+              }
+              const venue = preview.venue
+              const image = venue?.media?.[0]
+              const from = new Date(preview.dateFrom)
+              const to = new Date(preview.dateTo)
+              const opts = { day: "numeric", month: "short" }
+              const dateRange = `${from.toLocaleDateString("en-GB", opts)} – ${to.toLocaleDateString("en-GB", opts)}`
+              return (
+                <Link
+                  to={`/venue/${venue?.id}`}
+                  className="account-booking-preview"
+                >
+                  <img
+                    src={image?.url || "/placeholder.jpg"}
+                    alt={image?.alt || venue?.name || "Venue"}
+                    className="account-booking-preview__image"
+                  />
+                  <div className="account-booking-preview__body">
+                    <p className="account-booking-preview__name">
+                      {venue?.name || "Unknown venue"}
+                    </p>
+                    <p className="account-booking-preview__dates">
+                      {dateRange}
+                    </p>
+                  </div>
+                </Link>
+              )
+            })()}
+            {bookings.length > 0 && (
               <Link to="/bookings" className="account-section__link">
                 View all bookings <span aria-hidden="true">&gt;</span>
               </Link>

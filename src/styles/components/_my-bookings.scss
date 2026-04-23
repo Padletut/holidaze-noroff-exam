@@ -61,6 +61,14 @@
     padding: 0.75rem 1rem 0.75rem 0;
   }
 
+  &__name-link {
+    text-decoration: none;
+
+    &:hover .booking-card__name {
+      text-decoration: underline;
+    }
+  }
+
   &__name {
     font-family: $font-body;
     font-size: $body-medium-size;

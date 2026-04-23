@@ -170,6 +170,11 @@
     margin-bottom: 1rem;
   }
 
+  &__card--bookings {
+    padding: 0;
+    overflow: hidden;
+  }
+
   &__link {
     display: flex;
     align-items: center;
@@ -179,7 +184,7 @@
     font-weight: $font-weight-medium;
     color: $color-font-dark;
     text-decoration: none;
-    padding-top: 0.75rem;
+    padding: 0.875rem 1.25rem;
     border-top: 1px solid #e5e7eb;
 
     &:hover {
@@ -228,6 +233,45 @@
     margin-left: auto;
     color: $color-font-dark-grey;
     font-size: 14px;
+  }
+}
+
+// ─── Booking preview in Account page ─────────────────────────────────────────
+
+.account-booking-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+
+  &__image {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__name {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__dates {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    margin: 0;
   }
 }
 

@@ -1,0 +1,308 @@
+@use "../variables" as *;
+@use "sass:color";
+
+// ─── Shared card wrapper ───────────────────────────────────────────────────────
+
+%booking-page {
+  background-color: $color-background;
+  min-height: 100%;
+  padding: 2rem 1.25rem 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+%booking-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  height: fit-content;
+}
+
+// ─── Booking Confirmation ──────────────────────────────────────────────────────
+
+.booking-confirmation {
+  @extend %booking-page;
+
+  &__card {
+    @extend %booking-card;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h3-size;
+    line-height: $h3-line-height;
+    font-weight: $h3-weight;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  &__section {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.25rem;
+  }
+
+  &__section-title {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+    text-align: center;
+    margin: 0 0 1rem;
+  }
+
+  &__details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__detail-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+  }
+
+  &__detail-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  &__detail-label {
+    flex: 1;
+  }
+
+  &__detail-value {
+    font-weight: $font-weight-semibold;
+  }
+
+  &__change-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__change-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+  }
+
+  &__change-label {
+    font-weight: $font-weight-semibold;
+  }
+
+  &__change-values {
+    color: $color-font-dark-grey;
+
+    strong {
+      color: $color-font-dark;
+    }
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-bold;
+    color: $color-font-dark;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  &__btn {
+    display: block;
+    width: 100%;
+    padding: 0.875rem;
+    background-color: $color-primary;
+    color: #fff;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: color.adjust($color-primary, $lightness: 10%);
+    }
+  }
+}
+
+// ─── Edit Booking ──────────────────────────────────────────────────────────────
+
+.edit-booking {
+  @extend %booking-page;
+
+  &__card {
+    @extend %booking-card;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h3-size;
+    line-height: $h3-line-height;
+    font-weight: $h3-weight;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__venue-name {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    margin: -0.75rem 0 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.25rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__label {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+  }
+
+  &__input {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 0.625rem 0.75rem;
+    background: #fff;
+    appearance: auto;
+
+    &:focus {
+      outline: 2px solid $color-primary;
+      outline-offset: 1px;
+    }
+  }
+
+  &__summary {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+  }
+
+  &__summary-row {
+    display: flex;
+    justify-content: space-between;
+
+    &--total {
+      font-weight: $font-weight-bold;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 0.5rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__btn {
+    width: 100%;
+    padding: 0.875rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &--save {
+      background-color: $color-primary;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background-color: color.adjust($color-primary, $lightness: 10%);
+      }
+    }
+
+    &--cancel {
+      background-color: transparent;
+      color: #dc2626;
+      border: 1px solid #dc2626;
+
+      &:hover:not(:disabled) {
+        background-color: #fef2f2;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__confirm-cancel {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+  }
+
+  &__confirm-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

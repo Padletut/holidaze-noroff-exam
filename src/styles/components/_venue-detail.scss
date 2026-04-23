@@ -411,9 +411,90 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 
-    &:hover,
+    &:hover:not(:disabled),
     &:focus-visible {
       background: $color-button-hover;
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+  }
+
+  &__cancel-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    background: transparent;
+    color: #dc2626;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    border: 1.5px solid #dc2626;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background: #fef2f2;
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+  }
+
+  &__cancel-confirm {
+    margin-top: 0.75rem;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+
+    p {
+      margin: 0 0 0.75rem;
+    }
+  }
+
+  &__cancel-confirm-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .bc__cancel-btn,
+    .bc__book-btn {
+      margin-top: 0;
+    }
+  }
+
+  &__submit-error {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: #dc2626;
+    margin: 0.5rem 0 0;
+  }
+
+  &__login-prompt {
+    margin-top: 0.75rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  &__login-link {
+    color: $color-accent-sandstone;
+    font-weight: $font-weight-semibold;
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 }

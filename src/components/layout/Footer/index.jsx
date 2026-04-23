@@ -4,7 +4,7 @@ import "../../../../src/styles/index.scss"
 const sections = [
   {
     title: "Explore",
-    links: ["Beachfront", "Cabins", "City Breaks", "Countryside"],
+    links: ["Norway", "England", "Germany", "Denmark"],
   },
   {
     title: "Account",

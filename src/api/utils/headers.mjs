@@ -1,5 +1,5 @@
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+import { loadStorage } from "../../utils/loadStorage.mjs";
 
 /**
  * Builds a Headers object for API requests.
@@ -19,9 +19,11 @@ const API_KEY = import.meta.env.VITE_API_KEY;
  * // POST request (with body)
  * const res = await fetch(url, { method: "POST", body: JSON.stringify(data), headers: headers(true) })
  */
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 export function headers(hasBody = false) {
   const headers = new Headers();
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = loadStorage("accessToken");
 
   if (accessToken) {
     headers.append("Authorization", `Bearer ${accessToken}`);

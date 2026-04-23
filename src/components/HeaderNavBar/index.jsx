@@ -1,11 +1,22 @@
 import { useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
+import { loadStorage } from "../../utils/loadStorage.mjs"
+import { clearSession } from "../../utils/clearSession.mjs"
 
 function HeaderNavBar() {
   const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
+
+  const isLoggedIn = Boolean(loadStorage("accessToken"))
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
+  }
+
+  const handleSignOut = () => {
+    clearSession()
+    setIsOpen(false)
+    navigate("/")
   }
 
   return (
@@ -43,14 +54,20 @@ function HeaderNavBar() {
           </NavLink>
         </div>
         <div className="signin-nav-button hidden md:block">
-          <NavLink
-            to="/authenticate"
-            className={({ isActive }) =>
-              isActive ? "nav-link nav-link--active" : "nav-link"
-            }
-          >
-            Sign In
-          </NavLink>
+          {isLoggedIn ? (
+            <button className="nav-link" onClick={handleSignOut}>
+              Sign Out
+            </button>
+          ) : (
+            <NavLink
+              to="/authenticate"
+              className={({ isActive }) =>
+                isActive ? "nav-link nav-link--active" : "nav-link"
+              }
+            >
+              Sign In
+            </NavLink>
+          )}
         </div>
 
         {/* Hamburger button */}
@@ -95,15 +112,21 @@ function HeaderNavBar() {
           >
             My Account
           </NavLink>
-          <NavLink
-            to="/authenticate"
-            className={({ isActive }) =>
-              isActive ? "nav-link nav-link--active" : "nav-link"
-            }
-            onClick={toggleMenu}
-          >
-            Sign In
-          </NavLink>
+          {isLoggedIn ? (
+            <button className="nav-link" onClick={handleSignOut}>
+              Sign Out
+            </button>
+          ) : (
+            <NavLink
+              to="/authenticate"
+              className={({ isActive }) =>
+                isActive ? "nav-link nav-link--active" : "nav-link"
+              }
+              onClick={toggleMenu}
+            >
+              Sign In
+            </NavLink>
+          )}
         </div>
       )}
     </nav>

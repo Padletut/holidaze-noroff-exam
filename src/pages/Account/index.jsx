@@ -4,6 +4,8 @@ import "../../styles/index.scss"
 import { getProfile } from "../../api/profiles/getProfile"
 import EditProfileModal from "../../components/EditProfileModal"
 import LoadingSpinner from "../../components/LoadingSpinner"
+import { loadStorage } from "../../utils/loadStorage.mjs"
+import { clearSession } from "../../utils/clearSession.mjs"
 import Alert from "../../components/Alert"
 
 function Account() {
@@ -14,7 +16,7 @@ function Account() {
   const [saveSuccess, setSaveSuccess] = useState(null)
   const navigate = useNavigate()
 
-  const storedProfile = JSON.parse(localStorage.getItem("profile") || "null")
+  const storedProfile = loadStorage("profile")
 
   useEffect(() => {
     if (!storedProfile) {
@@ -30,8 +32,7 @@ function Account() {
   }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken")
-    localStorage.removeItem("profile")
+    clearSession()
     navigate("/")
   }
 

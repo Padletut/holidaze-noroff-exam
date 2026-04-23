@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { updateProfile } from "../../api/profiles/updateProfile"
+import { loadStorage } from "../../utils/loadStorage.mjs"
+import { saveStorage } from "../../utils/saveStorage.mjs"
 
 function EditProfileModal({ profile, onClose, onSave }) {
   const [bio, setBio] = useState(profile.bio || "")
@@ -30,8 +32,8 @@ function EditProfileModal({ profile, onClose, onSave }) {
 
     try {
       const updated = await updateProfile(profile.name, body)
-      const stored = JSON.parse(localStorage.getItem("profile") || "{}")
-      localStorage.setItem("profile", JSON.stringify({ ...stored, ...updated }))
+      const stored = loadStorage("profile") || {}
+      saveStorage("profile", { ...stored, ...updated })
       onSave(updated)
     } catch (err) {
       setError(err.message)

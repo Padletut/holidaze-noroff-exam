@@ -1,5 +1,6 @@
 import { BASE_URL } from "../config.mjs";
 import { fetchData } from "../utils/fetchdata.mjs";
+import { saveStorage } from "../../utils/saveStorage.mjs";
 
 /**
  * Logs in a registered user.
@@ -29,8 +30,8 @@ export async function login({ email, password }) {
 
   const { data } = await response.json();
 
-  localStorage.setItem("accessToken", data.accessToken);
-  localStorage.setItem("profile", JSON.stringify(data));
+  saveStorage("accessToken", data.accessToken);
+  saveStorage("profile", data);
 
   return data;
 }

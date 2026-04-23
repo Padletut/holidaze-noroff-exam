@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "../../styles/index.scss"
 import { getProfile } from "../../api/profiles/getProfile"
+import { getProfileBookings } from "../../api/profiles/getProfileBookings"
 import EditProfileModal from "../../components/EditProfileModal"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import { loadStorage } from "../../utils/loadStorage.mjs"
@@ -10,6 +11,7 @@ import Alert from "../../components/Alert"
 
 function Account() {
   const [profile, setProfile] = useState(null)
+  const [bookingCount, setBookingCount] = useState(0)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -24,8 +26,14 @@ function Account() {
       return
     }
 
-    getProfile(storedProfile.name)
-      .then((data) => setProfile(data))
+    Promise.all([
+      getProfile(storedProfile.name),
+      getProfileBookings(storedProfile.name),
+    ])
+      .then(([profileData, bookingsData]) => {
+        setProfile(profileData)
+        setBookingCount(bookingsData.length)
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,9 +107,11 @@ function Account() {
           <h2 className="account-section__heading">Bookings</h2>
           <div className="account-section__card">
             <p className="account-section__empty">No upcoming bookings.</p>
-            <Link to="/mybookings" className="account-section__link">
-              View all bookings <span aria-hidden="true">&gt;</span>
-            </Link>
+            {bookingCount > 0 && (
+              <Link to="/bookings" className="account-section__link">
+                View all bookings <span aria-hidden="true">&gt;</span>
+              </Link>
+            )}
           </div>
         </section>
 

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { getVenueById } from "../../api/venues/getVenueById.mjs"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import BookingCalendar from "./BookingCalendar"
+import Alert from "../../components/Alert"
 
 function VenueDetail() {
   const { id } = useParams()
@@ -21,7 +22,7 @@ function VenueDetail() {
   }, [id])
 
   if (loading) return <LoadingSpinner />
-  if (error) return <p className="venue-detail__error">{error}</p>
+  if (error) return <Alert type="error" message={error} />
   if (!venue) return null
 
   const {

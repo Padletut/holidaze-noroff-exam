@@ -43,7 +43,7 @@ function Account() {
   }
 
   if (loading) return <LoadingSpinner />
-  if (error) return <p className="account-page__error">{error}</p>
+  if (error) return <Alert type="error" message={error} />
   if (!profile) return null
 
   return (

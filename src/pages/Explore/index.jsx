@@ -7,6 +7,7 @@ import { searchVenues } from "../../api/venues/searchVenues"
 import { useEffect, useRef, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { groupByCountry } from "../../utils/groupByCountry.mjs"
+import Alert from "../../components/Alert"
 
 function Explore() {
   const [urlParams] = useSearchParams()
@@ -146,7 +147,7 @@ function Explore() {
 
       {showLoading && <LoadingSpinner />}
 
-      {error && <p className="explore__error">{error}</p>}
+      <Alert type="error" message={error} />
 
       {!showLoading && !error && (
         <>

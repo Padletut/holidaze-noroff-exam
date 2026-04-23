@@ -6,6 +6,7 @@ import LoadingSpinner from "../../components/LoadingSpinner"
 import { getVenues } from "../../api/venues/getVenues"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Alert from "../../components/Alert"
 
 function Home() {
   const [venues, setVenues] = useState([])
@@ -42,7 +43,7 @@ function Home() {
         <p className="home-content__text text-center mb-12">
           Browse through our selection of the most popular places to stay.
         </p>
-        {error && <p className="text-center text-red-500">{error}</p>}
+        <Alert type="error" message={error} />
         {loading ? (
           <LoadingSpinner />
         ) : (

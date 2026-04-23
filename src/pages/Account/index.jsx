@@ -4,12 +4,14 @@ import "../../styles/index.scss"
 import { getProfile } from "../../api/profiles/getProfile"
 import EditProfileModal from "../../components/EditProfileModal"
 import LoadingSpinner from "../../components/LoadingSpinner"
+import Alert from "../../components/Alert"
 
 function Account() {
   const [profile, setProfile] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
+  const [saveSuccess, setSaveSuccess] = useState(null)
   const navigate = useNavigate()
 
   const storedProfile = JSON.parse(localStorage.getItem("profile") || "null")
@@ -36,6 +38,8 @@ function Account() {
   const handleSave = (updated) => {
     setProfile((prev) => ({ ...prev, ...updated }))
     setShowModal(false)
+    setSaveSuccess("Profile updated successfully!")
+    setTimeout(() => setSaveSuccess(null), 4000)
   }
 
   if (loading) return <LoadingSpinner />
@@ -45,31 +49,43 @@ function Account() {
   return (
     <div className="account-page">
       {/* Profile header */}
-      <div className="account-header">
+      <div
+        className="account-header"
+        style={
+          profile.banner?.url
+            ? { backgroundImage: `url(${profile.banner.url})` }
+            : undefined
+        }
+      >
+        {/* Dark overlay when banner is present */}
         {profile.banner?.url && (
-          <div className="account-header__banner">
-            <img
-              src={profile.banner.url}
-              alt={profile.banner.alt || "Profile banner"}
-              className="account-header__banner-img"
-            />
-          </div>
+          <div className="account-header__overlay" aria-hidden="true" />
         )}
-        <div className="account-header__info">
+        <div
+          className="account-header__blob account-header__blob--1"
+          aria-hidden="true"
+        />
+        <div
+          className="account-header__blob account-header__blob--2"
+          aria-hidden="true"
+        />
+
+        <div className="account-header__inner">
           <img
             src={profile.avatar?.url || "/placeholder.jpg"}
             alt={profile.avatar?.alt || profile.name}
             className="account-header__avatar"
           />
-          <div className="account-header__text">
-            <p className="account-header__name">{profile.name}</p>
-            <p className="account-header__email">{profile.email}</p>
+          <div className="account-header__card">
+            <p className="account-header__card-label">{profile.name}</p>
+            <p className="account-header__card-email">{profile.email}</p>
           </div>
         </div>
       </div>
 
       {/* Page body */}
       <div className="account-body">
+        <Alert type="success" message={saveSuccess} />
         <h1 className="account-body__title">Account</h1>
         <p className="account-body__subtitle">
           Manage your profile, bookings, and venues

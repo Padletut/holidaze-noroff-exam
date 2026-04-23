@@ -1,7 +1,11 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "../../styles/index.scss"
 import validateLoginForm from "../../utils/validateLoginForm"
 import validateRegisterForm from "../../utils/validateRegisterForm"
+import { login } from "../../api/auth/login"
+import { register } from "../../api/auth/register"
+import Alert from "../../components/Alert"
 
 function FieldGroup({
   id,
@@ -48,9 +52,11 @@ function FieldGroup({
   )
 }
 
-function LoginForm({ onSwitch }) {
+function LoginForm({ onSwitch, onSuccess }) {
   const [values, setValues] = useState({ email: "", password: "" })
   const [touched, setTouched] = useState({})
+  const [apiError, setApiError] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
 
   const errors = validateLoginForm(values)
 
@@ -59,11 +65,20 @@ function LoginForm({ onSwitch }) {
     setTouched((t) => ({ ...t, [field]: true }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setTouched({ email: true, password: true })
-    if (Object.keys(errors).length === 0) {
-      // TODO: call login API
+    if (Object.keys(errors).length > 0) return
+
+    setApiError(null)
+    setSubmitting(true)
+    try {
+      await login(values)
+      onSuccess("You are now logged in! Taking you to your account…")
+    } catch (err) {
+      setApiError(err.message)
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -94,8 +109,13 @@ function LoginForm({ onSwitch }) {
             autoComplete="current-password"
             {...fieldProps("password")}
           />
-          <button type="submit" className="auth-form__btn">
-            Login
+          <Alert type="error" message={apiError} />
+          <button
+            type="submit"
+            className="auth-form__btn"
+            disabled={submitting}
+          >
+            {submitting ? "Logging in…" : "Login"}
           </button>
         </form>
         <p className="auth-card__switch-text">
@@ -109,7 +129,7 @@ function LoginForm({ onSwitch }) {
   )
 }
 
-function RegisterForm({ onSwitch }) {
+function RegisterForm({ onSwitch, onSuccess }) {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -118,6 +138,8 @@ function RegisterForm({ onSwitch }) {
     venueManager: false,
   })
   const [touched, setTouched] = useState({})
+  const [apiError, setApiError] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
 
   const errors = validateRegisterForm(values)
 
@@ -126,7 +148,7 @@ function RegisterForm({ onSwitch }) {
     setTouched((t) => ({ ...t, [field]: true }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setTouched({
       name: true,
@@ -134,8 +156,18 @@ function RegisterForm({ onSwitch }) {
       password: true,
       confirmPassword: true,
     })
-    if (Object.keys(errors).length === 0) {
-      // TODO: call register API
+    if (Object.keys(errors).length > 0) return
+
+    setApiError(null)
+    setSubmitting(true)
+    try {
+      await register(values)
+      await login({ email: values.email, password: values.password })
+      onSuccess("Account created! Taking you to your account…")
+    } catch (err) {
+      setApiError(err.message)
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -197,8 +229,13 @@ function RegisterForm({ onSwitch }) {
               Register as Venue Manager
             </label>
           </div>
-          <button type="submit" className="auth-form__btn">
-            Sign Up
+          <Alert type="error" message={apiError} />
+          <button
+            type="submit"
+            className="auth-form__btn"
+            disabled={submitting}
+          >
+            {submitting ? "Creating account…" : "Sign Up"}
           </button>
         </form>
         <p className="auth-card__switch-text">
@@ -214,13 +251,38 @@ function RegisterForm({ onSwitch }) {
 
 function Authenticate() {
   const [view, setView] = useState("login")
+  const [successMessage, setSuccessMessage] = useState(null)
+  const navigate = useNavigate()
+
+  const handleSuccess = (message) => {
+    setSuccessMessage(message)
+    setTimeout(() => {
+      navigate("/account")
+    }, 2000)
+  }
+
+  if (successMessage) {
+    return (
+      <div className="auth-page">
+        <div className="auth-success">
+          <Alert type="success" message={successMessage} />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="auth-page">
       {view === "login" ? (
-        <LoginForm onSwitch={() => setView("register")} />
+        <LoginForm
+          onSwitch={() => setView("register")}
+          onSuccess={handleSuccess}
+        />
       ) : (
-        <RegisterForm onSwitch={() => setView("login")} />
+        <RegisterForm
+          onSwitch={() => setView("login")}
+          onSuccess={handleSuccess}
+        />
       )}
     </div>
   )

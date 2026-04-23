@@ -20,6 +20,9 @@
 }
 
 .home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem;
 }
 
@@ -39,4 +42,10 @@
 
 .home-content__venues {
   margin: 2rem 0;
+}
+
+@media (min-width: 1184px) {
+  .home-content {
+    margin-top: 4rem;
+  }
 }

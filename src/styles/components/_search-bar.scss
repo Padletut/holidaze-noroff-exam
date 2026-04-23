@@ -89,4 +89,21 @@
       background-color: $color-button-hover;
     }
   }
+
+  @media (min-width: 1184px) {
+    flex-direction: row;
+    align-items: center;
+
+    .drp {
+      flex: 2;
+    }
+
+    &__button {
+      flex: 2;
+    }
+
+    &__wrapper {
+      margin-top: -8rem;
+    }
+  }
 }

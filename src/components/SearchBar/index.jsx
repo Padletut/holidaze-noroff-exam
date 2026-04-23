@@ -30,7 +30,7 @@ function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
   }
 
   return (
-    <div className="search-bar">
+    <div className="search-bar max-w-7xl mx-auto">
       <div className="search-bar__fields">
         <div className="search-bar__input-wrapper">
           <span className="search-bar__icon" aria-hidden="true">

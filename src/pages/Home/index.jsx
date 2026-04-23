@@ -33,10 +33,10 @@ function Home() {
   return (
     <div className="home relative">
       <Hero />
-      <div className="-mt-16 px-4 relative z-10">
+      <div className="search-bar__wrapper -mt-16 px-4 relative z-10">
         <SearchBar onSubmit={handleSearchSubmit} />
       </div>
-      <div className="home-content max-w-6xl mx-auto py-8">
+      <div className="home-content max-w-7xl mx-auto py-8">
         <h2 className="home-content__heading text-center mb-8">
           Popular Destinations
         </h2>

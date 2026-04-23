@@ -17,18 +17,24 @@
 
   &__links {
     list-style: none;
-    padding: 0;
+    padding: 0 1.25rem 1rem;
+    text-align: left;
     margin: 0;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+
+    @media (min-width: 769px) {
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
   }
 
   &__link {
-    font-family: $font-body;
-    font-size: $body-medium-size;
-    line-height: $body-medium-line-height;
-    font-weight: $font-weight-regular;
+    font-family: $font-heading;
+    font-size: $h3-size;
+    font-weight: $h3-weight;
     color: #ffffff;
     text-decoration: none;
 
@@ -39,10 +45,12 @@
 
   // ── Mobile accordion ────────────────────────────────────────
   &__accordion {
-    padding: 2rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.0rem;
+    @media (max-width: 768px) {
+      padding: 2rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.0rem;
+    }
   }
 
   &__accordion-item {
@@ -76,11 +84,6 @@
     &--open {
       transform: rotate(180deg);
     }
-  }
-
-  &__links {
-    padding: 0 1.25rem 1rem;
-    text-align: left;
   }
 
   &__social {
@@ -117,6 +120,7 @@
     gap: 2rem;
     padding: 3rem 2rem 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    width: inherit;
   }
 
   &__column {

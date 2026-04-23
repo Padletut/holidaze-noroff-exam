@@ -84,7 +84,7 @@ function HeaderNavBar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col gap-3 pt-3 px-2">
+        <div className="md:hidden flex flex-col gap-1 pt-3 px-2">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -113,9 +113,9 @@ function HeaderNavBar() {
             My Account
           </NavLink>
           {isLoggedIn ? (
-            <button className="nav-link" onClick={handleSignOut}>
+            <a className="nav-link" onClick={handleSignOut}>
               Sign Out
-            </button>
+            </a>
           ) : (
             <NavLink
               to="/authenticate"

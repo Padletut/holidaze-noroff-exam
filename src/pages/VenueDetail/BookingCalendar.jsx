@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import {
   toDateStr,
   getDaysInMonth,
@@ -8,37 +9,12 @@ import {
   DAY_NAMES,
 } from "../../utils/dateUtils.mjs"
 import useCalendarNav from "../../hooks/useCalendarNav"
-
-/**
- * Checks whether a date string falls within any booked period.
- *
- * @param {string} dateStr - ISO date string (YYYY-MM-DD) to check.
- * @param {Array<{dateFrom: string, dateTo: string}>} bookings - Array of booking objects.
- * @returns {boolean} True if the date is booked.
- */
-function isBooked(dateStr, bookings) {
-  return bookings.some(({ dateFrom, dateTo }) => {
-    const from = dateFrom.slice(0, 10)
-    const to = dateTo.slice(0, 10)
-    return dateStr >= from && dateStr <= to
-  })
-}
-
-/**
- * Checks whether selecting a range would overlap any existing booking.
- *
- * @param {string} from - ISO date string for range start.
- * @param {string} to - ISO date string for range end.
- * @param {Array<{dateFrom: string, dateTo: string}>} bookings - Existing bookings.
- * @returns {boolean} True if the range overlaps a booking.
- */
-function rangeOverlapsBooking(from, to, bookings) {
-  return bookings.some(({ dateFrom, dateTo }) => {
-    const bFrom = dateFrom.slice(0, 10)
-    const bTo = dateTo.slice(0, 10)
-    return from <= bTo && to >= bFrom
-  })
-}
+import { createBooking } from "../../api/bookings/createBooking.mjs"
+import { updateBooking } from "../../api/bookings/updateBooking.mjs"
+import { deleteBooking } from "../../api/bookings/deleteBooking.mjs"
+import { loadStorage } from "../../utils/loadStorage.mjs"
+import { isBooked } from "../../utils/isBooked.mjs"
+import { rangeOverlapsBooking } from "../../utils/rangeOverlapsBooking.mjs"
 
 /**
  * Inline booking calendar showing availability and letting the user pick a date range.
@@ -47,23 +23,46 @@ function rangeOverlapsBooking(from, to, bookings) {
  * @param {Array<{dateFrom: string, dateTo: string, guests: number}>} props.bookings - Existing bookings.
  * @param {number} props.maxGuests - Maximum allowed guests for this venue.
  * @param {number} props.pricePerNight - Price per night in USD.
+ * @param {string} props.venueId - The venue ID used when creating a booking.
+ * @param {string} props.venueName - The venue name passed to the confirmation page.
+ * @param {Object|null} props.userBooking - Existing booking by the logged-in user, if any.
  * @returns {JSX.Element}
  */
-function BookingCalendar({ bookings, maxGuests, pricePerNight }) {
+function BookingCalendar({
+  bookings,
+  maxGuests,
+  pricePerNight,
+  venueId,
+  venueName,
+  userBooking,
+}) {
   const { viewYear, viewMonth, prevMonth, nextMonth, isAtMinMonth, todayStr } =
     useCalendarNav()
+  const navigate = useNavigate()
 
-  const [checkIn, setCheckIn] = useState("")
-  const [checkOut, setCheckOut] = useState("")
+  const [checkIn, setCheckIn] = useState(
+    userBooking ? userBooking.dateFrom.slice(0, 10) : "",
+  )
+  const [checkOut, setCheckOut] = useState(
+    userBooking ? userBooking.dateTo.slice(0, 10) : "",
+  )
   const [hoverDate, setHoverDate] = useState(null)
-  const [guests, setGuests] = useState(1)
+  const [guests, setGuests] = useState(userBooking ? userBooking.guests : 1)
   const [rangeError, setRangeError] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState("")
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false)
+
+  // When editing, exclude the user's own booking from the blocked-dates check
+  const otherBookings = userBooking
+    ? bookings.filter((b) => b.id !== userBooking.id)
+    : bookings
 
   const selectingEnd = Boolean(checkIn && !checkOut)
 
   const handleDayClick = (dateStr) => {
     if (dateStr < todayStr) return
-    if (isBooked(dateStr, bookings)) return
+    if (isBooked(dateStr, otherBookings)) return
 
     if (!checkIn || (checkIn && checkOut)) {
       setCheckIn(dateStr)
@@ -72,7 +71,7 @@ function BookingCalendar({ bookings, maxGuests, pricePerNight }) {
     } else {
       const [lo, hi] =
         dateStr < checkIn ? [dateStr, checkIn] : [checkIn, dateStr]
-      if (rangeOverlapsBooking(lo, hi, bookings)) {
+      if (rangeOverlapsBooking(lo, hi, otherBookings)) {
         setRangeError(
           "Selected range includes unavailable dates. Please choose different dates.",
         )
@@ -98,7 +97,7 @@ function BookingCalendar({ bookings, maxGuests, pricePerNight }) {
     for (let d = 1; d <= daysInMonth; d++) {
       const dateStr = toDateStr(viewYear, viewMonth, d)
       const isPast = dateStr < todayStr
-      const booked = isBooked(dateStr, bookings)
+      const booked = isBooked(dateStr, otherBookings)
       const disabled = isPast || booked
 
       const effectiveEnd = selectingEnd && hoverDate ? hoverDate : checkOut
@@ -250,9 +249,134 @@ function BookingCalendar({ bookings, maxGuests, pricePerNight }) {
             <span>Total</span>
             <span>{nights * pricePerNight}</span>
           </div>
-          <button className="bc__book-btn" type="button">
-            Book
-          </button>
+
+          {userBooking ? (
+            <>
+              <button
+                className="bc__book-btn"
+                type="button"
+                disabled={submitting}
+                onClick={async () => {
+                  setSubmitError("")
+                  setSubmitting(true)
+                  const prev = {
+                    dateFrom: userBooking.dateFrom,
+                    dateTo: userBooking.dateTo,
+                    guests: userBooking.guests,
+                  }
+                  try {
+                    const updated = await updateBooking(userBooking.id, {
+                      dateFrom: new Date(checkIn).toISOString(),
+                      dateTo: new Date(checkOut).toISOString(),
+                      guests,
+                    })
+                    navigate("/booking-confirmed", {
+                      state: {
+                        mode: "updated",
+                        booking: updated,
+                        venue: { name: venueName, price: pricePerNight },
+                        prev,
+                      },
+                    })
+                  } catch (err) {
+                    setSubmitError(err.message)
+                    setSubmitting(false)
+                  }
+                }}
+              >
+                {submitting ? "Saving…" : "Update booking"}
+              </button>
+
+              {!showCancelConfirm ? (
+                <button
+                  className="bc__cancel-btn"
+                  type="button"
+                  disabled={submitting}
+                  onClick={() => setShowCancelConfirm(true)}
+                >
+                  Cancel booking
+                </button>
+              ) : (
+                <div className="bc__cancel-confirm">
+                  <p>Are you sure you want to cancel this booking?</p>
+                  <div className="bc__cancel-confirm-actions">
+                    <button
+                      className="bc__cancel-btn"
+                      type="button"
+                      disabled={submitting}
+                      onClick={async () => {
+                        setSubmitting(true)
+                        try {
+                          await deleteBooking(userBooking.id)
+                          navigate("/bookings")
+                        } catch (err) {
+                          setSubmitError(err.message)
+                          setSubmitting(false)
+                          setShowCancelConfirm(false)
+                        }
+                      }}
+                    >
+                      {submitting ? "Cancelling…" : "Yes, cancel"}
+                    </button>
+                    <button
+                      className="bc__book-btn"
+                      type="button"
+                      onClick={() => setShowCancelConfirm(false)}
+                    >
+                      Keep booking
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          ) : loadStorage("profile") ? (
+            <button
+              className="bc__book-btn"
+              type="button"
+              disabled={submitting}
+              onClick={async () => {
+                setSubmitError("")
+                setSubmitting(true)
+                try {
+                  const booking = await createBooking({
+                    dateFrom: new Date(checkIn).toISOString(),
+                    dateTo: new Date(checkOut).toISOString(),
+                    guests,
+                    venueId,
+                  })
+                  navigate("/booking-confirmed", {
+                    state: {
+                      mode: "created",
+                      booking,
+                      venue: { name: venueName, price: pricePerNight },
+                    },
+                  })
+                } catch (err) {
+                  setSubmitError(err.message)
+                  setSubmitting(false)
+                }
+              }}
+            >
+              {submitting ? "Booking…" : "Book now"}
+            </button>
+          ) : (
+            <p className="bc__login-prompt">
+              <Link to="/authenticate" className="bc__login-link">
+                Sign in
+              </Link>{" "}
+              or{" "}
+              <Link to="/authenticate" className="bc__login-link">
+                create an account
+              </Link>{" "}
+              to book this venue.
+            </p>
+          )}
+
+          {submitError && (
+            <p className="bc__submit-error" role="alert">
+              {submitError}
+            </p>
+          )}
         </div>
       )}
     </div>

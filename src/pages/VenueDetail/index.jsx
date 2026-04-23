@@ -5,6 +5,7 @@ import { getVenueById } from "../../api/venues/getVenueById.mjs"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import BookingCalendar from "./BookingCalendar"
 import Alert from "../../components/Alert"
+import { loadStorage } from "../../utils/loadStorage.mjs"
 
 function VenueDetail() {
   const { id } = useParams()
@@ -36,6 +37,12 @@ function VenueDetail() {
     location,
     bookings,
   } = venue
+
+  const storedProfile = loadStorage("profile")
+  const userBooking = storedProfile
+    ? ((bookings ?? []).find((b) => b.customer?.name === storedProfile.name) ??
+      null)
+    : null
   const locationLabel = [location?.city, location?.country]
     .filter(Boolean)
     .join(", ")
@@ -167,6 +174,9 @@ function VenueDetail() {
             bookings={bookings ?? []}
             maxGuests={maxGuests}
             pricePerNight={price}
+            venueId={id}
+            venueName={name}
+            userBooking={userBooking}
           />
         </section>
       </div>

@@ -11,7 +11,7 @@ import { BASE_URL } from "../config.mjs"
 export async function getVenueById(id) {
   try {
     const response = await fetch(
-      `${BASE_URL}/holidaze/venues/${id}?_bookings=true&_owner=true`,
+      `${BASE_URL}/holidaze/venues/${id}?_bookings=true&_owner=true&_customer=true`,
     )
 
     if (!response.ok) {

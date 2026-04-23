@@ -99,7 +99,7 @@ function Account() {
           <h2 className="account-section__heading">Bookings</h2>
           <div className="account-section__card">
             <p className="account-section__empty">No upcoming bookings.</p>
-            <Link to="/bookings" className="account-section__link">
+            <Link to="/mybookings" className="account-section__link">
               View all bookings <span aria-hidden="true">&gt;</span>
             </Link>
           </div>

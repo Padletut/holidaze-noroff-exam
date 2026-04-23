@@ -1,0 +1,88 @@
+@use "../variables" as *;
+
+.my-bookings {
+  background-color: $color-background;
+  min-height: 100%;
+  padding: 2rem 1.25rem 4rem;
+  max-width: 540px;
+  margin: 0 auto;
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h2-size;
+    line-height: $h2-line-height;
+    font-weight: $h2-weight;
+    color: $color-font-dark;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__empty {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    text-align: center;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}
+
+.booking-card {
+  display: flex;
+  gap: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+
+  &__image-link {
+    flex-shrink: 0;
+  }
+
+  &__image {
+    width: 140px;
+    height: 110px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem 0.75rem 0;
+  }
+
+  &__name {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__dates,
+  &__guests {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+}

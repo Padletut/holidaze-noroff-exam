@@ -1,0 +1,318 @@
+@use "../variables" as *;
+
+// ─── Account Page ─────────────────────────────────────────────────────────────
+
+.account-page {
+  background-color: $color-background;
+  min-height: 100%;
+}
+
+// ─── Profile Header ───────────────────────────────────────────────────────────
+
+.account-header {
+  background-color: $color-primary;
+  color: #fff;
+
+  &__banner {
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+  }
+
+  &__banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  &__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__name {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: #fff;
+    margin: 0;
+  }
+
+  &__email {
+    font-family: $font-body;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+}
+
+// ─── Body ─────────────────────────────────────────────────────────────────────
+
+.account-body {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h2-size;
+    line-height: $h2-line-height;
+    font-weight: $h2-weight;
+    color: $color-font-dark;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+
+  &__subtitle {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__bio {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.account-page__error {
+  font-family: $font-body;
+  font-size: $body-medium-size;
+  color: #dc2626;
+  text-align: center;
+  padding: 2rem;
+}
+
+// ─── Sections ─────────────────────────────────────────────────────────────────
+
+.account-section {
+  margin-bottom: 2rem;
+
+  &__heading {
+    font-family: $font-heading;
+    font-size: $h3-size;
+    line-height: $h3-line-height;
+    font-weight: $h3-weight;
+    color: $color-font-dark;
+    margin-bottom: 0.75rem;
+  }
+
+  &__card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  }
+
+  &__card--list {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  &__empty {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    margin-bottom: 1rem;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-medium;
+    color: $color-font-dark;
+    text-decoration: none;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+
+    &:hover {
+      color: $color-accent-sandstone;
+    }
+  }
+
+  // List-style items (links + buttons)
+  &__list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-medium;
+    color: $color-font-dark;
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.15s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #f9fafb;
+    }
+
+    &--btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+  }
+
+  &__list-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+  }
+
+  &__list-arrow {
+    margin-left: auto;
+    color: $color-font-dark-grey;
+    font-size: 14px;
+  }
+}
+
+// ─── Modal ────────────────────────────────────────────────────────────────────
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-card {
+  background: $color-background;
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h2-size;
+    line-height: $h2-line-height;
+    font-weight: $h2-weight;
+    color: $color-font-dark;
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  &__label {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-medium;
+    color: $color-font-dark;
+  }
+
+  &__input,
+  &__textarea {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+    background: #fff;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.15s ease;
+
+    &:focus {
+      border-color: $color-accent-sandstone;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  &__error {
+    font-family: $font-body;
+    font-size: 14px;
+    color: #dc2626;
+    margin-bottom: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  &__btn {
+    flex: 1;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s ease;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &--save {
+      background-color: $color-primary;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        opacity: 0.88;
+      }
+    }
+
+    &--cancel {
+      background-color: $color-primary;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        opacity: 0.88;
+      }
+    }
+  }
+}

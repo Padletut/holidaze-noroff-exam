@@ -21,7 +21,11 @@ function BookingCard({ booking }) {
         />
       </Link>
       <div className="booking-card__body">
-        <h2 className="booking-card__name">{venue?.name || "Unknown venue"}</h2>
+        <Link to={`/venue/${venue?.id}`} className="booking-card__name-link">
+          <h2 className="booking-card__name">
+            {venue?.name || "Unknown venue"}
+          </h2>
+        </Link>
         <p className="booking-card__dates">
           <span className="booking-card__icon" aria-hidden="true">
             &#128197;

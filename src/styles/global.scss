@@ -19,6 +19,17 @@ body,
   width: 100%;
 }
 
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.layout > main,
+.layout > [data-outlet] {
+  flex: 1;
+}
+
 header {
   display: flex;
 }

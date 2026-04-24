@@ -2,16 +2,14 @@
 
 // ─── Venue Detail Page ──────────────────────────────────────────────────────
 
-.venue-detail__page {
+// Give the outer main element a white background when VenueDetail is mounted
+main:has(.venue-detail) {
   background-color: #fff;
-  width: 100%;
-  flex: 1;
 }
 
 .venue-detail {
   margin: 0 auto;
   padding-bottom: 4rem;
-  background-color: white;
 
   &__error {
     font-family: $font-body;
@@ -519,10 +517,10 @@
 
 // ─── Desktop Layout ──────────────────────────────────────────────────────────
 
-@media (min-width: 768px) {
+@media (min-width: 910px) {
   .venue-detail {
     display: grid;
-    grid-template-columns: 260px 1fr 300px;
+    grid-template-columns: 390px 1fr 300px;
     column-gap: 2rem;
     margin: 0 auto;
     padding: 5rem 1rem;

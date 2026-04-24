@@ -15,7 +15,7 @@ export async function getVenueById(id) {
     )
 
     if (!response.ok) {
-      throw new Error("Failed to fetch venue")
+      throw new Error("We couldn't load this venue right now. Please try again.")
     }
 
     const data = await response.json()

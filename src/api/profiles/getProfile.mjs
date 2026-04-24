@@ -16,7 +16,7 @@ export async function getProfile(name) {
 
   if (!response.ok) {
     const error = await response.json()
-    throw new Error(error.errors?.[0]?.message ?? "Failed to fetch profile")
+    throw new Error(error.errors?.[0]?.message ?? "We couldn't load your profile right now. Please try again.")
   }
 
   const { data } = await response.json()

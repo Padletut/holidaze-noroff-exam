@@ -21,7 +21,7 @@ export async function updateProfile(name, body) {
 
   if (!response.ok) {
     const error = await response.json()
-    throw new Error(error.errors?.[0]?.message ?? "Failed to update profile")
+    throw new Error(error.errors?.[0]?.message ?? "We couldn't update your profile right now. Please try again.")
   }
 
   const { data } = await response.json()

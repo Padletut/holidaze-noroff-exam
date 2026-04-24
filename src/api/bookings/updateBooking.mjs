@@ -22,7 +22,7 @@ export async function updateBooking(id, bookingData) {
   const json = await response.json()
 
   if (!response.ok) {
-    throw new Error(json.errors?.[0]?.message ?? "Failed to update booking")
+    throw new Error(json.errors?.[0]?.message ?? "We couldn't update your booking right now. Please try again.")
   }
 
   return json.data

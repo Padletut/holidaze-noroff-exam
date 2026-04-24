@@ -16,7 +16,7 @@ export async function deleteBooking(id) {
   )
 
   if (!response.ok) {
-    let message = "Failed to cancel booking"
+    let message = "We couldn't cancel your booking right now. Please try again."
     try {
       const json = await response.json()
       message = json.errors?.[0]?.message ?? message

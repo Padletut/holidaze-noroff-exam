@@ -16,7 +16,7 @@ export async function getVenues(page = 1, limit = 12) {
     )
 
     if (!response.ok) {
-      throw new Error("Failed to fetch venues")
+      throw new Error("We couldn't load venues right now. Please try again.")
     }
     const data = await response.json()
     return data

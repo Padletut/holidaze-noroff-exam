@@ -137,10 +137,25 @@
   padding: 2rem;
 }
 
+@media (min-width: 1184px) {
+  .account-body {
+    max-width: none;
+  }
+}
+
 // ─── Sections ─────────────────────────────────────────────────────────────────
 
 .account-section {
   margin-bottom: 2rem;
+
+  &__wrapper {
+    @media (min-width: 1184px) {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      margin-top: 8rem;
+    }
+  }
 
   &__heading {
     font-family: $font-heading;

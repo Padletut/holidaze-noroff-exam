@@ -5,6 +5,7 @@
 .venue-detail__page {
   background-color: #fff;
   width: 100%;
+  flex: 1;
 }
 
 .venue-detail {
@@ -526,8 +527,7 @@
     margin: 0 auto;
     padding: 5rem 1rem;
     align-items: start;
-    height: 61vh;
-    
+    flex: 1;    
   }
 
   .venue-detail__gallery {

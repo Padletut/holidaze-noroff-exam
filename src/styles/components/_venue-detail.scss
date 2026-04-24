@@ -2,10 +2,15 @@
 
 // ─── Venue Detail Page ──────────────────────────────────────────────────────
 
+.venue-detail__page {
+  background-color: #fff;
+  width: 100%;
+}
+
 .venue-detail {
   margin: 0 auto;
   padding-bottom: 4rem;
-  background-color: #fff;
+  background-color: white;
 
   &__error {
     font-family: $font-body;
@@ -173,7 +178,7 @@
     font-size: $h4-size;
     font-weight: $h4-weight;
     color: $color-font-dark;
-    margin: 0 0 0.75rem;
+    margin: -1rem 0 0.75rem 0;
   }
 
   &__description {
@@ -203,6 +208,18 @@
     display: flex;
     align-items: center;
     gap: 6px;
+  }
+
+  &__info {
+    padding: 0.75rem 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__col--middle,
+  &__col--right {
+    padding: 0 1.25rem;
   }
 }
 
@@ -496,5 +513,38 @@
     &:hover {
       opacity: 0.8;
     }
+  }
+}
+
+// ─── Desktop Layout ──────────────────────────────────────────────────────────
+
+@media (min-width: 768px) {
+  .venue-detail {
+    display: grid;
+    grid-template-columns: 260px 1fr 300px;
+    column-gap: 2rem;
+    margin: 0 auto;
+    padding: 5rem 1rem;
+    align-items: start;
+    height: 61vh;
+    
+  }
+
+  .venue-detail__gallery {
+    border-radius: 12px;
+  }
+
+  .venue-detail__info {
+    padding: 0.75rem 0 0;
+  }
+
+  .venue-detail__col--middle,
+  .venue-detail__col--right {
+    padding: 0;
+  }
+
+  .venue-detail__col--middle .venue-detail__section:first-child,
+  .venue-detail__col--right .venue-detail__section:first-child {
+    margin-top: 0;
   }
 }

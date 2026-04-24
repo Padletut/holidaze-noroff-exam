@@ -101,4 +101,11 @@
     color: $color-font-dark;
     margin-left: 6px;
   }
+
+  &__rating-new {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-accent-sandstone;
+  }
 }

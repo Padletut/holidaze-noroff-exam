@@ -158,6 +158,13 @@ main:has(.venue-detail) {
     color: $color-font-dark;
   }
 
+  &__rating-new {
+    font-family: $font-body;
+    font-size: $body-large-size;
+    font-weight: $font-weight-semibold;
+    color: $color-accent-sandstone;
+  }
+
   &__guests {
     font-family: $font-body;
     font-size: $body-medium-size;

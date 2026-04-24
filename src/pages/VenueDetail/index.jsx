@@ -130,14 +130,20 @@ function VenueDetail() {
             <span className="venue-detail__price">
               <strong>${price}</strong> / night
             </span>
-            <span
-              className="venue-detail__rating"
-              aria-label={`Rating: ${rating} out of 5`}
-            >
-              {"★".repeat(Math.round(rating))}
-              {"☆".repeat(5 - Math.round(rating))}
-              <span className="venue-detail__rating-value">{rating}</span>
-            </span>
+            {rating === 0 ? (
+              <span className="venue-detail__rating-new" aria-label="New venue">
+                ⭐ New
+              </span>
+            ) : (
+              <span
+                className="venue-detail__rating"
+                aria-label={`Rating: ${rating} out of 5`}
+              >
+                {"★".repeat(Math.round(rating))}
+                {"☆".repeat(5 - Math.round(rating))}
+                <span className="venue-detail__rating-value">{rating}</span>
+              </span>
+            )}
           </div>
           <p className="venue-detail__guests">
             <span aria-hidden="true">👤</span> Guests: {maxGuests}

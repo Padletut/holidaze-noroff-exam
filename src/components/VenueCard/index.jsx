@@ -30,7 +30,7 @@ function VenueCard({ venue }) {
           <span className="venue-card__guests-icon" aria-hidden="true">
             &#128100;
           </span>{" "}
-          {maxGuests} {maxGuests === 1 ? "Guest" : "Guests"}
+          {maxGuests} {maxGuests === 1 ? "Guest" : "Guests"}n
         </p>
         <StarRating rating={rating} />
       </div>

@@ -1,0 +1,75 @@
+@use "../variables" as *;
+
+.venue-bookings {
+  background-color: $color-background;
+  min-height: 100%;
+  padding: 2rem 1.25rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h2-size;
+    line-height: $h2-line-height;
+    font-weight: $h2-weight;
+    color: $color-font-dark;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__empty {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark-grey;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 900px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+.venue-booking-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.1rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  &__venue {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-bold;
+    color: $color-font-dark;
+    margin: 0 0 0.2rem;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: $color-font-dark;
+  }
+}

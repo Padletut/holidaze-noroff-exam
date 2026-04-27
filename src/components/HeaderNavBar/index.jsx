@@ -21,7 +21,7 @@ function HeaderNavBar() {
 
   return (
     <nav className="w-full px-4 py-3">
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="font-bold tracking-tight logo-nav">
           Holidaze
         </Link>

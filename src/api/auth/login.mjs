@@ -25,7 +25,7 @@ export async function login({ email, password }) {
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.errors?.[0]?.message ?? "Login failed");
+    throw new Error(error.errors?.[0]?.message ?? "We couldn't sign you in right now. Please try again.");
   }
 
   const { data } = await response.json();

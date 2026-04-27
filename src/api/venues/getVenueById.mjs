@@ -11,11 +11,11 @@ import { BASE_URL } from "../config.mjs"
 export async function getVenueById(id) {
   try {
     const response = await fetch(
-      `${BASE_URL}/holidaze/venues/${id}?_bookings=true&_owner=true`,
+      `${BASE_URL}/holidaze/venues/${id}?_bookings=true&_owner=true&_customer=true`,
     )
 
     if (!response.ok) {
-      throw new Error("Failed to fetch venue")
+      throw new Error("We couldn't load this venue right now. Please try again.")
     }
 
     const data = await response.json()

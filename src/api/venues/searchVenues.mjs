@@ -15,7 +15,7 @@ export async function searchVenues(query) {
     )
 
     if (!response.ok) {
-      throw new Error("Failed to search venues")
+      throw new Error("We couldn't complete your search right now. Please try again.")
     }
 
     const data = await response.json()

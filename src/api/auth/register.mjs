@@ -35,7 +35,7 @@ export async function register({ name, email, password, venueManager = false }) 
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.errors?.[0]?.message ?? "Registration failed");
+    throw new Error(error.errors?.[0]?.message ?? "We couldn't create your account right now. Please try again.");
   }
 
   const { data } = await response.json();

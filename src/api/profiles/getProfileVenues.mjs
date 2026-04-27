@@ -2,21 +2,23 @@ import { BASE_URL } from "../config.mjs"
 import { fetchData } from "../utils/fetchdata.mjs"
 
 /**
- * Fetches a single profile by name.
+ * Fetches all venues owned by a profile.
  *
  * @async
  * @param {string} name - The profile name.
- * @returns {Promise<Object>} The profile data object from the API.
+ * @returns {Promise<Array>} An array of venue objects.
  * @throws {Error} If the request fails or the response is not ok.
  */
-export async function getProfile(name) {
+export async function getProfileVenues(name) {
   const response = await fetchData(
-    `${BASE_URL}/holidaze/profiles/${encodeURIComponent(name)}`,
+    `${BASE_URL}/holidaze/profiles/${encodeURIComponent(name)}/venues?_owner=true&_bookings=true`
   )
 
   if (!response.ok) {
     const error = await response.json()
-    throw new Error(error.errors?.[0]?.message ?? "We couldn't load your profile right now. Please try again.")
+    throw new Error(
+      error.errors?.[0]?.message ?? "We couldn't load your venues right now. Please try again."
+    )
   }
 
   const { data } = await response.json()

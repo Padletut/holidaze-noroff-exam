@@ -1,9 +1,9 @@
 @use "../variables" as *;
 
 .nav-link {
-  font-family: $font-body;
-  font-size: $body-large-size;
-  line-height: $body-large-line-height;
+  font-family: $font-heading;
+  font-size: $h3-size;
+  line-height: $h3-line-height;
   font-weight: $font-weight-medium;
   color: white;
   text-decoration: none;
@@ -29,6 +29,17 @@
   text-decoration: none;
 }
 
-.signin-nav-button a {
+.signin-nav-button {
+  background-color: $color-accent-sandstone;
+    padding: 8px 24px;
+    border-radius: 4px;
+    &:hover {
+      background-color: #e3a000;
+    }
+ .nav-link {
   color: white;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-medium;
+ }
 }

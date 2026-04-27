@@ -6,7 +6,7 @@ function Hero() {
     <div className="hero">
       <img src={heroImage} alt="Hero Image" className="hero-image" />
       <div className="hero-overlay" />
-      <div className="hero-content mx-auto">
+      <div className="hero-content max-w-7xl mx-auto">
         <h1>
           Find Your <span>Perfect Getaway</span>
         </h1>

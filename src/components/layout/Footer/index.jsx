@@ -4,7 +4,7 @@ import "../../../../src/styles/index.scss"
 const sections = [
   {
     title: "Explore",
-    links: ["Beachfront", "Cabins", "City Breaks", "Countryside"],
+    links: ["Norway", "England", "Germany", "Denmark"],
   },
   {
     title: "Account",
@@ -39,7 +39,7 @@ function Footer() {
   const toggle = (i) => setOpen(open === i ? null : i)
 
   return (
-    <footer className="footer">
+    <footer className="footer flex flex-col items-center justify-between">
       {/* Mobile accordion */}
       <div className="footer__accordion md:hidden">
         {sections.map((section, i) => (
@@ -105,7 +105,7 @@ function Footer() {
       </div>
 
       {/* Desktop grid */}
-      <div className="footer__desktop hidden md:grid">
+      <div className="footer__desktop max-w-7xl hidden md:grid">
         {sections.map((section) => (
           <div key={section.title} className="footer__column">
             <span className="footer__section-title">{section.title}</span>

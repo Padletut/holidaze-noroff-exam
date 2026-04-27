@@ -55,4 +55,22 @@
       text-align: start;
     }
   }
+
+  @media (min-width: 1184px) {
+    .hero-image {
+      height: 400px;
+    }
+    .hero-content {
+      padding: 1rem 0;
+    }
+  }
+  
+  @media (min-width: 1440px) {
+    .hero-image {
+      height: 560px;
+    }
+    .hero-content {
+      padding: 1rem 0;
+    }
+  }
 }

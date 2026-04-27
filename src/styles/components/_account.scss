@@ -75,6 +75,8 @@
     flex-direction: column;
     gap: 0.75rem;
     flex: 1;
+    max-width: 350px;
+    max-width: max-content;
   }
 
   &__card-label {
@@ -92,6 +94,12 @@
     color: #fff;
     margin: 0;
     word-break: break-all;
+  }
+}
+
+@media (min-width: 1184px) {
+  .account-header {
+    height: 350px;
   }
 }
 
@@ -137,10 +145,25 @@
   padding: 2rem;
 }
 
+@media (min-width: 1184px) {
+  .account-body {
+    max-width: none;
+  }
+}
+
 // ─── Sections ─────────────────────────────────────────────────────────────────
 
 .account-section {
   margin-bottom: 2rem;
+
+  &__wrapper {
+    @media (min-width: 1184px) {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      margin-top: 8rem;
+    }
+  }
 
   &__heading {
     font-family: $font-heading;
@@ -167,7 +190,12 @@
     font-family: $font-body;
     font-size: $body-medium-size;
     color: $color-font-dark-grey;
-    margin-bottom: 1rem;
+    margin: 1rem;
+  }
+
+  &__card--bookings {
+    padding: 0;
+    overflow: hidden;
   }
 
   &__link {
@@ -179,7 +207,7 @@
     font-weight: $font-weight-medium;
     color: $color-font-dark;
     text-decoration: none;
-    padding-top: 0.75rem;
+    padding: 0.875rem 1.25rem;
     border-top: 1px solid #e5e7eb;
 
     &:hover {
@@ -228,6 +256,45 @@
     margin-left: auto;
     color: $color-font-dark-grey;
     font-size: 14px;
+  }
+}
+
+// ─── Booking preview in Account page ─────────────────────────────────────────
+
+.account-booking-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  text-decoration: none;
+  padding: 1rem 1.25rem;
+
+  &__image {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__name {
+    font-family: $font-heading;
+    font-size: $h4-size;
+    font-weight: $h4-weight;
+    color: $color-font-dark;
+    margin: 0;
+  }
+
+  &__dates {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: black;
+    margin: 0;
   }
 }
 

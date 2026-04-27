@@ -4,6 +4,11 @@ import Explore from "./pages/Explore"
 import VenueDetail from "./pages/VenueDetail"
 import Authenticate from "./pages/Authenticate"
 import Account from "./pages/Account"
+import MyBookings from "./pages/MyBookings"
+import MyVenues from "./pages/MyVenues"
+import VenueForm from "./pages/VenueForm"
+import VenueBookings from "./pages/VenueBookings"
+import BookingConfirmation from "./pages/BookingConfirmation"
 import RouteNotFound from "./pages/RouteNotFound"
 import { Routes, Route } from "react-router-dom"
 
@@ -15,6 +20,12 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/venue/:id" element={<VenueDetail />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/bookings" element={<MyBookings />} />
+        <Route path="/venues/my" element={<MyVenues />} />
+        <Route path="/venues/create" element={<VenueForm />} />
+        <Route path="/venues/edit/:id" element={<VenueForm />} />
+        <Route path="/venues/bookings" element={<VenueBookings />} />
+        <Route path="/booking-confirmed" element={<BookingConfirmation />} />
         <Route path="/authenticate" element={<Authenticate />} />
         <Route path="*" element={<RouteNotFound />} />
       </Route>

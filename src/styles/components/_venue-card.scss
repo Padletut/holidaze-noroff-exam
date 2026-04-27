@@ -3,7 +3,7 @@
 .venue-card {
   display: flex;
   flex-direction: column;
-  background-color: $color-background;
+  background-color: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
@@ -100,5 +100,12 @@
     font-weight: $font-weight-semibold;
     color: $color-font-dark;
     margin-left: 6px;
+  }
+
+  &__rating-new {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    color: $color-accent-sandstone;
   }
 }

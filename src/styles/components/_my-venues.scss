@@ -47,4 +47,27 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__edit-btn {
+    display: block;
+    text-align: center;
+    font-family: $font-body;
+    font-size: 14px;
+    font-weight: $font-weight-semibold;
+    color: #fff;
+    background: $color-primary;
+    border-radius: 0 0 8px 8px;
+    padding: 0.5rem;
+    text-decoration: none;
+    transition: background 0.15s;
+
+    &:hover {
+      background: $color-button-hover;
+    }
+  }
 }

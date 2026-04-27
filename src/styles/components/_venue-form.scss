@@ -1,0 +1,180 @@
+@use "../variables" as *;
+
+.venue-form-page {
+  background-color: $color-background;
+  min-height: 100%;
+  padding: 2rem 1.25rem 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.venue-form-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h2-size;
+    font-weight: $h2-weight;
+    color: $color-font-dark;
+    text-align: center;
+    margin: 0 0 1.5rem;
+  }
+
+  &__label {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-medium;
+    color: $color-font-dark;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  &__input {
+    width: 100%;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 0.65rem 0.875rem;
+    margin-bottom: 0.875rem;
+    background: #fff;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.15s;
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+
+    &:focus {
+      border-color: $color-accent-sandstone;
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 0.65rem 0.875rem;
+    margin-bottom: 0.875rem;
+    background: #fff;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s;
+
+    &:focus {
+      border-color: $color-accent-sandstone;
+    }
+  }
+
+  &__amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__amenity-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: $font-body;
+    font-size: 14px;
+    font-weight: $font-weight-medium;
+    color: $color-font-dark;
+    background: #f3f4f6;
+    border: 1.5px solid #d1d5db;
+    border-radius: 999px;
+    padding: 0.4rem 0.875rem;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+
+    &--active {
+      background: $color-accent-sandstone;
+      border-color: $color-accent-sandstone;
+      color: #fff;
+    }
+  }
+
+  &__media-group {
+    margin-bottom: 0.25rem;
+  }
+
+  &__btn {
+    display: block;
+    width: 100%;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    transition: opacity 0.15s;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &--remove {
+      background: $color-primary;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background: darken($color-primary, 8%);
+      }
+    }
+
+    &--add-media {
+      background: $color-accent-sandstone;
+      color: #fff;
+      margin-top: 0.25rem;
+      margin-bottom: 1.25rem;
+
+      &:hover:not(:disabled) {
+        opacity: 0.88;
+      }
+    }
+
+    &--submit {
+      background: $color-accent-sandstone;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        opacity: 0.88;
+      }
+    }
+
+    &--delete {
+      background: $color-primary;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background: darken($color-primary, 8%);
+      }
+    }
+
+    &--cancel {
+      background: $color-primary;
+      color: #fff;
+      margin-bottom: 0;
+
+      &:hover:not(:disabled) {
+        background: darken($color-primary, 8%);
+      }
+    }
+  }
+}

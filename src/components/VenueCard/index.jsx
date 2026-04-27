@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import StarRating from "./StarRating"
 
-function VenueCard({ venue }) {
+function VenueCard({ venue, to }) {
   const { id, name, media, price, maxGuests, rating, location } = venue
 
   const image = media?.[0]
@@ -10,7 +10,7 @@ function VenueCard({ venue }) {
   const locationLabel = [city, country].filter(Boolean).join(", ")
 
   return (
-    <Link to={`/venue/${id}`} className="venue-card">
+    <Link to={to ?? `/venue/${id}`} className="venue-card">
       <div className="venue-card__image-wrapper">
         <img
           src={image?.url || "/placeholder.jpg"}

@@ -48,7 +48,11 @@ function MyVenues() {
       ) : (
         <div className="my-venues__grid">
           {venues.map((venue) => (
-            <VenueCard key={venue.id} venue={venue} />
+            <VenueCard
+              key={venue.id}
+              venue={venue}
+              to={`/venues/edit/${venue.id}`}
+            />
           ))}
         </div>
       )}

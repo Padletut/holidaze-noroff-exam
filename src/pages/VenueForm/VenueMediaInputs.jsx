@@ -1,5 +1,3 @@
-export const EMPTY_MEDIA = { url: "", alt: "" }
-
 function VenueMediaInputs({ mediaItems, onChange, onAdd, onRemove }) {
   return (
     <>

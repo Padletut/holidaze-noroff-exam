@@ -6,10 +6,12 @@ import { updateVenue } from "../../api/venues/updateVenue.mjs"
 import { deleteVenue } from "../../api/venues/deleteVenue.mjs"
 import { getVenueById } from "../../api/venues/getVenueById.mjs"
 import { loadStorage } from "../../utils/loadStorage.mjs"
+import { buildVenuePayload } from "../../utils/buildVenuePayload.mjs"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import Alert from "../../components/Alert"
-
-const EMPTY_MEDIA = { url: "", alt: "" }
+import VenueMediaInputs, { EMPTY_MEDIA } from "./VenueMediaInputs"
+import VenueAmenities from "./VenueAmenities"
+import VenueDeleteConfirm from "./VenueDeleteConfirm"
 
 const DEFAULT_FORM = {
   name: "",
@@ -36,6 +38,7 @@ function VenueForm() {
   const [loading, setLoading] = useState(isEditMode)
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [error, setError] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
 
@@ -85,44 +88,10 @@ function VenueForm() {
     }))
   }
 
-  const toggleAmenity = (key) => {
-    setForm((prev) => ({ ...prev, [key]: !prev[key] }))
-  }
-
   const handleMediaChange = (index, field, value) => {
     setMediaItems((prev) =>
       prev.map((item, i) => (i === index ? { ...item, [field]: value } : item)),
     )
-  }
-
-  const addMedia = () => setMediaItems((prev) => [...prev, { ...EMPTY_MEDIA }])
-
-  const removeMedia = (index) => {
-    setMediaItems((prev) => prev.filter((_, i) => i !== index))
-  }
-
-  const buildPayload = () => {
-    const validMedia = mediaItems.filter((m) => m.url.trim())
-
-    return {
-      name: form.name.trim(),
-      description: form.description.trim(),
-      price: Number(form.price),
-      maxGuests: Number(form.maxGuests),
-      media: validMedia.map((m) => ({ url: m.url.trim(), alt: m.alt.trim() })),
-      meta: {
-        wifi: form.wifi,
-        parking: form.parking,
-        breakfast: form.breakfast,
-        pets: form.pets,
-      },
-      location: {
-        address: form.address.trim() || null,
-        zip: form.zip.trim() || null,
-        city: form.city.trim() || null,
-        country: form.country.trim() || null,
-      },
-    }
   }
 
   const handleSubmit = async (e) => {
@@ -138,7 +107,7 @@ function VenueForm() {
 
     setSaving(true)
     try {
-      const payload = buildPayload()
+      const payload = buildVenuePayload(form, mediaItems)
       if (isEditMode) {
         await updateVenue(id, payload)
         setSuccessMessage("Venue updated successfully!")
@@ -155,12 +124,6 @@ function VenueForm() {
   }
 
   const handleDelete = async () => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this venue? This cannot be undone.",
-      )
-    )
-      return
     setDeleting(true)
     try {
       await deleteVenue(id)
@@ -168,17 +131,11 @@ function VenueForm() {
     } catch (err) {
       setError(err.message)
       setDeleting(false)
+      setShowDeleteConfirm(false)
     }
   }
 
   if (loading) return <LoadingSpinner />
-
-  const amenities = [
-    { key: "wifi", label: "WiFi", icon: "📶" },
-    { key: "parking", label: "Parking", icon: "🅿" },
-    { key: "breakfast", label: "Breakfast", icon: "☕" },
-    { key: "pets", label: "Pets allowed", icon: "🐾" },
-  ]
 
   return (
     <div className="venue-form-page">
@@ -188,167 +145,144 @@ function VenueForm() {
         </h1>
 
         <form onSubmit={handleSubmit} noValidate>
-          {/* Name */}
-          <input
-            className="venue-form-card__input"
-            type="text"
-            name="name"
-            placeholder="Title"
-            value={form.name}
-            onChange={handleChange}
-          />
-
-          {/* Description */}
-          <label className="venue-form-card__label">Descrition</label>
-          <textarea
-            className="venue-form-card__textarea"
-            name="description"
-            rows={4}
-            value={form.description}
-            onChange={handleChange}
-          />
-
-          {/* Price */}
-          <input
-            className="venue-form-card__input"
-            type="number"
-            name="price"
-            placeholder="Price"
-            min="0"
-            value={form.price}
-            onChange={handleChange}
-          />
-
-          {/* Max guests */}
-          <input
-            className="venue-form-card__input"
-            type="number"
-            name="maxGuests"
-            placeholder="Max guests"
-            min="1"
-            value={form.maxGuests}
-            onChange={handleChange}
-          />
-
-          {/* Location */}
-          <input
-            className="venue-form-card__input"
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={form.address}
-            onChange={handleChange}
-          />
-          <input
-            className="venue-form-card__input"
-            type="text"
-            name="zip"
-            placeholder="Zip code"
-            value={form.zip}
-            onChange={handleChange}
-          />
-          <input
-            className="venue-form-card__input"
-            type="text"
-            name="city"
-            placeholder="City"
-            value={form.city}
-            onChange={handleChange}
-          />
-          <input
-            className="venue-form-card__input"
-            type="text"
-            name="country"
-            placeholder="Country"
-            value={form.country}
-            onChange={handleChange}
-          />
-
-          {/* Amenities */}
-          <p className="venue-form-card__label">Amenities</p>
-          <div className="venue-form-card__amenities">
-            {amenities.map(({ key, label, icon }) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => toggleAmenity(key)}
-                className={`venue-form-card__amenity-chip${form[key] ? " venue-form-card__amenity-chip--active" : ""}`}
-              >
-                <span aria-hidden="true">{icon}</span> {label}
-              </button>
-            ))}
-          </div>
-
-          {/* Media */}
-          {mediaItems.map((item, index) => (
-            <div key={index} className="venue-form-card__media-group">
+          <div className="venue-form-card__columns">
+            {/* ── Left column ── */}
+            <div className="venue-form-card__col">
               <input
                 className="venue-form-card__input"
-                type="url"
-                placeholder="Media URL"
-                value={item.url}
-                onChange={(e) =>
-                  handleMediaChange(index, "url", e.target.value)
-                }
+                type="text"
+                name="name"
+                placeholder="Title"
+                value={form.name}
+                onChange={handleChange}
+              />
+
+              <label className="venue-form-card__label">Description</label>
+              <textarea
+                className="venue-form-card__textarea"
+                name="description"
+                rows={4}
+                value={form.description}
+                onChange={handleChange}
+              />
+
+              <input
+                className="venue-form-card__input"
+                type="number"
+                name="price"
+                placeholder="Price"
+                min="0"
+                value={form.price}
+                onChange={handleChange}
+              />
+
+              <input
+                className="venue-form-card__input"
+                type="number"
+                name="maxGuests"
+                placeholder="Max guests"
+                min="1"
+                value={form.maxGuests}
+                onChange={handleChange}
+              />
+
+              <input
+                className="venue-form-card__input"
+                type="text"
+                name="address"
+                placeholder="Address"
+                value={form.address}
+                onChange={handleChange}
               />
               <input
                 className="venue-form-card__input"
                 type="text"
-                placeholder="Picture description (optional)"
-                value={item.alt}
-                onChange={(e) =>
-                  handleMediaChange(index, "alt", e.target.value)
+                name="zip"
+                placeholder="Zip code"
+                value={form.zip}
+                onChange={handleChange}
+              />
+              <input
+                className="venue-form-card__input"
+                type="text"
+                name="city"
+                placeholder="City"
+                value={form.city}
+                onChange={handleChange}
+              />
+              <input
+                className="venue-form-card__input"
+                type="text"
+                name="country"
+                placeholder="Country"
+                value={form.country}
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* ── Right column ── */}
+            <div className="venue-form-card__col">
+              <VenueMediaInputs
+                mediaItems={mediaItems}
+                onChange={handleMediaChange}
+                onAdd={() =>
+                  setMediaItems((prev) => [...prev, { ...EMPTY_MEDIA }])
+                }
+                onRemove={(index) =>
+                  setMediaItems((prev) => prev.filter((_, i) => i !== index))
                 }
               />
-              {mediaItems.length > 1 && (
-                <button
-                  type="button"
-                  className="venue-form-card__btn venue-form-card__btn--remove"
-                  onClick={() => removeMedia(index)}
-                >
-                  Remove
-                </button>
+
+              <VenueAmenities
+                values={form}
+                onToggle={(key) =>
+                  setForm((prev) => ({ ...prev, [key]: !prev[key] }))
+                }
+              />
+
+              {error && <Alert type="error" message={error} />}
+              {successMessage && (
+                <Alert type="success" message={successMessage} />
               )}
+
+              <button
+                type="submit"
+                className="venue-form-card__btn venue-form-card__btn--submit"
+                disabled={saving}
+              >
+                {saving ? "Saving…" : isEditMode ? "Update" : "Create"}
+              </button>
+
+              {isEditMode && (
+                <>
+                  {!showDeleteConfirm ? (
+                    <button
+                      type="button"
+                      className="venue-form-card__btn venue-form-card__btn--delete"
+                      onClick={() => setShowDeleteConfirm(true)}
+                      disabled={deleting}
+                    >
+                      Delete
+                    </button>
+                  ) : (
+                    <VenueDeleteConfirm
+                      deleting={deleting}
+                      onConfirm={handleDelete}
+                      onCancel={() => setShowDeleteConfirm(false)}
+                    />
+                  )}
+                </>
+              )}
+
+              <button
+                type="button"
+                className="venue-form-card__btn venue-form-card__btn--cancel"
+                onClick={() => navigate("/account")}
+              >
+                Cancel
+              </button>
             </div>
-          ))}
-
-          <button
-            type="button"
-            className="venue-form-card__btn venue-form-card__btn--add-media"
-            onClick={addMedia}
-          >
-            Add Media
-          </button>
-
-          {error && <Alert type="error" message={error} />}
-          {successMessage && <Alert type="success" message={successMessage} />}
-
-          <button
-            type="submit"
-            className="venue-form-card__btn venue-form-card__btn--submit"
-            disabled={saving}
-          >
-            {saving ? "Saving…" : isEditMode ? "Update" : "Create"}
-          </button>
-
-          {isEditMode && (
-            <button
-              type="button"
-              className="venue-form-card__btn venue-form-card__btn--delete"
-              onClick={handleDelete}
-              disabled={deleting}
-            >
-              {deleting ? "Deleting…" : "Delete"}
-            </button>
-          )}
-
-          <button
-            type="button"
-            className="venue-form-card__btn venue-form-card__btn--cancel"
-            onClick={() => navigate("/account")}
-          >
-            Cancel
-          </button>
+          </div>
         </form>
       </div>
     </div>

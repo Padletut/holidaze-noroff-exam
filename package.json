@@ -10,7 +10,7 @@
     "test": "jest",
     "preview": "vite preview",
     "generate-docs": "jsdoc -c jsdoc.json",
-    "prepare": "husky"
+    "prepare": "is-ci || husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
@@ -33,6 +33,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "is-ci": "^4.1.0",
     "jest": "^30.3.0",
     "jsdoc": "^4.0.5",
     "prettier": "^3.8.3",

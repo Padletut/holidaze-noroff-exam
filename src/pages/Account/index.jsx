@@ -6,6 +6,7 @@ import { getProfileBookings } from "../../api/profiles/getProfileBookings"
 import EditProfileModal from "../../components/EditProfileModal"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import { loadStorage } from "../../utils/loadStorage.mjs"
+import { saveStorage } from "../../utils/saveStorage.mjs"
 import { clearSession } from "../../utils/clearSession.mjs"
 import Alert from "../../components/Alert"
 
@@ -33,6 +34,10 @@ function Account() {
       .then(([profileData, bookingsData]) => {
         setProfile(profileData)
         setBookings(bookingsData)
+        saveStorage("profile", {
+          ...loadStorage("profile"),
+          venueManager: profileData.venueManager,
+        })
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
@@ -105,7 +110,7 @@ function Account() {
         {/* Bookings */}
         <div className="account-section__wrapper max-w-7xl mx-auto">
           <section className="account-section">
-            <h2 className="account-section__heading">Bookings</h2>
+            <h2 className="account-section__heading">Upcoming Bookings</h2>
             <div className="account-section__card account-section__card--bookings">
               {(() => {
                 const today = new Date().toISOString().slice(0, 10)

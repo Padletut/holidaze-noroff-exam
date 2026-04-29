@@ -1,5 +1,5 @@
 import "../../styles/index.scss"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { useParams } from "react-router-dom"
 import { getVenueById } from "../../api/venues/getVenueById.mjs"
 import LoadingSpinner from "../../components/LoadingSpinner"
@@ -13,6 +13,7 @@ function VenueDetail() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [imgIndex, setImgIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
   const touchStartX = useRef(null)
 
   useEffect(() => {
@@ -21,6 +22,22 @@ function VenueDetail() {
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
   }, [id])
+
+  const openLightbox = useCallback(() => setLightboxOpen(true), [])
+  const closeLightbox = useCallback(() => setLightboxOpen(false), [])
+
+  useEffect(() => {
+    if (!lightboxOpen) return
+    const imageCount = venue?.media?.length || 1
+    const onKey = (e) => {
+      if (e.key === "Escape") closeLightbox()
+      if (e.key === "ArrowRight") setImgIndex((i) => (i + 1) % imageCount)
+      if (e.key === "ArrowLeft")
+        setImgIndex((i) => (i - 1 + imageCount) % imageCount)
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [lightboxOpen, venue?.media?.length, closeLightbox])
 
   if (loading) return <LoadingSpinner />
   if (error) return <Alert type="error" message={error} />
@@ -58,137 +75,202 @@ function VenueDetail() {
   ].filter(Boolean)
 
   return (
-    <div className="venue-detail max-w-7xl mx-auto">
-      {/* Left column: Gallery + venue info */}
-      <div className="venue-detail__col venue-detail__col--left">
+    <>
+      <div className="venue-detail max-w-7xl mx-auto">
+        {/* Left column: Gallery + venue info */}
+        <div className="venue-detail__col venue-detail__col--left">
+          <div
+            className="venue-detail__gallery"
+            onTouchStart={(e) => {
+              touchStartX.current = e.touches[0].clientX
+            }}
+            onTouchEnd={(e) => {
+              if (touchStartX.current === null) return
+              const diff = touchStartX.current - e.changedTouches[0].clientX
+              touchStartX.current = null
+              if (Math.abs(diff) < 40) return
+              if (diff > 0) {
+                setImgIndex((i) => (i + 1) % images.length)
+              } else {
+                setImgIndex((i) => (i - 1 + images.length) % images.length)
+              }
+            }}
+          >
+            <img
+              src={images[imgIndex]?.url}
+              alt={images[imgIndex]?.alt || name}
+              className="venue-detail__gallery-img venue-detail__gallery-img--clickable"
+              onClick={openLightbox}
+              aria-label="View full size image"
+            />
+            {images.length > 1 && (
+              <>
+                <button
+                  className="venue-detail__gallery-arrow venue-detail__gallery-arrow--prev"
+                  onClick={() =>
+                    setImgIndex((i) => (i - 1 + images.length) % images.length)
+                  }
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <button
+                  className="venue-detail__gallery-arrow venue-detail__gallery-arrow--next"
+                  onClick={() => setImgIndex((i) => (i + 1) % images.length)}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+                <span
+                  className="venue-detail__gallery-count"
+                  aria-live="polite"
+                >
+                  {imgIndex + 1} / {images.length}
+                </span>
+                <div className="venue-detail__gallery-dots" aria-hidden="true">
+                  {images.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={`venue-detail__gallery-dot${
+                        i === imgIndex
+                          ? " venue-detail__gallery-dot--active"
+                          : ""
+                      }`}
+                      onClick={() => setImgIndex(i)}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="venue-detail__info">
+            <h1 className="venue-detail__name">{name}</h1>
+            {locationLabel && (
+              <p className="venue-detail__location">{locationLabel}</p>
+            )}
+            <div className="venue-detail__meta-row">
+              <span className="venue-detail__price">
+                <strong>${price}</strong> / night
+              </span>
+              {rating === 0 ? (
+                <span
+                  className="venue-detail__rating-new"
+                  aria-label="New venue"
+                >
+                  ⭐ New
+                </span>
+              ) : (
+                <span
+                  className="venue-detail__rating"
+                  aria-label={`Rating: ${rating} out of 5`}
+                >
+                  {"★".repeat(Math.round(rating))}
+                  {"☆".repeat(5 - Math.round(rating))}
+                  <span className="venue-detail__rating-value">{rating}</span>
+                </span>
+              )}
+            </div>
+            <p className="venue-detail__guests">
+              <span aria-hidden="true">👤</span> Guests: {maxGuests}
+            </p>
+          </div>
+        </div>
+
+        {/* Middle column: Description + Amenities */}
+        <div className="venue-detail__col venue-detail__col--middle flex flex-col gap-8">
+          {description && (
+            <section className="venue-detail__section">
+              <h2 className="venue-detail__section-title">Description</h2>
+              <p className="venue-detail__description">{description}</p>
+            </section>
+          )}
+
+          {amenities.length > 0 && (
+            <section className="venue-detail__section">
+              <h2 className="venue-detail__section-title">Amenities</h2>
+              <ul className="venue-detail__amenities">
+                {amenities.map(({ label, icon }) => (
+                  <li key={label} className="venue-detail__amenity">
+                    <span aria-hidden="true">{icon}</span> {label}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+
+        {/* Right column: Availability */}
+        <div className="venue-detail__col venue-detail__col--right">
+          <section className="venue-detail__section">
+            <h2 className="venue-detail__section-title">Availability</h2>
+            <BookingCalendar
+              bookings={bookings ?? []}
+              maxGuests={maxGuests}
+              pricePerNight={price}
+              venueId={id}
+              venueName={name}
+              userBooking={userBooking}
+            />
+          </section>
+        </div>
+      </div>
+
+      {lightboxOpen && (
         <div
-          className="venue-detail__gallery"
-          onTouchStart={(e) => {
-            touchStartX.current = e.touches[0].clientX
-          }}
-          onTouchEnd={(e) => {
-            if (touchStartX.current === null) return
-            const diff = touchStartX.current - e.changedTouches[0].clientX
-            touchStartX.current = null
-            if (Math.abs(diff) < 40) return
-            if (diff > 0) {
-              setImgIndex((i) => (i + 1) % images.length)
-            } else {
-              setImgIndex((i) => (i - 1 + images.length) % images.length)
-            }
-          }}
+          className="venue-detail__lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image lightbox"
+          onClick={closeLightbox}
         >
+          <button
+            className="venue-detail__lightbox-close"
+            onClick={closeLightbox}
+            aria-label="Close lightbox"
+          >
+            ×
+          </button>
+          {images.length > 1 && (
+            <button
+              className="venue-detail__lightbox-arrow venue-detail__lightbox-arrow--prev"
+              onClick={(e) => {
+                e.stopPropagation()
+                setImgIndex((i) => (i - 1 + images.length) % images.length)
+              }}
+              aria-label="Previous image"
+            >
+              ‹
+            </button>
+          )}
           <img
             src={images[imgIndex]?.url}
             alt={images[imgIndex]?.alt || name}
-            className="venue-detail__gallery-img"
+            className="venue-detail__lightbox-img"
+            onClick={(e) => e.stopPropagation()}
           />
           {images.length > 1 && (
             <>
               <button
-                className="venue-detail__gallery-arrow venue-detail__gallery-arrow--prev"
-                onClick={() =>
-                  setImgIndex((i) => (i - 1 + images.length) % images.length)
-                }
-                aria-label="Previous image"
-              >
-                ‹
-              </button>
-              <button
-                className="venue-detail__gallery-arrow venue-detail__gallery-arrow--next"
-                onClick={() => setImgIndex((i) => (i + 1) % images.length)}
+                className="venue-detail__lightbox-arrow venue-detail__lightbox-arrow--next"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setImgIndex((i) => (i + 1) % images.length)
+                }}
                 aria-label="Next image"
               >
                 ›
               </button>
-              <span className="venue-detail__gallery-count" aria-live="polite">
+              <span className="venue-detail__lightbox-count">
                 {imgIndex + 1} / {images.length}
               </span>
-              <div className="venue-detail__gallery-dots" aria-hidden="true">
-                {images.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    className={`venue-detail__gallery-dot${
-                      i === imgIndex ? " venue-detail__gallery-dot--active" : ""
-                    }`}
-                    onClick={() => setImgIndex(i)}
-                    aria-label={`Go to image ${i + 1}`}
-                  />
-                ))}
-              </div>
             </>
           )}
         </div>
-
-        <div className="venue-detail__info">
-          <h1 className="venue-detail__name">{name}</h1>
-          {locationLabel && (
-            <p className="venue-detail__location">{locationLabel}</p>
-          )}
-          <div className="venue-detail__meta-row">
-            <span className="venue-detail__price">
-              <strong>${price}</strong> / night
-            </span>
-            {rating === 0 ? (
-              <span className="venue-detail__rating-new" aria-label="New venue">
-                ⭐ New
-              </span>
-            ) : (
-              <span
-                className="venue-detail__rating"
-                aria-label={`Rating: ${rating} out of 5`}
-              >
-                {"★".repeat(Math.round(rating))}
-                {"☆".repeat(5 - Math.round(rating))}
-                <span className="venue-detail__rating-value">{rating}</span>
-              </span>
-            )}
-          </div>
-          <p className="venue-detail__guests">
-            <span aria-hidden="true">👤</span> Guests: {maxGuests}
-          </p>
-        </div>
-      </div>
-
-      {/* Middle column: Description + Amenities */}
-      <div className="venue-detail__col venue-detail__col--middle flex flex-col gap-8">
-        {description && (
-          <section className="venue-detail__section">
-            <h2 className="venue-detail__section-title">Description</h2>
-            <p className="venue-detail__description">{description}</p>
-          </section>
-        )}
-
-        {amenities.length > 0 && (
-          <section className="venue-detail__section">
-            <h2 className="venue-detail__section-title">Amenities</h2>
-            <ul className="venue-detail__amenities">
-              {amenities.map(({ label, icon }) => (
-                <li key={label} className="venue-detail__amenity">
-                  <span aria-hidden="true">{icon}</span> {label}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
-
-      {/* Right column: Availability */}
-      <div className="venue-detail__col venue-detail__col--right">
-        <section className="venue-detail__section">
-          <h2 className="venue-detail__section-title">Availability</h2>
-          <BookingCalendar
-            bookings={bookings ?? []}
-            maxGuests={maxGuests}
-            pricePerNight={price}
-            venueId={id}
-            venueName={name}
-            userBooking={userBooking}
-          />
-        </section>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 

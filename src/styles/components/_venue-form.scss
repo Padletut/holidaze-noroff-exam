@@ -1,4 +1,5 @@
 @use "../variables" as *;
+@use "sass:color";
 
 .venue-form-page {
   background-color: $color-background;
@@ -17,7 +18,7 @@
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
 
   @media (min-width: 700px) {
-    max-width: 820px;
+    max-width: 80rem;
     padding: 3rem 3.5rem;
   }
 
@@ -46,13 +47,32 @@
     flex-direction: column;
   }
 
+  &__field {
+    position: relative;
+    margin-bottom: 1.1rem;
+  }
+
   &__label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     font-family: $font-body;
     font-size: $body-medium-size;
-    font-weight: $font-weight-medium;
-    color: $color-font-dark;
-    display: block;
-    margin: 2.5rem 0 0.5rem;
+    color: #9ca3af;
+    pointer-events: none;
+    transition: top 0.15s ease, font-size 0.15s ease, color 0.15s ease,
+      transform 0.15s ease;
+
+    &--static {
+      position: static;
+      transform: none;
+      font-size: $body-medium-size;
+      font-weight: $font-weight-medium;
+      color: $color-font-dark;
+      margin: 1.5rem 0 0.5rem;
+      pointer-events: auto;
+    }
   }
 
   &__input {
@@ -62,16 +82,11 @@
     color: $color-font-dark;
     border: 1px solid #d1d5db;
     border-radius: 6px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.1rem;
+    padding: 1.35rem 1rem 0.45rem;
     background: #fff;
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.15s;
-
-    &::placeholder {
-      color: #9ca3af;
-    }
 
     &:focus {
       border-color: $color-accent-sandstone;
@@ -85,8 +100,7 @@
     color: $color-font-dark;
     border: 1px solid #d1d5db;
     border-radius: 6px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.1rem;
+    padding: 1.75rem 1rem 0.5rem;
     background: #fff;
     box-sizing: border-box;
     resize: vertical;
@@ -96,6 +110,29 @@
     &:focus {
       border-color: $color-accent-sandstone;
     }
+  }
+
+  // Floating label – textarea label starts at top, not vertically centered
+  &__textarea + &__label {
+    top: 0.875rem;
+    transform: none;
+  }
+
+  // Floating state – input
+  &__input:focus + &__label,
+  &__input:not(:placeholder-shown) + &__label {
+    top: 0.4rem;
+    transform: none;
+    font-size: 11px;
+    color: $color-accent-sandstone;
+  }
+
+  // Floating state – textarea
+  &__textarea:focus + &__label,
+  &__textarea:not(:placeholder-shown) + &__label {
+    top: 0.4rem;
+    font-size: 11px;
+    color: $color-accent-sandstone;
   }
 
   &__amenities {
@@ -155,7 +192,7 @@
       color: #fff;
 
       &:hover:not(:disabled) {
-        background: darken($color-primary, 8%);
+        background: color.adjust($color-primary, $lightness: -8%);
       }
     }
 
@@ -184,7 +221,7 @@
       color: #fff;
 
       &:hover:not(:disabled) {
-        background: darken($color-primary, 8%);
+        background: color.adjust($color-primary, $lightness: -8%);
       }
     }
 
@@ -194,7 +231,7 @@
       margin-bottom: 0;
 
       &:hover:not(:disabled) {
-        background: darken($color-primary, 8%);
+        background: color.adjust($color-primary, $lightness: -8%);
       }
     }
 
@@ -216,7 +253,7 @@
       margin-bottom: 0;
 
       &:hover:not(:disabled) {
-        background: darken($color-primary, 8%);
+        background: color.adjust($color-primary, $lightness: -8%);
       }
     }
   }

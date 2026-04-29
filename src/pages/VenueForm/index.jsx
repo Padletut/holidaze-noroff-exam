@@ -149,76 +149,127 @@ function VenueForm() {
           <div className="venue-form-card__columns">
             {/* ── Left column ── */}
             <div className="venue-form-card__col">
-              <input
-                className="venue-form-card__input"
-                type="text"
-                name="name"
-                placeholder="Title"
-                value={form.name}
-                onChange={handleChange}
-              />
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder=" "
+                  value={form.name}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="name">
+                  Title
+                </label>
+              </div>
 
-              <label className="venue-form-card__label">Description</label>
-              <textarea
-                className="venue-form-card__textarea"
-                name="description"
-                rows={4}
-                value={form.description}
-                onChange={handleChange}
-              />
+              <div className="venue-form-card__field">
+                <textarea
+                  className="venue-form-card__textarea"
+                  id="description"
+                  name="description"
+                  rows={4}
+                  placeholder=" "
+                  value={form.description}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="description">
+                  Description
+                </label>
+              </div>
 
-              <input
-                className="venue-form-card__input"
-                type="number"
-                name="price"
-                placeholder="Price"
-                min="0"
-                value={form.price}
-                onChange={handleChange}
-              />
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="number"
+                  id="price"
+                  name="price"
+                  min="0"
+                  placeholder=" "
+                  value={form.price}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="price">
+                  Price per night (NOK)
+                </label>
+              </div>
 
-              <input
-                className="venue-form-card__input"
-                type="number"
-                name="maxGuests"
-                placeholder="Max guests"
-                min="1"
-                value={form.maxGuests}
-                onChange={handleChange}
-              />
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="number"
+                  id="maxGuests"
+                  name="maxGuests"
+                  min="1"
+                  placeholder=" "
+                  value={form.maxGuests}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="maxGuests">
+                  Max guests
+                </label>
+              </div>
 
-              <input
-                className="venue-form-card__input"
-                type="text"
-                name="address"
-                placeholder="Address"
-                value={form.address}
-                onChange={handleChange}
-              />
-              <input
-                className="venue-form-card__input"
-                type="text"
-                name="zip"
-                placeholder="Zip code"
-                value={form.zip}
-                onChange={handleChange}
-              />
-              <input
-                className="venue-form-card__input"
-                type="text"
-                name="city"
-                placeholder="City"
-                value={form.city}
-                onChange={handleChange}
-              />
-              <input
-                className="venue-form-card__input"
-                type="text"
-                name="country"
-                placeholder="Country"
-                value={form.country}
-                onChange={handleChange}
-              />
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder=" "
+                  value={form.address}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="address">
+                  Address
+                </label>
+              </div>
+
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="text"
+                  id="zip"
+                  name="zip"
+                  placeholder=" "
+                  value={form.zip}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="zip">
+                  Zip code
+                </label>
+              </div>
+
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder=" "
+                  value={form.city}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="city">
+                  City
+                </label>
+              </div>
+
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="text"
+                  id="country"
+                  name="country"
+                  placeholder=" "
+                  value={form.country}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="country">
+                  Country
+                </label>
+              </div>
             </div>
 
             {/* ── Right column ── */}

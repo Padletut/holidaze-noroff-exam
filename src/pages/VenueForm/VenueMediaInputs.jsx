@@ -3,20 +3,38 @@ function VenueMediaInputs({ mediaItems, onChange, onAdd, onRemove }) {
     <>
       {mediaItems.map((item, index) => (
         <div key={index} className="venue-form-card__media-group">
-          <input
-            className="venue-form-card__input"
-            type="url"
-            placeholder="Media URL"
-            value={item.url}
-            onChange={(e) => onChange(index, "url", e.target.value)}
-          />
-          <input
-            className="venue-form-card__input"
-            type="text"
-            placeholder="Picture description (optional)"
-            value={item.alt}
-            onChange={(e) => onChange(index, "alt", e.target.value)}
-          />
+          <div className="venue-form-card__field">
+            <input
+              className="venue-form-card__input"
+              type="url"
+              id={`media-url-${index}`}
+              placeholder=" "
+              value={item.url}
+              onChange={(e) => onChange(index, "url", e.target.value)}
+            />
+            <label
+              className="venue-form-card__label"
+              htmlFor={`media-url-${index}`}
+            >
+              Media URL
+            </label>
+          </div>
+          <div className="venue-form-card__field">
+            <input
+              className="venue-form-card__input"
+              type="text"
+              id={`media-alt-${index}`}
+              placeholder=" "
+              value={item.alt}
+              onChange={(e) => onChange(index, "alt", e.target.value)}
+            />
+            <label
+              className="venue-form-card__label"
+              htmlFor={`media-alt-${index}`}
+            >
+              Picture description (optional)
+            </label>
+          </div>
           {mediaItems.length > 1 && (
             <button
               type="button"

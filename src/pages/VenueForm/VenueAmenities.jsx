@@ -8,7 +8,9 @@ const AMENITIES = [
 function VenueAmenities({ values, onToggle }) {
   return (
     <>
-      <p className="venue-form-card__label">Amenities</p>
+      <p className="venue-form-card__label venue-form-card__label--static">
+        Amenities
+      </p>
       <div className="venue-form-card__amenities">
         {AMENITIES.map(({ key, label, icon }) => (
           <button

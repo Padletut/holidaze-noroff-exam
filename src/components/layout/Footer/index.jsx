@@ -3,10 +3,6 @@ import "../../../../src/styles/index.scss"
 
 const sections = [
   {
-    title: "Explore",
-    links: ["Norway", "England", "Germany", "Denmark"],
-  },
-  {
     title: "Account",
     links: ["My Bookings", "My Venues", "Logout"],
   },
@@ -121,7 +117,7 @@ function Footer() {
           </div>
         ))}
 
-        <div className="footer__column">
+        <div className="footer__column footer__column--right">
           <span className="footer__section-title">Follow Us</span>
           <div className="footer__social">
             <a href="#" aria-label="Instagram" className="footer__social-link">

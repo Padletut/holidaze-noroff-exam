@@ -36,6 +36,7 @@ function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
         e.preventDefault()
         onSubmit?.({ query, guests, checkIn, checkOut })
       }}
+      role="search"
     >
       <div className="search-bar__fields">
         <div className="search-bar__input-wrapper">
@@ -61,6 +62,12 @@ function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
             aria-label="Search by location or name"
             value={query}
             onChange={handleQueryChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault()
+                onSubmit?.({ query, guests, checkIn, checkOut })
+              }
+            }}
           />
         </div>
 
@@ -88,6 +95,12 @@ function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
             aria-label="Number of guests"
             value={guests}
             onChange={handleGuestsChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault()
+                onSubmit?.({ query, guests, checkIn, checkOut })
+              }
+            }}
           />
         </div>
       </div>

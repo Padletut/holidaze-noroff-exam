@@ -28,7 +28,7 @@
   &__trigger-icon {
     display: flex;
     align-items: center;
-    color: #6b7280;
+    color: $color-muted;
     flex-shrink: 0;
   }
 
@@ -41,7 +41,7 @@
     text-overflow: ellipsis;
 
     &--placeholder {
-      color: #6b7280;
+      color: $color-muted;
     }
   }
 
@@ -135,7 +135,7 @@
     }
 
     &--past {
-      color: #d1d5db;
+      color: $color-border;
       cursor: default;
     }
 

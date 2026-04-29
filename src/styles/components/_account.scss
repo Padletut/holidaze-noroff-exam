@@ -20,7 +20,7 @@
   &__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 26, 44, 0.65);
+    background: rgba($color-primary, 0.65);
     z-index: 0;
   }
 
@@ -44,7 +44,7 @@
   &__blob--2 {
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, #13c296 0%, #0a7a5c 100%);
+    background: radial-gradient(circle, $color-secondary 0%, #0a7a5c 100%);
     bottom: -80px;
     left: 10px;
     opacity: 0.35;
@@ -140,7 +140,7 @@
 .account-page__error {
   font-family: $font-body;
   font-size: $body-medium-size;
-  color: #dc2626;
+  color: $color-error;
   text-align: center;
   padding: 2rem;
 }
@@ -208,7 +208,7 @@
     color: $color-font-dark;
     text-decoration: none;
     padding: 0.875rem 1.25rem;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid $color-border-light;
 
     &:hover {
       color: $color-accent-sandstone;
@@ -226,7 +226,7 @@
     color: $color-font-dark;
     text-decoration: none;
     padding: 1rem 1.25rem;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid $color-border-light;
     transition: background-color 0.15s ease;
 
     &:last-child {
@@ -234,7 +234,7 @@
     }
 
     &:hover {
-      background-color: #f9fafb;
+      background-color: $color-surface-hover;
     }
 
     &--btn {
@@ -349,7 +349,7 @@
     font-size: $body-medium-size;
     color: $color-font-dark;
     background: #fff;
-    border: 1.5px solid #d1d5db;
+    border: 1.5px solid $color-border;
     border-radius: 8px;
     padding: 0.75rem 1rem;
     width: 100%;
@@ -368,8 +368,8 @@
 
   &__error {
     font-family: $font-body;
-    font-size: 14px;
-    color: #dc2626;
+    font-size: 0.875rem;
+    color: $color-error;
     margin-bottom: 1rem;
   }
 

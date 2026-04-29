@@ -58,11 +58,12 @@
     font-family: $font-body;
     font-size: $body-medium-size;
     font-weight: $font-weight-semibold;
-    color: $color-secondary;
+    color: $color-secondary-dark;
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      color: $color-secondary;
+      transition: color 0.2s ease;
     }
   }
 }
@@ -126,6 +127,7 @@
 
     &:hover {
       background-color: $color-button-hover;
+      transition: background-color 0.2s ease;
     }
   }
 }
@@ -133,7 +135,7 @@
 .auth-page .form-control {
   width: 100%;
   padding: 0.625rem 2.25rem 0.625rem 0.875rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid $color-border;
   border-radius: 6px;
   font-family: $font-body;
   font-size: $body-medium-size;
@@ -142,21 +144,21 @@
   box-sizing: border-box;
 
   &::placeholder {
-    color: #9ca3af;
+    color: $color-placeholder;
   }
 
   &:focus {
     outline: none;
     border-color: $color-secondary;
-    box-shadow: 0 0 0 2px rgba(19, 194, 150, 0.2);
+    box-shadow: 0 0 0 2px rgba($color-secondary, 0.2);
   }
 
   &--invalid {
-    border-color: #dc2626;
+      border-color: $color-error;
 
     &:focus {
-      border-color: #dc2626;
-      box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+      border-color: $color-error;
+      box-shadow: 0 0 0 2px rgba($color-error, 0.2);
     }
   }
 
@@ -165,7 +167,7 @@
 
     &:focus {
       border-color: $color-secondary;
-      box-shadow: 0 0 0 2px rgba(19, 194, 150, 0.2);
+      box-shadow: 0 0 0 2px rgba($color-secondary, 0.2);
     }
   }
 }
@@ -182,7 +184,7 @@
     right: 0.75rem;
     width: 1.1rem;
     height: 1.1rem;
-    border: 2px solid #dc2626;
+    border: 2px solid $color-error;
     border-radius: 50%;
     pointer-events: none;
     flex-shrink: 0;
@@ -196,7 +198,7 @@
       justify-content: center;
       font-size: 0.7rem;
       font-weight: $font-weight-bold;
-      color: #dc2626;
+      color: $color-error;
       line-height: 1;
     }
   }
@@ -214,7 +216,7 @@
   &__feedback {
     font-family: $font-body;
     font-size: 0.8rem;
-    color: #dc2626;
+    color: $color-error;
     margin: 0;
     text-align: left;
   }
@@ -222,7 +224,7 @@
   &__api-error {
     font-family: $font-body;
     font-size: $body-medium-size;
-    color: #dc2626;
+    color: $color-error;
     text-align: center;
     margin: 0;
   }

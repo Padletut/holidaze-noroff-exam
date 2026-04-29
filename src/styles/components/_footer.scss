@@ -40,6 +40,7 @@
 
     &:hover {
       color: $color-accent-sandstone;
+      transition: color 0.2s ease;
     }
   }
 
@@ -117,11 +118,16 @@
 
   // ── Desktop grid ─────────────────────────────────────────────
   &__desktop {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    padding: 3rem 0rem 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    width: inherit;
+    display: none;
+
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      padding: 3rem 0rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      width: inherit;
+    }
   }
 
   &__column {

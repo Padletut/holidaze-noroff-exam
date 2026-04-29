@@ -30,7 +30,13 @@ function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
   }
 
   return (
-    <div className="search-bar max-w-7xl mx-auto">
+    <form
+      className="search-bar max-w-7xl mx-auto"
+      onSubmit={(e) => {
+        e.preventDefault()
+        onSubmit?.({ query, guests, checkIn, checkOut })
+      }}
+    >
       <div className="search-bar__fields">
         <div className="search-bar__input-wrapper">
           <span className="search-bar__icon" aria-hidden="true">
@@ -92,14 +98,10 @@ function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
         onChange={handleDatesChange}
       />
 
-      <button
-        className="search-bar__button"
-        type="button"
-        onClick={() => onSubmit?.({ query, guests, checkIn, checkOut })}
-      >
+      <button className="search-bar__button" type="submit">
         Search
       </button>
-    </div>
+    </form>
   )
 }
 

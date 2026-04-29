@@ -89,7 +89,7 @@
     transition: border-color 0.15s;
 
     &:focus {
-      border-color: $color-accent-sandstone;
+      border-color: $color-accent-sandstone-dark;
     }
   }
 
@@ -108,7 +108,7 @@
     transition: border-color 0.15s;
 
     &:focus {
-      border-color: $color-accent-sandstone;
+      border-color: $color-accent-sandstone-dark;
     }
   }
 
@@ -124,7 +124,7 @@
     top: 0.4rem;
     transform: none;
     font-size: 11px;
-    color: $color-accent-sandstone;
+    color: $color-accent-sandstone-dark;
   }
 
   // Floating state – textarea
@@ -132,7 +132,7 @@
   &__textarea:not(:placeholder-shown) + &__label {
     top: 0.4rem;
     font-size: 11px;
-    color: $color-accent-sandstone;
+    color: $color-accent-sandstone-dark;
   }
 
   &__amenities {
@@ -158,8 +158,8 @@
     transition: background 0.15s, border-color 0.15s, color 0.15s;
 
     &--active {
-      background: $color-accent-sandstone;
-      border-color: $color-accent-sandstone;
+      background: $color-accent-sandstone-dark;
+      border-color: $color-accent-sandstone-dark;
       color: #fff;
     }
   }
@@ -197,7 +197,7 @@
     }
 
     &--add-media {
-      background: $color-accent-sandstone;
+      background: $color-accent-sandstone-dark;
       color: #fff;
       margin-top: 0.25rem;
       margin-bottom: 2rem;
@@ -208,7 +208,7 @@
     }
 
     &--submit {
-      background: $color-accent-sandstone;
+      background: $color-accent-sandstone-dark;
       color: #fff;
 
       &:hover:not(:disabled) {

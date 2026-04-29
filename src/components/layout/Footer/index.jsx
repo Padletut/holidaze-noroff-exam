@@ -1,16 +1,7 @@
 import { useState } from "react"
+import { Link, useLocation } from "react-router-dom"
+import { loadStorage } from "../../../utils/loadStorage.mjs"
 import "../../../../src/styles/index.scss"
-
-const sections = [
-  {
-    title: "Account",
-    links: ["My Bookings", "My Venues", "Logout"],
-  },
-  {
-    title: "Company",
-    links: ["About Us", "Careers", "Contact"],
-  },
-]
 
 function ChevronDown() {
   return (
@@ -29,8 +20,46 @@ function ChevronDown() {
   )
 }
 
+const LINK_MAP = {
+  "Sign In": "/authenticate",
+  "My Bookings": "/bookings",
+  "My Venues": "/venues/my",
+}
+
+function FooterLink({ link }) {
+  const to = LINK_MAP[link]
+  return to ? (
+    <Link to={to} className="footer__link">
+      {link}
+    </Link>
+  ) : (
+    <a href="#" className="footer__link">
+      {link}
+    </a>
+  )
+}
+
 function Footer() {
   const [open, setOpen] = useState(null)
+  useLocation() // re-reads localStorage on every navigation
+  const isLoggedIn = Boolean(loadStorage("accessToken"))
+  const storedProfile = loadStorage("profile")
+  const isVenueManager = Boolean(storedProfile?.venueManager)
+
+  const accountLinks = isLoggedIn
+    ? ["My Bookings", ...(isVenueManager ? ["My Venues"] : []), "Logout"]
+    : ["Sign In"]
+
+  const sections = [
+    {
+      title: "Account",
+      links: accountLinks,
+    },
+    {
+      title: "Company",
+      links: ["About Us", "Contact"],
+    },
+  ]
 
   const toggle = (i) => setOpen(open === i ? null : i)
 
@@ -56,9 +85,7 @@ function Footer() {
               <ul className="footer__links">
                 {section.links.map((link) => (
                   <li key={link}>
-                    <a href="#" className="footer__link">
-                      {link}
-                    </a>
+                    <FooterLink link={link} />
                   </li>
                 ))}
               </ul>
@@ -108,9 +135,7 @@ function Footer() {
             <ul className="footer__links">
               {section.links.map((link) => (
                 <li key={link}>
-                  <a href="#" className="footer__link">
-                    {link}
-                  </a>
+                  <FooterLink link={link} />
                 </li>
               ))}
             </ul>

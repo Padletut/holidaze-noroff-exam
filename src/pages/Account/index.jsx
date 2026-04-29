@@ -79,7 +79,7 @@ function Account() {
           aria-hidden="true"
         />
 
-        <div className="account-header__inner">
+        <div className="account-header__inner max-w-7xl mx-auto">
           <img
             src={profile.avatar?.url || "/placeholder.jpg"}
             alt={profile.avatar?.alt || profile.name}
@@ -103,7 +103,7 @@ function Account() {
         {profile.bio && <p className="account-body__bio">{profile.bio}</p>}
 
         {/* Bookings */}
-        <div className="account-section__wrapper max-w-7xl">
+        <div className="account-section__wrapper max-w-7xl mx-auto">
           <section className="account-section">
             <h2 className="account-section__heading">Bookings</h2>
             <div className="account-section__card account-section__card--bookings">

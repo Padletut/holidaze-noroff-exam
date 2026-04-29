@@ -59,7 +59,7 @@
     transform: translateY(-50%);
     font-family: $font-body;
     font-size: $body-medium-size;
-    color: #9ca3af;
+    color: $color-placeholder;
     pointer-events: none;
     transition: top 0.15s ease, font-size 0.15s ease, color 0.15s ease,
       transform 0.15s ease;
@@ -80,7 +80,7 @@
     font-family: $font-body;
     font-size: $body-medium-size;
     color: $color-font-dark;
-    border: 1px solid #d1d5db;
+    border: 1px solid $color-border;
     border-radius: 6px;
     padding: 1.35rem 1rem 0.45rem;
     background: #fff;
@@ -98,7 +98,7 @@
     font-family: $font-body;
     font-size: $body-medium-size;
     color: $color-font-dark;
-    border: 1px solid #d1d5db;
+    border: 1px solid $color-border;
     border-radius: 6px;
     padding: 1.75rem 1rem 0.5rem;
     background: #fff;
@@ -150,8 +150,8 @@
     font-size: 14px;
     font-weight: $font-weight-medium;
     color: $color-font-dark;
-    background: #f3f4f6;
-    border: 1.5px solid #d1d5db;
+    background: $color-surface-subtle;
+    border: 1.5px solid $color-border;
     border-radius: 999px;
     padding: 0.4rem 0.875rem;
     cursor: pointer;

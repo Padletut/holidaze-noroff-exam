@@ -3,7 +3,7 @@
 .venue-card {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
@@ -60,7 +60,7 @@
   }
 
   &__price-value {
-    color: $color-accent-sandstone;
+    color: $color-accent-sandstone-dark;
   }
 
   &__guests {
@@ -86,10 +86,10 @@
 
     .star {
       font-size: 20px;
-      color: #d1d5db;
+      color: $color-font-dark-grey;
 
       &--filled {
-        color: $color-accent-sandstone;
+        color: $color-accent-sandstone-dark;
       }
     }
   }
@@ -106,6 +106,6 @@
     font-family: $font-body;
     font-size: $body-medium-size;
     font-weight: $font-weight-semibold;
-    color: $color-accent-sandstone;
+    color: $color-accent-sandstone-dark;
   }
 }

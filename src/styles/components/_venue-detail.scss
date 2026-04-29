@@ -14,7 +14,7 @@ main:has(.venue-detail) {
   &__error {
     font-family: $font-body;
     font-size: $body-medium-size;
-    color: #dc2626;
+    color: $color-error;
     text-align: center;
     padding: 2rem;
   }
@@ -25,7 +25,7 @@ main:has(.venue-detail) {
     width: 100%;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: #e5e7eb;
+    background: $color-border-light;
   }
 
   &__gallery-img {
@@ -136,7 +136,7 @@ main:has(.venue-detail) {
   &__price {
     font-family: $font-body;
     font-size: $body-large-size;
-    color: $color-accent-sandstone;
+    color: $color-accent-sandstone-dark;
 
     strong {
       font-weight: $font-weight-bold;
@@ -145,7 +145,7 @@ main:has(.venue-detail) {
 
   &__rating {
     font-size: 18px;
-    color: $color-accent-sandstone;
+    color: $color-accent-sandstone-dark;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -162,7 +162,7 @@ main:has(.venue-detail) {
     font-family: $font-body;
     font-size: $body-large-size;
     font-weight: $font-weight-semibold;
-    color: $color-accent-sandstone;
+    color: $color-accent-sandstone-dark;
   }
 
   &__guests {
@@ -207,7 +207,7 @@ main:has(.venue-detail) {
   &__amenity {
     font-family: $font-body;
     font-size: $body-medium-size;
-    background: #f3f4f6;
+    background: $color-surface-subtle;
     border-radius: 20px;
     padding: 0.35rem 0.9rem;
     color: $color-font-dark;
@@ -320,13 +320,13 @@ main:has(.venue-detail) {
     }
 
     &--past {
-      color: #d1d5db;
+      color: $color-border;
       cursor: default;
     }
 
     &--booked {
-      background: #f3f4f6;
-      color: #9ca3af;
+      background: $color-surface-subtle;
+      color: $color-placeholder;
       text-decoration: line-through;
       cursor: not-allowed;
       border-radius: 0;
@@ -359,8 +359,8 @@ main:has(.venue-detail) {
     margin-top: 0.75rem;
     min-height: 1.25rem;
     font-family: $font-body;
-    font-size: 13px;
-    color: #dc2626;
+    font-size: 0.8125rem;
+    color: $color-error;
     text-align: center;
   }
 
@@ -382,13 +382,14 @@ main:has(.venue-detail) {
     font-family: $font-body;
     font-size: $body-medium-size;
     color: $color-font-dark;
-    border: 1px solid #d1d5db;
+    border: 1px solid $color-border;
     border-radius: 8px;
     padding: 0.65rem 1rem;
     background: #ffffff;
     width: 100%;
     cursor: pointer;
     appearance: none;
+    box-sizing: border-box;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
@@ -396,7 +397,7 @@ main:has(.venue-detail) {
 
   // Summary
   &__summary {
-    background: #f9fafb;
+    background: $color-surface-hover;
     border-radius: 12px;
     padding: 1rem;
     display: flex;
@@ -415,7 +416,7 @@ main:has(.venue-detail) {
       font-weight: $font-weight-bold;
       color: $color-font-dark;
       padding-top: 0.5rem;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid $color-border-light;
       margin-top: 0.25rem;
     }
   }
@@ -449,11 +450,11 @@ main:has(.venue-detail) {
     margin-top: 0.5rem;
     width: 100%;
     background: transparent;
-    color: #dc2626;
+    color: $color-error;
     font-family: $font-body;
     font-size: $body-medium-size;
     font-weight: $font-weight-semibold;
-    border: 1.5px solid #dc2626;
+    border: 1.5px solid $color-error;
     border-radius: 8px;
     padding: 0.85rem 1rem;
     cursor: pointer;
@@ -498,7 +499,7 @@ main:has(.venue-detail) {
   &__submit-error {
     font-family: $font-body;
     font-size: $body-medium-size;
-    color: #dc2626;
+    color: $color-error;
     margin: 0.5rem 0 0;
   }
 

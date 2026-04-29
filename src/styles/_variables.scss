@@ -2,41 +2,51 @@ $color-primary: #0f1a2c;
 $color-secondary: #13C296;
 $color-background: #f6f1e8;
 $color-accent-sandstone: #ba8300;
+$color-accent-sandstone-hover: #e3a000;
 $color-button-hover: #1b44c8;
 $color-font-dark: #111928;
 $color-font-dark-grey: #4B5563;
 
+// UI colours
+$color-error: #dc2626;
+$color-border: #d1d5db;
+$color-border-light: #e5e7eb;
+$color-muted: #6b7280;
+$color-placeholder: #9ca3af;
+$color-surface-subtle: #f3f4f6;
+$color-surface-hover: #f9fafb;
+
 // Typography
 $font-heading: "Playfair Display", serif;
 
-$h1-size: 48px;
-$h1-line-height: 68px;
+$h1-size: 3rem;
+$h1-line-height: 1.42;
 $h1-weight: 400;
 
-$h2-size: 32px;
-$h2-line-height: 58px;
+$h2-size: 2rem;
+$h2-line-height: 1.8;
 $h2-weight: 400;
 
-$h3-size: 24px;
-$h3-line-height: 36px;
+$h3-size: 1.5rem;
+$h3-line-height: 1.5;
 $h3-weight: 400;
 
-$h4-size: 18px;
-$h4-line-height: 28px;
+$h4-size: 1.125rem;
+$h4-line-height: 1.556;
 $h4-weight: 400;
 
-$h5-size: 16px;
-$h5-line-height: 16px;
+$h5-size: 1rem;
+$h5-line-height: 1;
 $h5-weight: 600;
 
 // Body
 $font-body: "Inter", sans-serif;
 
-$body-large-size: 18px;
-$body-large-line-height: 26px;
+$body-large-size: 1.125rem;
+$body-large-line-height: 1.444;
 
-$body-medium-size: 16px;
-$body-medium-line-height: 24px;
+$body-medium-size: 1rem;
+$body-medium-line-height: 1.5;
 
 $font-weight-regular: 400;
 $font-weight-medium: 500;

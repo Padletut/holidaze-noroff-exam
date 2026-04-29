@@ -152,7 +152,7 @@ function VenueDetail() {
       </div>
 
       {/* Middle column: Description + Amenities */}
-      <div className="venue-detail__col venue-detail__col--middle">
+      <div className="venue-detail__col venue-detail__col--middle flex flex-col gap-8">
         {description && (
           <section className="venue-detail__section">
             <h2 className="venue-detail__section-title">Description</h2>

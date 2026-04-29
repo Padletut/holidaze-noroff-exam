@@ -51,7 +51,7 @@ function SearchBar({ onSearch, onSubmit, initialValues = {} }) {
           <input
             className="search-bar__input"
             type="text"
-            placeholder="Location"
+            placeholder="Location or name"
             aria-label="Search by location or name"
             value={query}
             onChange={handleQueryChange}

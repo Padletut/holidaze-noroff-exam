@@ -145,7 +145,7 @@ function Explore() {
   const showLoading = isSearching ? searchLoading : loading
 
   return (
-    <main className="explore max-w-7xl">
+    <div className="explore max-w-7xl">
       <div className="explore__header">
         <h1 className="explore__title">Explore</h1>
         <p className="explore__subtitle">Explore unique places to stay.</p>
@@ -189,7 +189,7 @@ function Explore() {
           )}
         </>
       )}
-    </main>
+    </div>
   )
 }
 

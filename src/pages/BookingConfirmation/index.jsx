@@ -1,30 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import "../../styles/index.scss"
-
-const MONTHS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-]
-
-function displayDate(isoStr) {
-  const d = new Date(isoStr)
-  return `${d.getDate()}. ${MONTHS[d.getMonth()]}`
-}
-
-function nightsBetween(from, to) {
-  return Math.round((new Date(to) - new Date(from)) / 86400000)
-}
+import { differenceInDays, formatLongDate } from "../../utils/dateUtils.mjs"
 
 function BookingConfirmation() {
   const { state } = useLocation()
@@ -37,7 +14,7 @@ function BookingConfirmation() {
   if (!state?.booking) return null
 
   const { mode, booking, venue, prev } = state
-  const nights = nightsBetween(booking.dateFrom, booking.dateTo)
+  const nights = differenceInDays(booking.dateFrom, booking.dateTo)
   const totalPrice = nights * (venue?.price ?? 0)
 
   const isCreated = mode === "created"
@@ -49,15 +26,15 @@ function BookingConfirmation() {
       changedFields.push({
         icon: "📅",
         label: "Check-in",
-        from: displayDate(prev.dateFrom),
-        to: displayDate(booking.dateFrom),
+        from: formatLongDate(prev.dateFrom),
+        to: formatLongDate(booking.dateFrom),
       })
     if (prev.dateTo !== booking.dateTo)
       changedFields.push({
         icon: "📅",
         label: "Check-out",
-        from: displayDate(prev.dateTo),
-        to: displayDate(booking.dateTo),
+        from: formatLongDate(prev.dateTo),
+        to: formatLongDate(booking.dateTo),
       })
     if (prev.guests !== booking.guests)
       changedFields.push({
@@ -128,7 +105,7 @@ function BookingConfirmation() {
                 Check-in
               </span>
               <span className="booking-confirmation__detail-value">
-                {displayDate(booking.dateFrom)}
+                {formatLongDate(booking.dateFrom)}
               </span>
             </li>
             <li className="booking-confirmation__detail-row">
@@ -142,7 +119,7 @@ function BookingConfirmation() {
                 Check-out
               </span>
               <span className="booking-confirmation__detail-value">
-                {displayDate(booking.dateTo)}
+                {formatLongDate(booking.dateTo)}
               </span>
             </li>
             <li className="booking-confirmation__detail-row">
@@ -172,7 +149,7 @@ function BookingConfirmation() {
           {venue?.price != null && (
             <div className="booking-confirmation__total">
               <span>Total price</span>
-              <span>{totalPrice}</span>
+              <span>NOK {totalPrice}</span>
             </div>
           )}
         </div>

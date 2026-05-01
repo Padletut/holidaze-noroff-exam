@@ -7,6 +7,7 @@ import {
   formatDisplay,
   MONTH_NAMES,
   DAY_NAMES,
+  differenceInDays,
 } from "../../utils/dateUtils.mjs"
 import useCalendarNav from "../../hooks/useCalendarNav"
 import { createBooking } from "../../api/bookings/createBooking.mjs"
@@ -155,10 +156,7 @@ function BookingCalendar({
     return cells
   }
 
-  const nights =
-    checkIn && checkOut
-      ? Math.round((new Date(checkOut) - new Date(checkIn)) / 86400000)
-      : 0
+  const nights = checkIn && checkOut ? differenceInDays(checkIn, checkOut) : 0
 
   return (
     <div className="bc">
@@ -247,7 +245,7 @@ function BookingCalendar({
           </div>
           <div className="bc__summary-row bc__summary-row--total">
             <span>Total</span>
-            <span>{nights * pricePerNight}</span>
+            <span>NOK {nights * pricePerNight}</span>
           </div>
 
           {userBooking ? (

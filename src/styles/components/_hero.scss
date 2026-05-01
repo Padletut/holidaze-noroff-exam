@@ -3,32 +3,32 @@
 .hero {
   position: relative;
   width: 100%;
+  height: 19rem;
   overflow: hidden;
 
   .hero-image {
     display: block;
     width: 100%;
-    height: 260px;
     object-fit: cover;
   }
 
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.15) 100%
-    );
+    background: linear-gradient(135deg,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.15) 100%);
   }
 
   .hero-content {
     position: absolute;
     inset: 0;
+  }
+
+  .hero-content__inner {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem;
 
     h1 {
       color: $color-white;
@@ -37,9 +37,10 @@
       font-size: $h2-size;
       font-weight: $h2-weight;
       text-align: start;
+
       span {
         display: block;
-        
+
       }
     }
 
@@ -56,20 +57,17 @@
   }
 
   @media (min-width: $breakpoint-xl) {
+
+    height: 400px;
+
     .hero-image {
       height: 400px;
     }
-    .hero-content {
-      padding: 1rem 0;
-    }
   }
-  
+
   @media (min-width: $breakpoint-xxl) {
     .hero-image {
       height: 560px;
-    }
-    .hero-content {
-      padding: 1rem 0;
     }
   }
 }

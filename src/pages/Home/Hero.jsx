@@ -6,11 +6,13 @@ function Hero() {
     <div className="hero">
       <img src={heroImage} alt="Hero Image" className="hero-image" />
       <div className="hero-overlay" />
-      <div className="hero-content max-w-7xl mx-auto">
-        <h1>
-          Find Your <span>Perfect Getaway</span>
-        </h1>
-        <p>Discover and book unique stays at beautiful destinations.</p>
+      <div className="hero-content px-4 py-3">
+        <div className="hero-content__inner max-w-7xl mx-auto w-full">
+          <h1>
+            Find Your <span>Perfect Getaway</span>
+          </h1>
+          <p>Discover and book unique stays at beautiful destinations.</p>
+        </div>
       </div>
     </div>
   )

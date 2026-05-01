@@ -1,11 +1,5 @@
 import { Link } from "react-router-dom"
-
-function formatDateRange(dateFrom, dateTo) {
-  const from = new Date(dateFrom)
-  const to = new Date(dateTo)
-  const opts = { day: "numeric", month: "short" }
-  return `${from.toLocaleDateString("en-GB", opts)} – ${to.toLocaleDateString("en-GB", opts)}`
-}
+import { formatDateRange } from "../../utils/dateUtils.mjs"
 
 function BookingCard({ booking }) {
   const venue = booking.venue

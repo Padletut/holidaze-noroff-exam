@@ -4,7 +4,7 @@ function StarRating({ rating }) {
 
   if (rating === 0) {
     return (
-      <div className="venue-card__stars" aria-label="New venue">
+      <div className="venue-card__stars" role="img" aria-label="New venue">
         <span className="venue-card__rating-new">⭐ New</span>
       </div>
     )
@@ -13,6 +13,7 @@ function StarRating({ rating }) {
   return (
     <div
       className="venue-card__stars"
+      role="img"
       aria-label={`Rating: ${rating} out of 5`}
     >
       {Array.from({ length: maxStars }, (_, i) => (

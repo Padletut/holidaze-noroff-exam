@@ -4,10 +4,10 @@ import heroImage from "../../assets/ChatGPT Image 16. feb. 2026, 23_01_19.png"
 function Hero() {
   return (
     <div className="hero">
-      <img src={heroImage} alt="Hero Image" className="hero-image" />
-      <div className="hero-overlay" />
-      <div className="hero-content px-4 py-3">
-        <div className="hero-content__inner max-w-7xl mx-auto w-full">
+      <img src={heroImage} alt="Hero Image" className="hero__image" />
+      <div className="hero__overlay" />
+      <div className="hero__content px-4 py-3">
+        <div className="hero__content-inner max-w-7xl mx-auto w-full">
           <h1>
             Find Your <span>Perfect Getaway</span>
           </h1>

@@ -5,7 +5,7 @@
   font-size: $h3-size;
   line-height: $h3-line-height;
   font-weight: $font-weight-medium;
-  color: #fff;
+  color: $color-white;
   text-decoration: none;
   display: block;
   padding: 0.75rem 0.5rem;
@@ -40,7 +40,7 @@
     transition: background-color 0.2s ease;
   }
  .nav-link {
-  color: #fff;
+  color: $color-white;
     font-family: $font-body;
     font-size: $body-medium-size;
     font-weight: $font-weight-medium;

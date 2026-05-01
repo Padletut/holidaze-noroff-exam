@@ -2,7 +2,7 @@
 
 .footer {
   background-color: $color-primary;
-  color: #ffffff;
+  color: $color-white;
   width: 100%;
   margin-top: auto;
 
@@ -35,7 +35,7 @@
     font-family: $font-heading;
     font-size: $h4-size;
     font-weight: $h4-weight;
-    color: #ffffff;
+    color: $color-white;
     text-decoration: none;
 
     &:hover {
@@ -50,7 +50,7 @@
       padding: 2rem 1.25rem;
       display: flex;
       flex-direction: column;
-      gap: 1.0rem;
+      gap: 1rem;
       width: 100%;
     }
   }
@@ -160,7 +160,7 @@
   &__copyright {
     font-family: $font-body;
     font-size: $body-medium-size;
-    color: #ffffff;
+    color: $color-white;
     order: 2;
 
     @media (min-width: 768px) {
@@ -181,7 +181,7 @@
   &__legal-link {
     font-family: $font-body;
     font-size: $body-medium-size;
-    color: #ffffff;
+    color: $color-white;
     text-decoration: none;
 
     &:hover {

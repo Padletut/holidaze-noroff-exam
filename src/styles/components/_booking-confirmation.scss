@@ -12,7 +12,7 @@
 }
 
 %booking-card {
-  background: #fff;
+  background: $color-white;
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   padding: 2rem 1.5rem;
@@ -142,7 +142,7 @@
     width: 100%;
     padding: 0.875rem;
     background-color: $color-primary;
-    color: #fff;
+    color: $color-white;
     font-family: $font-body;
     font-size: $body-medium-size;
     font-weight: $font-weight-semibold;
@@ -214,7 +214,7 @@
     border: 1px solid $color-border;
     border-radius: 6px;
     padding: 0.625rem 0.75rem;
-    background: #fff;
+    background: $color-white;
     appearance: auto;
 
     &:focus {
@@ -264,7 +264,7 @@
 
     &--save {
       background-color: $color-primary;
-      color: #fff;
+      color: $color-white;
 
       &:hover:not(:disabled) {
         background-color: color.adjust($color-primary, $lightness: 10%);

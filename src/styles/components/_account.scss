@@ -44,7 +44,7 @@
   &__blob--2 {
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, $color-secondary 0%, #0a7a5c 100%);
+    background: radial-gradient(circle, $color-secondary 0%, $color-secondary-dark 100%);
     bottom: -80px;
     left: 10px;
     opacity: 0.35;
@@ -70,12 +70,11 @@
     background: rgba(0, 0, 0, 0.45);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 1.0rem 0.8rem;
+    padding: 1rem 0.8rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     flex: 1;
-    max-width: 350px;
     max-width: max-content;
   }
 
@@ -91,7 +90,7 @@
     font-family: $font-heading;
     font-size: $h5-size;
     font-weight: $h5-weight;
-    color: #fff;
+    color: $color-white;
     margin: 0;
     word-break: break-all;
   }
@@ -175,7 +174,7 @@
   }
 
   &__card {
-    background: #fff;
+    background: $color-white;
     border-radius: 8px;
     padding: 1.25rem;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
@@ -293,7 +292,7 @@
   &__dates {
     font-family: $font-body;
     font-size: $body-medium-size;
-    color: black;
+    color: $color-font-dark;
     margin: 0;
   }
 }
@@ -348,7 +347,7 @@
     font-family: $font-body;
     font-size: $body-medium-size;
     color: $color-font-dark;
-    background: #fff;
+    background: $color-white;
     border: 1.5px solid $color-border;
     border-radius: 8px;
     padding: 0.75rem 1rem;
@@ -397,7 +396,7 @@
 
     &--save {
       background-color: $color-primary;
-      color: #fff;
+      color: $color-white;
 
       &:hover:not(:disabled) {
         opacity: 0.88;
@@ -406,7 +405,7 @@
 
     &--cancel {
       background-color: $color-primary;
-      color: #fff;
+      color: $color-white;
 
       &:hover:not(:disabled) {
         opacity: 0.88;

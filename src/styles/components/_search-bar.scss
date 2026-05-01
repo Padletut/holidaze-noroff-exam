@@ -21,9 +21,16 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #ffffff;
+    background-color: $color-white;
     border-radius: 8px;
     padding: 0.75rem 1rem;
+    border: 2px solid transparent;
+    transition: border-color 0.15s ease;
+
+    &:focus-within {
+      border-color: $color-primary;
+      outline: none;
+    }
 
     &--full {
       width: 100%;
@@ -39,7 +46,7 @@
 
   &__input {
     border: none;
-    outline: none;
+    outline: none; // focus shown on wrapper via :focus-within
     background: transparent;
     font-family: $font-body;
     font-size: $body-medium-size;
@@ -73,7 +80,7 @@
 
   &__button {
     background-color: $color-primary;
-    color: #ffffff;
+    color: $color-white;
     font-family: $font-body;
     font-size: $body-medium-size;
     line-height: $body-medium-line-height;

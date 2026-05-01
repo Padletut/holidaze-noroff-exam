@@ -24,7 +24,7 @@
   }
 
   &__form-box {
-    background: #ffffff;
+    background: $color-white;
     border-radius: 8px;
     padding: 2rem 1.5rem;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -116,7 +116,7 @@
     width: 100%;
     padding: 0.75rem;
     background-color: $color-primary;
-    color: #ffffff;
+    color: $color-white;
     border: none;
     border-radius: 6px;
     font-family: $font-body;
@@ -140,7 +140,7 @@
   font-family: $font-body;
   font-size: $body-medium-size;
   color: $color-font-dark;
-  background-color: #ffffff;
+  background-color: $color-white;
   box-sizing: border-box;
 
   &::placeholder {
@@ -240,7 +240,7 @@
   align-items: center;
   justify-content: center;
   padding: 2.5rem 1.5rem;
-  background: #ffffff;
+  background: $color-white;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   max-width: 400px;

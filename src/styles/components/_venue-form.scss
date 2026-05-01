@@ -10,7 +10,7 @@
 }
 
 .venue-form-card {
-  background: #fff;
+  background: $color-white;
   border-radius: 12px;
   padding: 2rem 1.5rem;
   width: 100%;
@@ -83,7 +83,7 @@
     border: 1px solid $color-border;
     border-radius: 6px;
     padding: 1.35rem 1rem 0.45rem;
-    background: #fff;
+    background: $color-white;
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.15s;
@@ -101,7 +101,7 @@
     border: 1px solid $color-border;
     border-radius: 6px;
     padding: 1.75rem 1rem 0.5rem;
-    background: #fff;
+    background: $color-white;
     box-sizing: border-box;
     resize: vertical;
     outline: none;
@@ -160,7 +160,7 @@
     &--active {
       background: $color-accent-sandstone-dark;
       border-color: $color-accent-sandstone-dark;
-      color: #fff;
+      color: $color-white;
     }
   }
 
@@ -189,7 +189,7 @@
 
     &--remove {
       background: $color-primary;
-      color: #fff;
+      color: $color-white;
 
       &:hover:not(:disabled) {
         background: color.adjust($color-primary, $lightness: -8%);
@@ -198,7 +198,7 @@
 
     &--add-media {
       background: $color-accent-sandstone-dark;
-      color: #fff;
+      color: $color-white;
       margin-top: 0.25rem;
       margin-bottom: 2rem;
 
@@ -209,7 +209,7 @@
 
     &--submit {
       background: $color-accent-sandstone-dark;
-      color: #fff;
+      color: $color-white;
 
       &:hover:not(:disabled) {
         opacity: 0.88;
@@ -218,7 +218,7 @@
 
     &--delete {
       background: $color-primary;
-      color: #fff;
+      color: $color-white;
 
       &:hover:not(:disabled) {
         background: color.adjust($color-primary, $lightness: -8%);
@@ -227,7 +227,7 @@
 
     &--cancel {
       background: $color-primary;
-      color: #fff;
+      color: $color-white;
       margin-bottom: 0;
 
       &:hover:not(:disabled) {
@@ -237,19 +237,19 @@
 
     &--delete-confirm {
       background: transparent;
-      color: #c0392b;
-      border: 1.5px solid #c0392b;
+      color: $color-error;
+      border: 1.5px solid $color-error;
       margin-bottom: 0.75rem;
 
       &:hover:not(:disabled) {
-        background: #c0392b;
-        color: #fff;
+        background: $color-error;
+        color: $color-white;
       }
     }
 
     &--keep {
       background: $color-primary;
-      color: #fff;
+      color: $color-white;
       margin-bottom: 0;
 
       &:hover:not(:disabled) {
@@ -259,11 +259,11 @@
   }
 
   &__delete-confirm {
-    border: 1.5px solid #f3c5c5;
+    border: 1.5px solid rgba($color-error, 0.3);
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1rem;
-    background: #fff5f5;
+    background: rgba($color-error, 0.04);
   }
 
   &__delete-confirm-text {

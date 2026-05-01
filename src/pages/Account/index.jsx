@@ -9,6 +9,7 @@ import { loadStorage } from "../../utils/loadStorage.mjs"
 import { saveStorage } from "../../utils/saveStorage.mjs"
 import { clearSession } from "../../utils/clearSession.mjs"
 import Alert from "../../components/Alert"
+import { formatDateRange } from "../../utils/dateUtils.mjs"
 
 function Account() {
   const [profile, setProfile] = useState(null)
@@ -19,30 +20,43 @@ function Account() {
   const [saveSuccess, setSaveSuccess] = useState(null)
   const navigate = useNavigate()
 
-  const storedProfile = loadStorage("profile")
+  const profileName = loadStorage("profile")?.name ?? null
 
   useEffect(() => {
-    if (!storedProfile) {
+    if (!profileName) {
       navigate("/authenticate")
       return
     }
 
-    Promise.all([
-      getProfile(storedProfile.name),
-      getProfileBookings(storedProfile.name),
-    ])
-      .then(([profileData, bookingsData]) => {
+    const controller = new AbortController()
+
+    async function loadAccountData() {
+      try {
+        const [profileData, bookingsData] = await Promise.all([
+          getProfile(profileName, { signal: controller.signal }),
+          getProfileBookings(profileName, { signal: controller.signal }),
+        ])
+
         setProfile(profileData)
         setBookings(bookingsData)
         saveStorage("profile", {
           ...loadStorage("profile"),
           venueManager: profileData.venueManager,
         })
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+      } catch (err) {
+        if (err.name === "AbortError") return
+        setError(err.message)
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadAccountData()
+
+    return () => controller.abort()
+  }, [navigate, profileName])
 
   const handleLogout = () => {
     clearSession()
@@ -127,10 +141,10 @@ function Account() {
                 }
                 const venue = preview.venue
                 const image = venue?.media?.[0]
-                const from = new Date(preview.dateFrom)
-                const to = new Date(preview.dateTo)
-                const opts = { day: "numeric", month: "short" }
-                const dateRange = `${from.toLocaleDateString("en-GB", opts)} – ${to.toLocaleDateString("en-GB", opts)}`
+                const dateRange = formatDateRange(
+                  preview.dateFrom,
+                  preview.dateTo,
+                )
                 return (
                   <Link
                     to={`/venue/${venue?.id}`}

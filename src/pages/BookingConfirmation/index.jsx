@@ -149,7 +149,7 @@ function BookingConfirmation() {
           {venue?.price != null && (
             <div className="booking-confirmation__total">
               <span>Total price</span>
-              <span>NOK {totalPrice}</span>
+              <span>USD {totalPrice}</span>
             </div>
           )}
         </div>

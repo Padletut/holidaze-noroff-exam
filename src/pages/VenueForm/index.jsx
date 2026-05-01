@@ -204,7 +204,7 @@ function VenueForm() {
                   onChange={handleChange}
                 />
                 <label className="venue-form-card__label" htmlFor="price">
-                  Price per night (NOK)
+                  Price per night (USD)
                 </label>
               </div>
 

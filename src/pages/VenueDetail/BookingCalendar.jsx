@@ -245,7 +245,7 @@ function BookingCalendar({
           </div>
           <div className="bc__summary-row bc__summary-row--total">
             <span>Total</span>
-            <span>NOK {nights * pricePerNight}</span>
+            <span>USD {nights * pricePerNight}</span>
           </div>
 
           {userBooking ? (

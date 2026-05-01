@@ -17,10 +17,28 @@ function VenueDetail() {
   const touchStartX = useRef(null)
 
   useEffect(() => {
-    getVenueById(id)
-      .then((data) => setVenue(data.data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
+    const controller = new AbortController()
+
+    async function loadVenue() {
+      setLoading(true)
+      setError(null)
+
+      try {
+        const data = await getVenueById(id, { signal: controller.signal })
+        setVenue(data.data)
+      } catch (err) {
+        if (err.name === "AbortError") return
+        setError(err.message)
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadVenue()
+
+    return () => controller.abort()
   }, [id])
 
   const openLightbox = useCallback(() => setLightboxOpen(true), [])

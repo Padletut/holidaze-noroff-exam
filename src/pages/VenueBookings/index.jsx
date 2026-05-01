@@ -5,13 +5,7 @@ import { getProfileVenues } from "../../api/profiles/getProfileVenues.mjs"
 import { loadStorage } from "../../utils/loadStorage.mjs"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import Alert from "../../components/Alert"
-
-function formatDateRange(dateFrom, dateTo) {
-  const from = new Date(dateFrom)
-  const to = new Date(dateTo)
-  const opts = { day: "numeric", month: "short" }
-  return `${from.toLocaleDateString("en-GB", opts)} – ${to.toLocaleDateString("en-GB", opts)}`
-}
+import { formatDateRange } from "../../utils/dateUtils.mjs"
 
 function VenueBookings() {
   const [venues, setVenues] = useState([])
@@ -19,20 +13,36 @@ function VenueBookings() {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
-  const storedProfile = loadStorage("profile")
+  const profileName = loadStorage("profile")?.name ?? null
 
   useEffect(() => {
-    if (!storedProfile) {
+    if (!profileName) {
       navigate("/authenticate")
       return
     }
 
-    getProfileVenues(storedProfile.name)
-      .then((data) => setVenues(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    const controller = new AbortController()
+
+    async function loadVenueBookings() {
+      try {
+        const data = await getProfileVenues(profileName, {
+          signal: controller.signal,
+        })
+        setVenues(data)
+      } catch (err) {
+        if (err.name === "AbortError") return
+        setError(err.message)
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadVenueBookings()
+
+    return () => controller.abort()
+  }, [navigate, profileName])
 
   if (loading) return <LoadingSpinner />
   if (error) return <Alert type="error" message={error} />

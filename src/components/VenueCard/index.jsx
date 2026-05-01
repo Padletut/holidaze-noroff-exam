@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
 import StarRating from "./StarRating"
 
-function VenueCard({ venue, to }) {
+function VenueCard({ venue, to, headingLevel = 3 }) {
   const { id, name, media, price, maxGuests, rating, location } = venue
+  const Heading = `h${headingLevel}`
 
   const image = media?.[0]
   const city = location?.city || ""
@@ -19,7 +20,7 @@ function VenueCard({ venue, to }) {
         />
       </div>
       <div className="venue-card__body">
-        <h3 className="venue-card__name">{name}</h3>
+        <Heading className="venue-card__name">{name}</Heading>
         {locationLabel && (
           <p className="venue-card__location">{locationLabel}</p>
         )}

@@ -68,6 +68,7 @@ function MyVenues() {
               key={venue.id}
               venue={venue}
               to={`/venues/edit/${venue.id}`}
+              headingLevel={2}
             />
           ))}
         </div>

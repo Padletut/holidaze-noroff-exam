@@ -119,6 +119,14 @@ function VenueDetail() {
               alt={images[imgIndex]?.alt || name}
               className="venue-detail__gallery-img venue-detail__gallery-img--clickable"
               onClick={openLightbox}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  openLightbox()
+                }
+              }}
+              role="button"
+              tabIndex={0}
               aria-label="View full size image"
             />
             {images.length > 1 && (

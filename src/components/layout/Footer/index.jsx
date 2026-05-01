@@ -130,57 +130,63 @@ function Footer() {
       </div>
 
       {/* Desktop grid */}
-      <div className="footer__desktop max-w-7xl hidden md:grid">
-        {sections.map((section) => (
-          <div key={section.title} className="footer__column">
-            <span className="footer__section-title">{section.title}</span>
-            <ul className="footer__links">
-              {section.links.map((link) => (
-                <li key={link}>
-                  <FooterLink link={link} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div className="hidden md:block w-full px-4">
+        <div className="footer__desktop max-w-7xl mx-auto">
+          {sections.map((section) => (
+            <div key={section.title} className="footer__column">
+              <span className="footer__section-title">{section.title}</span>
+              <ul className="footer__links">
+                {section.links.map((link) => (
+                  <li key={link}>
+                    <FooterLink link={link} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
-        <div className="footer__column footer__column--right">
-          <span className="footer__section-title">Follow Us</span>
-          <div className="footer__social">
-            <a href="#" aria-label="Instagram" className="footer__social-link">
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          <div className="footer__column footer__column--right">
+            <span className="footer__section-title">Follow Us</span>
+            <div className="footer__social">
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="footer__social-link"
               >
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-              </svg>
-            </a>
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="footer__social-link footer__social-link--fb"
-            >
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                fill="currentColor"
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+                </svg>
+              </a>
+              <a
+                href="#"
+                aria-label="Facebook"
+                className="footer__social-link footer__social-link--fb"
               >
-                <rect x="0" y="0" width="24" height="24" rx="4" />
-                <path
-                  d="M16 8h-2a1 1 0 0 0-1 1v2h3l-.5 3H13v7h-3v-7H8v-3h2V9a4 4 0 0 1 4-4h2v3z"
-                  fill="white"
-                />
-              </svg>
-            </a>
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <rect x="0" y="0" width="24" height="24" rx="4" />
+                  <path
+                    d="M16 8h-2a1 1 0 0 0-1 1v2h3l-.5 3H13v7h-3v-7H8v-3h2V9a4 4 0 0 1 4-4h2v3z"
+                    fill="white"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { getVenueById } from "../../api/venues/getVenueById.mjs"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import BookingCalendar from "./BookingCalendar"
 import Alert from "../../components/Alert"
+import StarRating from "../../components/VenueCard/StarRating"
 import { loadStorage } from "../../utils/loadStorage.mjs"
 
 function VenueDetail() {
@@ -178,23 +179,7 @@ function VenueDetail() {
               <span className="venue-detail__price">
                 <strong>${price}</strong> / night
               </span>
-              {rating === 0 ? (
-                <span
-                  className="venue-detail__rating-new"
-                  aria-label="New venue"
-                >
-                  ⭐ New
-                </span>
-              ) : (
-                <span
-                  className="venue-detail__rating"
-                  aria-label={`Rating: ${rating} out of 5`}
-                >
-                  {"★".repeat(Math.round(rating))}
-                  {"☆".repeat(5 - Math.round(rating))}
-                  <span className="venue-detail__rating-value">{rating}</span>
-                </span>
-              )}
+              <StarRating rating={rating} />
             </div>
             <p className="venue-detail__guests">
               <span aria-hidden="true">👤</span> Guests: {maxGuests}

@@ -13,20 +13,36 @@ function MyVenues() {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
-  const storedProfile = loadStorage("profile")
+  const profileName = loadStorage("profile")?.name ?? null
 
   useEffect(() => {
-    if (!storedProfile) {
+    if (!profileName) {
       navigate("/authenticate")
       return
     }
 
-    getProfileVenues(storedProfile.name)
-      .then((data) => setVenues(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    const controller = new AbortController()
+
+    async function loadVenues() {
+      try {
+        const data = await getProfileVenues(profileName, {
+          signal: controller.signal,
+        })
+        setVenues(data)
+      } catch (err) {
+        if (err.name === "AbortError") return
+        setError(err.message)
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadVenues()
+
+    return () => controller.abort()
+  }, [navigate, profileName])
 
   if (loading) return <LoadingSpinner />
   if (error) return <Alert type="error" message={error} />

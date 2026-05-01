@@ -114,21 +114,18 @@ function VenueDetail() {
               }
             }}
           >
-            <img
-              src={images[imgIndex]?.url}
-              alt={images[imgIndex]?.alt || name}
-              className="venue-detail__gallery-img venue-detail__gallery-img--clickable"
+            <button
+              type="button"
+              className="venue-detail__gallery-img-btn"
               onClick={openLightbox}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault()
-                  openLightbox()
-                }
-              }}
-              role="button"
-              tabIndex={0}
               aria-label="View full size image"
-            />
+            >
+              <img
+                src={images[imgIndex]?.url}
+                alt={images[imgIndex]?.alt || name}
+                className="venue-detail__gallery-img venue-detail__gallery-img--clickable"
+              />
+            </button>
             {images.length > 1 && (
               <>
                 <button

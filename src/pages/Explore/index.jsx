@@ -52,24 +52,36 @@ function Explore() {
 
   // Initial browse fetch
   useEffect(() => {
-    getVenues(1)
-      .then((data) => {
+    async function fetchInitialVenues() {
+      try {
+        const data = await getVenues(1)
         const items = data.data ?? data
         const meta = data.meta
         setVenues(items)
         setHasMore(meta ? meta.currentPage < meta.pageCount : items.length > 0)
-      })
-      .catch((err) => setBrowseError(err.message))
-      .finally(() => setLoading(false))
+      } catch (err) {
+        setBrowseError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchInitialVenues()
   }, [])
 
   // If arriving from Home with a pre-filled query, run search immediately
   useEffect(() => {
     if (!initialQuery.trim()) return
-    searchVenues(initialQuery)
-      .then((data) => setSearchResults(data.data ?? data))
-      .catch((err) => setSearchError(err.message))
-      .finally(() => setSearchLoading(false))
+    async function fetchInitialSearch() {
+      try {
+        const data = await searchVenues(initialQuery)
+        setSearchResults(data.data ?? data)
+      } catch (err) {
+        setSearchError(err.message)
+      } finally {
+        setSearchLoading(false)
+      }
+    }
+    fetchInitialSearch()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Infinite scroll — only active in browse mode
@@ -77,22 +89,24 @@ function Explore() {
     const sentinel = sentinelRef.current
     if (!sentinel || isSearching) return
     const observer = new IntersectionObserver(
-      (entries) => {
+      async (entries) => {
         if (entries[0].isIntersecting && hasMore && !loadingMore && !loading) {
           const nextPage = pageRef.current + 1
           pageRef.current = nextPage
           setLoadingMore(true)
-          getVenues(nextPage)
-            .then((data) => {
-              const items = data.data ?? data
-              const meta = data.meta
-              setVenues((prev) => [...prev, ...items])
-              setHasMore(
-                meta ? meta.currentPage < meta.pageCount : items.length > 0,
-              )
-            })
-            .catch((err) => setBrowseError(err.message))
-            .finally(() => setLoadingMore(false))
+          try {
+            const data = await getVenues(nextPage)
+            const items = data.data ?? data
+            const meta = data.meta
+            setVenues((prev) => [...prev, ...items])
+            setHasMore(
+              meta ? meta.currentPage < meta.pageCount : items.length > 0,
+            )
+          } catch (err) {
+            setBrowseError(err.message)
+          } finally {
+            setLoadingMore(false)
+          }
         }
       },
       { rootMargin: "200px" },
@@ -112,13 +126,17 @@ function Explore() {
       return
     }
 
-    debounceRef.current = setTimeout(() => {
+    debounceRef.current = setTimeout(async () => {
       setSearchLoading(true)
       setSearchError(null)
-      searchVenues(query)
-        .then((data) => setSearchResults(data.data ?? data))
-        .catch((err) => setSearchError(err.message))
-        .finally(() => setSearchLoading(false))
+      try {
+        const data = await searchVenues(query)
+        setSearchResults(data.data ?? data)
+      } catch (err) {
+        setSearchError(err.message)
+      } finally {
+        setSearchLoading(false)
+      }
     }, 400)
   }
 

@@ -7,6 +7,7 @@ import { deleteVenue } from "../../api/venues/deleteVenue.mjs"
 import { getVenueById } from "../../api/venues/getVenueById.mjs"
 import { loadStorage } from "../../utils/loadStorage.mjs"
 import { buildVenuePayload } from "../../utils/buildVenuePayload.mjs"
+import validateVenueForm from "../../utils/validateVenueForm.mjs"
 import LoadingSpinner from "../../components/LoadingSpinner"
 import Alert from "../../components/Alert"
 import VenueMediaInputs from "./VenueMediaInputs"
@@ -43,43 +44,59 @@ function VenueForm() {
   const [error, setError] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
 
-  const storedProfile = loadStorage("profile")
+  const profileName = loadStorage("profile")?.name ?? null
 
   useEffect(() => {
-    if (!storedProfile) {
+    if (!profileName) {
       navigate("/authenticate")
       return
     }
 
     if (!isEditMode) return
 
-    getVenueById(id)
-      .then(({ data }) => {
-        const v = data
+    const controller = new AbortController()
+
+    async function loadVenue() {
+      try {
+        const { data } = await getVenueById(id, { signal: controller.signal })
+        const venue = data
+
         setForm({
-          name: v.name ?? "",
-          description: v.description ?? "",
-          price: v.price ?? "",
-          maxGuests: v.maxGuests ?? "",
-          address: v.location?.address ?? "",
-          zip: v.location?.zip ?? "",
-          city: v.location?.city ?? "",
-          country: v.location?.country ?? "",
-          wifi: v.meta?.wifi ?? false,
-          parking: v.meta?.parking ?? false,
-          breakfast: v.meta?.breakfast ?? false,
-          pets: v.meta?.pets ?? false,
+          name: venue.name ?? "",
+          description: venue.description ?? "",
+          price: venue.price ?? "",
+          maxGuests: venue.maxGuests ?? "",
+          address: venue.location?.address ?? "",
+          zip: venue.location?.zip ?? "",
+          city: venue.location?.city ?? "",
+          country: venue.location?.country ?? "",
+          wifi: venue.meta?.wifi ?? false,
+          parking: venue.meta?.parking ?? false,
+          breakfast: venue.meta?.breakfast ?? false,
+          pets: venue.meta?.pets ?? false,
         })
         setMediaItems(
-          v.media?.length
-            ? v.media.map((m) => ({ url: m.url, alt: m.alt ?? "" }))
+          venue.media?.length
+            ? venue.media.map((item) => ({
+                url: item.url,
+                alt: item.alt ?? "",
+              }))
             : [{ ...EMPTY_MEDIA }],
         )
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+      } catch (err) {
+        if (err.name === "AbortError") return
+        setError(err.message)
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadVenue()
+
+    return () => controller.abort()
+  }, [id, isEditMode, navigate, profileName])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -99,12 +116,8 @@ function VenueForm() {
     e.preventDefault()
     setError(null)
 
-    if (!form.name.trim()) return setError("Title is required.")
-    if (!form.description.trim()) return setError("Description is required.")
-    if (!form.price || isNaN(Number(form.price)))
-      return setError("A valid price is required.")
-    if (!form.maxGuests || isNaN(Number(form.maxGuests)))
-      return setError("Max guests is required.")
+    const validationError = validateVenueForm(form)
+    if (validationError) return setError(validationError)
 
     setSaving(true)
     try {

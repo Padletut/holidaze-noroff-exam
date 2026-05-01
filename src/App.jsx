@@ -9,6 +9,8 @@ import MyVenues from "./pages/MyVenues"
 import VenueForm from "./pages/VenueForm"
 import VenueBookings from "./pages/VenueBookings"
 import BookingConfirmation from "./pages/BookingConfirmation"
+import About from "./pages/About"
+import Contact from "./pages/Contact"
 import RouteNotFound from "./pages/RouteNotFound"
 import { Routes, Route } from "react-router-dom"
 
@@ -26,6 +28,8 @@ function App() {
         <Route path="/venues/edit/:id" element={<VenueForm />} />
         <Route path="/venues/bookings" element={<VenueBookings />} />
         <Route path="/booking-confirmed" element={<BookingConfirmation />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/authenticate" element={<Authenticate />} />
         <Route path="*" element={<RouteNotFound />} />
       </Route>

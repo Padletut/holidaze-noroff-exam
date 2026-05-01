@@ -1,0 +1,145 @@
+@use "../variables" as *;
+
+.contact {
+  background-color: $color-background;
+  min-height: 100%;
+
+  &__hero {
+    background-color: $color-primary;
+    color: #fff;
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    font-size: $h1-size;
+    font-weight: $h1-weight;
+    line-height: $h1-line-height;
+    margin-bottom: 0.75rem;
+  }
+
+  &__subtitle {
+    font-family: $font-body;
+    font-size: $body-large-size;
+    line-height: $body-large-line-height;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  &__content {
+    padding: 3rem 1.5rem 4rem;
+  }
+}
+
+.contact-form {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__label {
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-medium;
+    color: $color-font-dark;
+  }
+
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    color: $color-font-dark;
+    background: #fff;
+    border: 1.5px solid $color-border;
+    border-radius: 6px;
+    padding: 0.625rem 0.875rem;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: $color-placeholder;
+    }
+
+    &:focus {
+      border-color: $color-secondary;
+      box-shadow: 0 0 0 3px rgba(19, 194, 150, 0.15);
+    }
+
+    &--invalid {
+      border-color: $color-error;
+      padding-right: 2.5rem;
+
+      &:focus {
+        border-color: $color-error;
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+      }
+    }
+
+    &--valid {
+      border-color: $color-secondary;
+      padding-right: 2.5rem;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  &__valid-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-secondary;
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
+  &__feedback {
+    font-family: $font-body;
+    font-size: 0.875rem;
+    color: $color-error;
+    margin: 0;
+  }
+
+  &__submit {
+    align-self: flex-start;
+    padding: 0.75rem 2rem;
+    background-color: $color-primary;
+    color: #fff;
+    font-family: $font-body;
+    font-size: $body-medium-size;
+    font-weight: $font-weight-semibold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $color-button-hover;
+    }
+
+    &:focus-visible {
+      outline: 3px solid $color-button-hover;
+      outline-offset: 2px;
+    }
+  }
+}

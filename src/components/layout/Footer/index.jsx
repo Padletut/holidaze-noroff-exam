@@ -24,6 +24,8 @@ const LINK_MAP = {
   "Sign In": "/authenticate",
   "My Bookings": "/bookings",
   "My Venues": "/venues/my",
+  "About Us": "/about",
+  Contact: "/contact",
 }
 
 function FooterLink({ link }) {
@@ -47,7 +49,7 @@ function Footer() {
   const isVenueManager = Boolean(storedProfile?.venueManager)
 
   const accountLinks = isLoggedIn
-    ? ["My Bookings", ...(isVenueManager ? ["My Venues"] : []), "Logout"]
+    ? ["My Bookings", ...(isVenueManager ? ["My Venues"] : []), "Sign Out"]
     : ["Sign In"]
 
   const sections = [

@@ -68,7 +68,7 @@ function Footer() {
   return (
     <footer className="footer flex flex-col items-center justify-between">
       {/* Mobile accordion */}
-      <div className="footer__accordion md:hidden">
+      <div className="footer__accordion sm:hidden">
         {sections.map((section, i) => (
           <div key={section.title} className="footer__accordion-item">
             <button
@@ -130,7 +130,7 @@ function Footer() {
       </div>
 
       {/* Desktop grid */}
-      <div className="hidden md:block w-full px-4">
+      <div className="hidden sm:block w-full px-4">
         <div className="footer__desktop max-w-7xl mx-auto">
           {sections.map((section) => (
             <div key={section.title} className="footer__column">

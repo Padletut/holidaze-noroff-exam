@@ -29,11 +29,11 @@
     grid-template-columns: 1fr;
     gap: 1rem;
 
-    @media (min-width: 640px) {
+    @media (min-width: $breakpoint-sm) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (min-width: 900px) {
+    @media (min-width: $breakpoint-lg) {
       grid-template-columns: repeat(3, 1fr);
     }
   }

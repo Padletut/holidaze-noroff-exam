@@ -38,7 +38,7 @@ main:has(.venue-detail) {
     background: none;
     cursor: default;
 
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-md) {
       cursor: zoom-in;
     }
 
@@ -63,7 +63,7 @@ main:has(.venue-detail) {
     display: block;
 
     &--clickable {
-      @media (min-width: 768px) {
+      @media (min-width: $breakpoint-md) {
         cursor: zoom-in;
       }
     }
@@ -266,7 +266,7 @@ main:has(.venue-detail) {
   &__lightbox {
     display: none;
 
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-md) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -637,7 +637,7 @@ main:has(.venue-detail) {
 
 // ─── Desktop Layout ──────────────────────────────────────────────────────────
 
-@media (min-width: 910px) {
+@media (min-width: $breakpoint-lg) {
   .venue-detail {
     display: grid;
     grid-template-columns: 35% 1fr 25%;

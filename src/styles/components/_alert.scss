@@ -15,15 +15,15 @@
   box-sizing: border-box;
 
   &--success {
-    background-color: #d1fae5;
-    color: #065f46;
-    border: 1px solid #6ee7b7;
+    background-color: $color-success-bg;
+    color: $color-success-text;
+    border: 1px solid $color-success-border;
   }
 
   &--error {
-    background-color: #cd3b3b;
+    background-color: $color-error-bg;
     color: $color-white;
-    border: 1px solid #b91c1c;
+    border: 1px solid $color-error-border;
   }
 
   &__message {

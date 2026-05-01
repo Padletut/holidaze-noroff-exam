@@ -10,7 +10,7 @@
   display: block;
   padding: 0.75rem 0.5rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: $breakpoint-md) {
     padding: 0;
   }
 
@@ -39,10 +39,11 @@
     background-color: $color-accent-sandstone;
     transition: background-color 0.2s ease;
   }
- .nav-link {
-  color: $color-white;
+
+  .nav-link {
+    color: $color-white;
     font-family: $font-body;
     font-size: $body-medium-size;
     font-weight: $font-weight-medium;
- }
+  }
 }

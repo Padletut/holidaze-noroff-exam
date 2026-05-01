@@ -42,6 +42,13 @@ $h5-size: 1rem;
 $h5-line-height: 1;
 $h5-weight: 600;
 
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 900px;
+$breakpoint-xl: 1184px;
+$breakpoint-xxl: 1440px;
+
 // Body
 $font-body: "Inter", sans-serif;
 
@@ -55,4 +62,13 @@ $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
+
+$font-size-sm: 0.875rem; // 14px
+
+// Alert colours
+$color-success-bg: #d1fae5;
+$color-success-text: #065f46;
+$color-success-border: #6ee7b7;
+$color-error-bg: #cd3b3b;
+$color-error-border: #b91c1c;
 

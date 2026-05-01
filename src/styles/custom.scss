@@ -33,7 +33,7 @@
   margin: 2rem 0;
 }
 
-@media (min-width: 1184px) {
+@media (min-width: $breakpoint-xl) {
   .home-content {
     margin-top: 4rem;
   }

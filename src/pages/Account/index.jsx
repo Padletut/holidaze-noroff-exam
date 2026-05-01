@@ -78,13 +78,18 @@ function Account() {
     <div className="account-page">
       {/* Profile header */}
       <div
-        className="account-header"
-        style={
-          profile.banner?.url
-            ? { backgroundImage: `url(${profile.banner.url})` }
-            : undefined
-        }
+        className={`account-header${
+          profile.banner?.url ? " account-header--has-banner" : ""
+        }`}
       >
+        {profile.banner?.url && (
+          <img
+            src={profile.banner.url}
+            alt=""
+            className="account-header__banner"
+            aria-hidden="true"
+          />
+        )}
         {/* Dark overlay when banner is present */}
         {profile.banner?.url && (
           <div className="account-header__overlay" aria-hidden="true" />

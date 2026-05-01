@@ -15,10 +15,25 @@ function Home() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    getVenues()
-      .then((result) => setVenues(result.data.slice(0, 6)))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
+    const controller = new AbortController()
+
+    async function loadFeaturedVenues() {
+      try {
+        const result = await getVenues(1, 6, { signal: controller.signal })
+        setVenues(result.data ?? result)
+      } catch (err) {
+        if (err.name === "AbortError") return
+        setError(err.message)
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadFeaturedVenues()
+
+    return () => controller.abort()
   }, [])
 
   const handleSearchSubmit = ({ query, guests, checkIn, checkOut }) => {

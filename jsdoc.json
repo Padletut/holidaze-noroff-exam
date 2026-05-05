@@ -4,7 +4,7 @@
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
-  "plugins": ["plugins/markdown", "node_modules/better-docs/component"],
+  "plugins": ["plugins/markdown"],
   "opts": {
     "destination": "docs",
     "recurse": true,

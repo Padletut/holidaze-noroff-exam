@@ -2,20 +2,23 @@ import { useState } from "react"
 import { toDateStr } from "../utils/dateUtils.mjs"
 
 /**
+ * @typedef {Object} UseCalendarNavResult
+ * @property {number} viewYear
+ * @property {number} viewMonth
+ * @property {Function} prevMonth
+ * @property {Function} nextMonth
+ * @property {boolean} isAtMinMonth
+ * @property {string} todayStr
+ */
+
+/**
  * Manages month-navigation state for a calendar component.
  *
  * Provides the current view year/month, helpers to move forward and backward
  * one month, a flag indicating whether the view is already at the earliest
  * allowed month (current month), and a pre-computed today string.
  *
- * @returns {{
- *   viewYear: number,
- *   viewMonth: number,
- *   prevMonth: () => void,
- *   nextMonth: () => void,
- *   isAtMinMonth: boolean,
- *   todayStr: string,
- * }}
+ * @returns {UseCalendarNavResult}
  */
 function useCalendarNav() {
   const today = new Date()

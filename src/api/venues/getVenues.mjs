@@ -6,13 +6,22 @@ import { BASE_URL } from "../config.mjs"
  * @async
  * @param {number} [page=1] - The page number to fetch.
  * @param {number} [limit=12] - The number of venues per page.
+ * @param {RequestInit} [options={}] - Optional fetch options.
  * @returns {Promise<Object>} The paginated API response containing venue data and meta.
  * @throws {Error} If the request fails or the response is not ok.
  */
-export async function getVenues(page = 1, limit = 12) {
+export async function getVenues(page = 1, limit = 12, options = {}) {
   try {
+    const queryParams = new URLSearchParams({
+      page: String(page),
+      limit: String(limit),
+      sort: "updated",
+      sortOrder: "asc",
+    })
+
     const response = await fetch(
-      `${BASE_URL}/holidaze/venues?page=${page}&limit=${limit}`
+      `${BASE_URL}/holidaze/venues?${queryParams.toString()}`,
+      options,
     )
 
     if (!response.ok) {

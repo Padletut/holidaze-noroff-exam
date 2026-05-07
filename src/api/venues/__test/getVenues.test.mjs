@@ -35,8 +35,22 @@ describe("getVenues()", () => {
 
     await getVenues();
 
-    expect(mockFetch).toHaveBeenCalledWith(expect.stringContaining("page=1"));
-    expect(mockFetch).toHaveBeenCalledWith(expect.stringContaining("limit=12"));
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("page=1"),
+      {},
+    );
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("limit=12"),
+      {},
+    );
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("sort=updated"),
+      {},
+    );
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("sortOrder=asc"),
+      {},
+    );
   });
 
   it("accepts custom page and limit arguments", async () => {
@@ -44,8 +58,23 @@ describe("getVenues()", () => {
 
     await getVenues(3, 24);
 
-    expect(mockFetch).toHaveBeenCalledWith(expect.stringContaining("page=3"));
-    expect(mockFetch).toHaveBeenCalledWith(expect.stringContaining("limit=24"));
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("page=3"),
+      {},
+    );
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("limit=24"),
+      {},
+    );
+  });
+
+  it("passes optional fetch options through to fetch", async () => {
+    mockFetch.mockResolvedValue(mockOkFetch(mockVenueList));
+    const options = { signal: new AbortController().signal };
+
+    await getVenues(1, 12, options);
+
+    expect(mockFetch).toHaveBeenCalledWith(expect.any(String), options);
   });
 
   it("calls the /holidaze/venues endpoint", async () => {
@@ -55,6 +84,7 @@ describe("getVenues()", () => {
 
     expect(mockFetch).toHaveBeenCalledWith(
       expect.stringContaining("/holidaze/venues"),
+      {},
     );
   });
 

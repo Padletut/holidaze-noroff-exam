@@ -15,7 +15,7 @@ export async function getVenues(page = 1, limit = 12, options = {}) {
     const queryParams = new URLSearchParams({
       page: String(page),
       limit: String(limit),
-      sort: "updated",
+      sort: "created",
       sortOrder: "asc",
     })
 

@@ -1,5 +1,9 @@
 // @ts-check
 import { defineConfig, devices } from "@playwright/test"
+import { config } from "dotenv"
+
+// Load .env into process.env so TEST_EMAIL / TEST_PASSWORD are available
+config()
 
 /**
  * Read environment variables from file.

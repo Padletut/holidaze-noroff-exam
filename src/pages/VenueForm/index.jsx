@@ -20,6 +20,7 @@ const DEFAULT_FORM = {
   description: "",
   price: "",
   maxGuests: "",
+  rating: "0",
   address: "",
   zip: "",
   city: "",
@@ -66,6 +67,7 @@ function VenueForm() {
           description: venue.description ?? "",
           price: venue.price ?? "",
           maxGuests: venue.maxGuests ?? "",
+          rating: venue.rating ?? "0",
           address: venue.location?.address ?? "",
           zip: venue.location?.zip ?? "",
           city: venue.location?.city ?? "",
@@ -221,6 +223,24 @@ function VenueForm() {
                 />
                 <label className="venue-form-card__label" htmlFor="maxGuests">
                   Max guests
+                </label>
+              </div>
+
+              <div className="venue-form-card__field">
+                <input
+                  className="venue-form-card__input"
+                  type="number"
+                  id="rating"
+                  name="rating"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  placeholder=" "
+                  value={form.rating}
+                  onChange={handleChange}
+                />
+                <label className="venue-form-card__label" htmlFor="rating">
+                  Rating (0-5)
                 </label>
               </div>
 

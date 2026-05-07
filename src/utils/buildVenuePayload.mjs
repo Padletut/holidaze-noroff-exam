@@ -13,6 +13,7 @@ export function buildVenuePayload(form, mediaItems) {
     description: form.description.trim(),
     price: Number(form.price),
     maxGuests: Number(form.maxGuests),
+    rating: Number(form.rating || 0),
     media: validMedia.map((m) => ({ url: m.url.trim(), alt: m.alt.trim() })),
     meta: {
       wifi: form.wifi,

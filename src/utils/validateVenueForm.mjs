@@ -11,6 +11,10 @@ function validateVenueForm(values) {
     return "A valid price is required."
   if (!values.maxGuests || isNaN(Number(values.maxGuests)))
     return "Max guests is required."
+  if (values.rating !== "" && isNaN(Number(values.rating)))
+    return "Rating must be a number."
+  if (Number(values.rating) < 0 || Number(values.rating) > 5)
+    return "Rating must be between 0 and 5."
   return null
 }
 

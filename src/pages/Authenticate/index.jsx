@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useMemo, useState } from "react"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import "../../styles/index.scss"
 import validateLoginForm from "../../utils/validateLoginForm"
 import validateRegisterForm from "../../utils/validateRegisterForm"
@@ -250,9 +250,17 @@ function RegisterForm({ onSwitch, onSuccess }) {
 }
 
 function Authenticate() {
-  const [view, setView] = useState("login")
+  const [searchParams, setSearchParams] = useSearchParams()
   const [successMessage, setSuccessMessage] = useState(null)
   const navigate = useNavigate()
+  const view = useMemo(() => {
+    const mode = searchParams.get("mode")
+    return mode === "register" ? "register" : "login"
+  }, [searchParams])
+
+  const setView = (nextView) => {
+    setSearchParams(nextView === "register" ? { mode: "register" } : {})
+  }
 
   const handleSuccess = (message) => {
     setSuccessMessage(message)

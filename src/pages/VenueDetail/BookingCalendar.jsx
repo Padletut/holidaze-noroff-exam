@@ -363,7 +363,7 @@ function BookingCalendar({
                 Sign in
               </Link>{" "}
               or{" "}
-              <Link to="/authenticate" className="bc__login-link">
+              <Link to="/authenticate?mode=register" className="bc__login-link">
                 create an account
               </Link>{" "}
               to book this venue.

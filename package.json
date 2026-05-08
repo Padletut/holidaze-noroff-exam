@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "test": "vitest run",
+    "e2e": "playwright test",
     "preview": "vite preview",
     "generate-docs": "jsdoc -c jsdoc.json",
     "prepare": "is-ci || husky"

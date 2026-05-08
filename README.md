@@ -100,11 +100,11 @@ Who they are:
 
 ## Tech Stack
 
-- Vite
-- Vitest
 - React 19
 - React Router
 - Zustand
+- Vite
+- Vitest
 - Tailwind CSS 4
 - Sass
 - ESLint + Prettier

@@ -40,23 +40,23 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.1rem;
 
-  &__group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  &__field {
+    position: relative;
   }
 
   &__label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     font-family: $font-body;
     font-size: $body-medium-size;
-    font-weight: $font-weight-medium;
-    color: $color-font-dark;
-  }
-
-  &__input-wrapper {
-    position: relative;
+    color: $color-placeholder;
+    pointer-events: none;
+    transition: top 0.15s ease, font-size 0.15s ease, color 0.15s ease,
+      transform 0.15s ease;
   }
 
   &__input,
@@ -68,14 +68,10 @@
     background: $color-white;
     border: 1.5px solid $color-border;
     border-radius: 6px;
-    padding: 0.625rem 0.875rem;
+    padding: 1.35rem 0.875rem 0.45rem;
     outline: none;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     box-sizing: border-box;
-
-    &::placeholder {
-      color: $color-placeholder;
-    }
 
     &:focus {
       border-color: $color-secondary;
@@ -84,7 +80,6 @@
 
     &--invalid {
       border-color: $color-error;
-      padding-right: 2.5rem;
 
       &:focus {
         border-color: $color-error;
@@ -94,13 +89,36 @@
 
     &--valid {
       border-color: $color-secondary;
-      padding-right: 2.5rem;
     }
   }
 
   &__textarea {
     resize: vertical;
     min-height: 120px;
+    padding: 1.75rem 0.875rem 0.5rem;
+  }
+
+  // Textarea label starts at top, not vertically centred
+  &__textarea + &__label {
+    top: 0.875rem;
+    transform: none;
+  }
+
+  // Floating state – input
+  &__input:focus + &__label,
+  &__input:not(:placeholder-shown) + &__label {
+    top: 0.4rem;
+    transform: none;
+    font-size: 11px;
+    color: $color-secondary;
+  }
+
+  // Floating state – textarea
+  &__textarea:focus + &__label,
+  &__textarea:not(:placeholder-shown) + &__label {
+    top: 0.4rem;
+    font-size: 11px;
+    color: $color-secondary;
   }
 
   &__valid-icon {
@@ -117,7 +135,7 @@
     font-family: $font-body;
     font-size: 0.875rem;
     color: $color-error;
-    margin: 0;
+    margin: 0.25rem 0 0;
   }
 
   &__submit {

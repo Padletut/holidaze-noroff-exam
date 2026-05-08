@@ -9,8 +9,8 @@ import Alert from "../../components/Alert"
 
 function FieldGroup({
   id,
+  label,
   type,
-  placeholder,
   autoComplete,
   value,
   onChange,
@@ -18,31 +18,26 @@ function FieldGroup({
   valid,
 }) {
   return (
-    <div className="auth-form__group">
+    <div className="auth-form__field">
+      <input
+        id={id}
+        type={type}
+        className={`auth-form__input${error ? " auth-form__input--invalid" : ""}${valid ? " auth-form__input--valid" : ""}`}
+        placeholder=" "
+        autoComplete={autoComplete}
+        value={value}
+        onChange={onChange}
+        aria-describedby={error ? `${id}-error` : undefined}
+        aria-invalid={!!error}
+      />
       <label htmlFor={id} className="auth-form__label">
-        {placeholder}
+        {label}
       </label>
-      <div className="auth-form__input-wrapper">
-        <input
-          id={id}
-          type={type}
-          className={`form-control${error ? " form-control--invalid" : ""}${valid ? " form-control--valid" : ""}`}
-          placeholder={placeholder}
-          autoComplete={autoComplete}
-          value={value}
-          onChange={onChange}
-          aria-describedby={error ? `${id}-error` : undefined}
-          aria-invalid={!!error}
-        />
-        {error && (
-          <span className="auth-form__invalid-icon" aria-hidden="true" />
-        )}
-        {valid && (
-          <span className="auth-form__valid-icon" aria-hidden="true">
-            ✓
-          </span>
-        )}
-      </div>
+      {valid && (
+        <span className="auth-form__valid-icon" aria-hidden="true">
+          ✓
+        </span>
+      )}
       {error && (
         <p id={`${id}-error`} className="auth-form__feedback">
           {error}
@@ -97,15 +92,15 @@ function LoginForm({ onSwitch, onSuccess }) {
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
           <FieldGroup
             id="login-email"
+            label="Email (stud.noroff.no)"
             type="email"
-            placeholder="Email (stud.noroff.no)"
             autoComplete="email"
             {...fieldProps("email")}
           />
           <FieldGroup
             id="login-password"
+            label="Password"
             type="password"
-            placeholder="Password"
             autoComplete="current-password"
             {...fieldProps("password")}
           />
@@ -186,29 +181,29 @@ function RegisterForm({ onSwitch, onSuccess }) {
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
           <FieldGroup
             id="register-name"
+            label="Your name"
             type="text"
-            placeholder="Your name"
             autoComplete="name"
             {...fieldProps("name")}
           />
           <FieldGroup
             id="register-email"
+            label="Email (stud.noroff.no)"
             type="email"
-            placeholder="Email (stud.noroff.no)"
             autoComplete="email"
             {...fieldProps("email")}
           />
           <FieldGroup
             id="register-password"
+            label="Password"
             type="password"
-            placeholder="Password"
             autoComplete="new-password"
             {...fieldProps("password")}
           />
           <FieldGroup
             id="register-confirm-password"
+            label="Confirm password"
             type="password"
-            placeholder="Confirm password"
             autoComplete="new-password"
             {...fieldProps("confirmPassword")}
           />

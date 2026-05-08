@@ -7,18 +7,16 @@ const INITIAL = { name: "", email: "", subject: "", message: "" }
 
 function FieldGroup({ id, label, error, valid, children }) {
   return (
-    <div className="contact-form__group">
+    <div className="contact-form__field">
+      {children}
       <label htmlFor={id} className="contact-form__label">
         {label}
       </label>
-      <div className="contact-form__input-wrapper">
-        {children}
-        {valid && (
-          <span className="contact-form__valid-icon" aria-hidden="true">
-            ✓
-          </span>
-        )}
-      </div>
+      {valid && (
+        <span className="contact-form__valid-icon" aria-hidden="true">
+          ✓
+        </span>
+      )}
       {error && (
         <p id={`${id}-error`} className="contact-form__feedback" role="alert">
           {error}
@@ -90,7 +88,7 @@ function Contact() {
               id="contact-name"
               type="text"
               className={fieldClass("name")}
-              placeholder="Jane Doe"
+              placeholder=" "
               autoComplete="name"
               value={values.name}
               onChange={set("name")}
@@ -111,7 +109,7 @@ function Contact() {
               id="contact-email"
               type="email"
               className={fieldClass("email")}
-              placeholder="jane@example.com"
+              placeholder=" "
               autoComplete="email"
               value={values.email}
               onChange={set("email")}
@@ -134,7 +132,7 @@ function Contact() {
               id="contact-subject"
               type="text"
               className={fieldClass("subject")}
-              placeholder="How can we help?"
+              placeholder=" "
               value={values.subject}
               onChange={set("subject")}
               aria-describedby={
@@ -155,7 +153,7 @@ function Contact() {
             <textarea
               id="contact-message"
               className={`${fieldClass("message")} contact-form__textarea`}
-              placeholder="Write your message here…"
+              placeholder=" "
               rows={5}
               value={values.message}
               onChange={set("message")}

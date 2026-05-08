@@ -6,7 +6,10 @@ import { fetchData } from "../utils/fetchdata.mjs"
  *
  * @async
  * @param {string} id - The booking ID.
- * @param {{ dateFrom?: string, dateTo?: string, guests?: number }} bookingData
+ * @param {Object} bookingData - Partial booking payload to update.
+ * @param {string} [bookingData.dateFrom] - Updated check-in date (ISO string).
+ * @param {string} [bookingData.dateTo] - Updated check-out date (ISO string).
+ * @param {number} [bookingData.guests] - Updated number of guests.
  * @returns {Promise<Object>} The updated booking object from the API.
  * @throws {Error} If the request fails.
  */

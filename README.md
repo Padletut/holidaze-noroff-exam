@@ -87,14 +87,14 @@ Who they are:
 
 ## Tech Stack
 
-- React 19
 - Vite
+- Vitest
+- React 19
 - React Router
 - Zustand
 - Tailwind CSS 4
 - Sass
 - ESLint + Prettier
-- Vitest
 - Playwright
 - JSDoc
 

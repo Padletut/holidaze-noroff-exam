@@ -47,15 +47,20 @@ function MyBookings() {
   if (loading) return <LoadingSpinner />
   if (error) return <Alert type="error" message={error} />
 
+  const today = new Date().toISOString().slice(0, 10)
+  const upcomingBookings = bookings
+    .filter((booking) => booking.dateFrom?.slice(0, 10) >= today)
+    .sort((a, b) => a.dateFrom.localeCompare(b.dateFrom))
+
   return (
     <div className="my-bookings">
-      <h1 className="my-bookings__title">My Bookings</h1>
+      <h1 className="my-bookings__title">My Upcoming Bookings</h1>
 
-      {bookings.length === 0 ? (
-        <p className="my-bookings__empty">You have no bookings yet.</p>
+      {upcomingBookings.length === 0 ? (
+        <p className="my-bookings__empty">You have no upcoming bookings.</p>
       ) : (
         <ul className="my-bookings__list">
-          {bookings.map((booking) => (
+          {upcomingBookings.map((booking) => (
             <BookingCard key={booking.id} booking={booking} />
           ))}
         </ul>

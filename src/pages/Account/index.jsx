@@ -173,7 +173,8 @@ function Account() {
               })()}
               {bookings.length > 0 && (
                 <Link to="/bookings" className="account-section__link">
-                  View all bookings <span aria-hidden="true">&gt;</span>
+                  View all upcoming bookings{" "}
+                  <span aria-hidden="true">&gt;</span>
                 </Link>
               )}
             </div>

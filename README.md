@@ -185,3 +185,7 @@ Focus areas included:
 - `npm run test` - Run Vitest tests
 - `npm run e2e` - Run Playwright end-to-end tests
 - `npm run generate-docs` - Generate JSDoc documentation
+
+## AI Generated Assets
+
+- The homepage hero image was generated using ChatGPT image generation tools.

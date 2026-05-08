@@ -30,6 +30,9 @@ Core goals:
 - Clear venue details, pricing, and availability
 - Easy venue management for non-technical users
 
+## Live Demo
+[Holydaze](https://holydayz.netlify.app)
+
 ## Screenshots
 
 ### Desktop View
@@ -39,6 +42,16 @@ Core goals:
 ### Mobile View
 
 ![Holidaze mobile screenshot](./screenshots/Screenshot_20260508_183843.png)
+
+## Features
+
+- User registration and login
+- Venue browsing and search
+- Venue booking system
+- Venue manager dashboard
+- Responsive mobile-first design
+- Form validation
+- Automated testing
 
 ## Target Audience
 

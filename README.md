@@ -119,16 +119,21 @@ npm run dev
 The project can use environment variables for API configuration.
 
 1. Create a `.env` file in the project root.
-2. Add your variables with the `VITE_` prefix.
+2. Add your frontend variables with the `VITE_` prefix.
+3. Add test credentials for Playwright E2E tests.
 
 Example:
 
 ```env
 VITE_API_BASE_URL=https://api.noroff.dev
 VITE_API_KEY=your_api_key_here
+TEST_EMAIL=your_test_user_email
+TEST_PASSWORD=your_test_user_password
 ```
 
 Variables must start with `VITE_` to be available in the frontend.
+
+`TEST_EMAIL` and `TEST_PASSWORD` are used by the Playwright E2E test suite. Some venue management tests also require the test account to have venue manager permissions.
 
 ## Testing
 

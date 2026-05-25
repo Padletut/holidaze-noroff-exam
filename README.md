@@ -4,21 +4,24 @@ Holidaze is a booking platform for accommodation where users can explore venues,
 
 The platform has two main user groups:
 
-1. Travellers (Customer)
+1. Travellers (Customers)
 2. Venue Managers
 
 ## Table of Contents
 
 - [About Holidaze](#about-holidaze)
+- [Features](#features)
+- [Live Demo](#live-demo)
+- [Screenshots](#screenshots)
 - [Target Audience](#target-audience)
 - [Project Resources](#project-resources)
-- [Screenshots](#screenshots)
-- [Tech Stack](#tech-stack)
+- [Built With](#built-with)
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [Testing](#testing)
 - [Accessibility & Validation](#accessibility--validation)
 - [Scripts](#scripts)
+- [AI Generated Assets](#ai-generated-assets)
 
 ## About Holidaze
 
@@ -30,8 +33,20 @@ Core goals:
 - Clear venue details, pricing, and availability
 - Easy venue management for non-technical users
 
+## Features
+
+- User registration and login
+- Venue browsing and search
+- Venue booking system
+- Venue manager dashboard
+- Responsive mobile-first design
+- Form validation
+- Automated testing
+
 ## Live Demo
-[Holydaze](https://holydayz.netlify.app)
+
+- Live Site: https://holydayz.netlify.app
+- Repository: https://github.com/Padletut/holidaze-noroff-exam
 
 ## Screenshots
 
@@ -43,23 +58,13 @@ Core goals:
 
 ![Holidaze mobile screenshot](./screenshots/Screenshot_20260508_183843.png)
 
-## Features
-
-- User registration and login
-- Venue browsing and search
-- Venue booking system
-- Venue manager dashboard
-- Responsive mobile-first design
-- Form validation
-- Automated testing
-
 ## Target Audience
 
 ### Primary Audience: Travellers
 
 Suggested realistic target group:
 
-- Young adults aged 20-35
+- Young adults aged 20–35
 - Students and early-career professionals
 - Digital-first users
 - Primarily booking from mobile devices
@@ -92,13 +97,11 @@ Who they are:
 
 - [Gantt Chart for Project Timing](https://github.com/users/Padletut/projects/3/views/4)
 - [Kanban Project Board](https://github.com/users/Padletut/projects/3/views/1)
-- [Repository](https://github.com/Padletut/holidaze-noroff-exam)
-- [Hosted Application Demo](https://holydayz.netlify.app)
 - [Design Prototype (Desktop)](https://www.figma.com/proto/9FZzqTrAYie2SArwdl0BCe/Holydaze?node-id=2503-1943&t=ZX5BvzBLeuPsDkgf-1&scaling=scale-down&content-scaling=fixed&page-id=2503%3A15&starting-point-node-id=2503%3A1944&show-proto-sidebar=1)
 - [Design Prototype (Mobile)](https://www.figma.com/proto/9FZzqTrAYie2SArwdl0BCe/Holydaze?node-id=2530-1155&t=9Vvt3X6Fr5rOhnl4-1&scaling=scale-down&content-scaling=fixed&page-id=2503%3A15&starting-point-node-id=2530%3A2599&show-proto-sidebar=1)
 - [Style Guide](https://www.figma.com/design/9FZzqTrAYie2SArwdl0BCe/Holydaze?node-id=2733-5724&t=dflh5i4FIEYe5uWC-1)
 
-## Tech Stack
+## Built With
 
 - React 19
 - React Router
@@ -121,7 +124,7 @@ cd holidaze-noroff-exam
 npm install
 ```
 
-Start development server:
+Start the development server:
 
 ```bash
 npm run dev
@@ -150,9 +153,9 @@ Variables must start with `VITE_` to be available in the frontend.
 
 ## Testing
 
-The project includes automated test coverage with a total of 255 tests.
+The project includes automated unit, integration, and end-to-end testing.
 
-- Unit/integration tests run with Vitest
+- Unit and integration tests run with Vitest
 - End-to-end tests run with Playwright
 
 Run tests:
@@ -178,13 +181,13 @@ Focus areas included:
 
 ## Scripts
 
-- `npm run dev` - Start Vite development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-- `npm run test` - Run Vitest tests
-- `npm run e2e` - Run Playwright end-to-end tests
-- `npm run generate-docs` - Generate JSDoc documentation
+- `npm run dev` — Start Vite development server
+- `npm run build` — Build for production
+- `npm run preview` — Preview production build
+- `npm run lint` — Run ESLint
+- `npm run test` — Run Vitest tests
+- `npm run e2e` — Run Playwright end-to-end tests
+- `npm run generate-docs` — Generate JSDoc documentation
 
 ## AI Generated Assets
 
